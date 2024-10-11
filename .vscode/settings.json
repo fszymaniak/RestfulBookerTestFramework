@@ -11,5 +11,9 @@
     ],
     "cucumber.features": [ // sets the location of the feature files
       "RestfulBookerTestFramework/tests/**/*.cs",
-    ]
+    ],
+
+    // enable Roslyn Analyzers
+    "omnisharp.enableRoslynAnalyzers": true,
+    "omnisharp.enableEditorConfigSupport": true
   }
