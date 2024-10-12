@@ -1,5 +1,4 @@
 using RestfulBookerTestFramework.Tests.Api.Configuration;
-using RestfulBookerTestFramework.Tests.Api.Drivers;
 using RestfulBookerTestFramework.Tests.Api.Drivers.AuthToken;
 
 namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
