@@ -48,7 +48,7 @@ public static class SetupTestDependencies
         // Register scenario scoped runtime dependencies
 
         // RestSharp
-        containerBuilder
+        containerBuilder  
             .RegisterType<RestClient>()
             .AsSelf()
             .SingleInstance();

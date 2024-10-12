@@ -25,9 +25,22 @@ public class ValidationDriver(ScenarioContext scenarioContext) : IValidationDriv
         actualBooking.Booking.Should().BeEquivalentTo(expectedBooking);
     }
     
-    public void ValidateUpdatedBooking()
+    public void ValidatePutUpdatedBooking()
     {
         var expectedBooking = scenarioContext.GetBookingRequest();
+        
+        var actualBookingResponse = scenarioContext.GetRestResponse();
+
+        var actualBooking = actualBookingResponse.Deserialize<DTOs.Models.Booking>();
+        
+        actualBooking.Should().BeEquivalentTo(expectedBooking);
+    }
+    
+    public void ValidatePatchUpdatedBooking()
+    {
+        var expectedPatchBookingRequest = scenarioContext.GetBookingRequest();
+        var expectedBookingRequest = scenarioContext.GetRestResponsesList().First();
+        var expectedBooking = expectedBookingRequest.Deserialize<BookingResponse>().Booking.UpdateBookingWithAnonymousObject(expectedPatchBookingRequest);
         
         var actualBookingResponse = scenarioContext.GetRestResponse();
 

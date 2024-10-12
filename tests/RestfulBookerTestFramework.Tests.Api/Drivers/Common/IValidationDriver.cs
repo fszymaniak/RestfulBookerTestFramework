@@ -6,5 +6,7 @@ public interface IValidationDriver
 
     public void ValidateCreatedBooking();
     
-    public void ValidateUpdatedBooking();
+    public void ValidatePutUpdatedBooking();
+
+    public void ValidatePatchUpdatedBooking();
 }

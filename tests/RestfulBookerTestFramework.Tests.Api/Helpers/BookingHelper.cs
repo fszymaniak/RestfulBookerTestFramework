@@ -1,9 +1,5 @@
-﻿using System.Linq;
-
-using RestfulBookerTestFramework.Tests.Api.Drivers;
-using RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
-using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
+﻿using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
+using RestfulBookerTestFramework.Tests.Api.DTOs.Requests.Partial.SingleProperty;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
 using RestfulBookerTestFramework.Tests.Api.Extensions;
 using RestfulBookerTestFramework.Tests.Api.Factories;
@@ -52,4 +48,21 @@ public class BookingHelper(ScenarioContext scenarioContext, EndpointsHelper endp
         
         requestDriver.SendDeleteRequest(deleteBookingEndpoint);
     }
+
+    // public BookingResponse UpdateExpectedBookingWithPartialPatchRequest(RestRequest expectedBookingRequest,
+    //     object partialPatchRequest, string partialPatchRequestString)
+    // {
+    //     return partialPatchRequestString switch
+    //     {
+    //         nameof(PartialBookingWithOnlyFirstNameRequest) => GeneratePartialBookingWithOnlyFirstName(),
+    //         nameof(PartialBookingWithOnlyLastNameRequest) => GeneratePartialBookingWithOnlyLastName(),
+    //         nameof(PartialBookingWithOnlyTotalPriceRequest) => GeneratePartialBookingWithOnlyTotalPrice(),
+    //         nameof(PartialBookingWithOnlyDepositPaidRequest) => GeneratePartialBookingWithOnlyDepositPaid(),
+    //         nameof(PartialBookingDatesWithOnlyCheckInRequest) => PartialBookingDatesFactory.CreateBookingDatesRequestWithOnlyCheckIn(),
+    //         nameof(PartialBookingDatesWithOnlyCheckOutRequest) => PartialBookingDatesFactory.CreateBookingDatesRequestWithOnlyCheckOut(),
+    //         nameof(PartialBookingWithOnlyAdditionalNeedsRequest) => GeneratePartialBookingWithOnlyAdditionalNeeds(),
+    //         _ => throw new ArgumentOutOfRangeException(nameof(partialPatchRequestString),
+    //             $"Not found the expected partial booking request value: {partialPatchRequestString}")
+    //     };
+    // }
 }

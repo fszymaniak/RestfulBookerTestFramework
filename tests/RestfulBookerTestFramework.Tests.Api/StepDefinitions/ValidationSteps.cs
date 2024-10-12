@@ -17,10 +17,20 @@ namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions
             validationDriver.ValidateCreatedBooking();
         }
         
-        [Then("the newly updated booking should be valid")]
-        public void ThenTheUpdatedBookingShouldBeValid()
+        [Then("the newly '(.*)' updated booking should be valid")]
+        public void ThenTheUpdatedBookingShouldBeValid(Method restRequestMethod)
         {
-            validationDriver.ValidateUpdatedBooking();
+            switch (restRequestMethod)
+            {
+                case Method.Put:
+                    validationDriver.ValidatePutUpdatedBooking();
+                    break;
+                case Method.Patch:
+                    validationDriver.ValidatePatchUpdatedBooking();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(restRequestMethod), restRequestMethod, null);
+            }
         }
     }
 }
