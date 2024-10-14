@@ -7,7 +7,7 @@ namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 public sealed class CreateTokenSteps(IAuthTokenDriver authTokenDriver, AppSettings appSettings)
 {
     [Given("a new valid auth token request is created")]
-    public async Task CreateValidAuthTokenRequest()
+    public void CreateValidAuthTokenRequest()
     {
         authTokenDriver.CreateAuthTokenRequest(appSettings.Credentials.UserName, appSettings.Credentials.Password);
     }
