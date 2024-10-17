@@ -7,4 +7,6 @@ public interface IAuthTokenDriver
     public void CreateAuthToken();
 
     public void ValidateAuthTokenResponse();
+
+    public void ValidateAuthErrorMessage();
 }
