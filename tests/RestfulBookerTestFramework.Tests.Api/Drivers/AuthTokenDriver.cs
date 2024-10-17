@@ -5,7 +5,7 @@ using RestfulBookerTestFramework.Tests.Api.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers
 {
-    internal class AuthTokenDriver(RestClient restClient, EndpointsHelper endpointsHelper, ScenarioContext scenarioContext)
+    public sealed class AuthTokenDriver(IRequestDriver requestDriver, EndpointsHelper endpointsHelper, ScenarioContext scenarioContext)
         : IAuthTokenDriver
     {
         public void CreateAuthTokenRequest(string userName, string password)
@@ -28,7 +28,7 @@ namespace RestfulBookerTestFramework.Tests.Api.Drivers
 
             var requestAuthTokenBody = scenarioContext.GetAuthTokenRequest();
 
-            var response = SendPostRequestToAuthEndpoint(authEndpoint, requestAuthTokenBody);
+            var response = requestDriver.SendPostRequest(authEndpoint, requestAuthTokenBody);
 
             scenarioContext.SetRestResponse(response);
         }
@@ -39,28 +39,6 @@ namespace RestfulBookerTestFramework.Tests.Api.Drivers
             var token = JsonConvert.DeserializeObject<AuthTokenResponse>(response.Content);
 
             token.Token.Should().NotBeNullOrEmpty();
-        }
-
-        private RestResponse SendPostRequestToAuthEndpoint(string authEndpoint, AuthTokenRequest requestAuthTokenBody)
-        {
-            var request = new RestRequest(authEndpoint, Method.Post);
-
-            var cancellationTokenSource = new CancellationTokenSource();
-
-            RestResponse response;
-            request.AddBody(requestAuthTokenBody);
-
-            try
-            {
-                response = restClient.ExecutePostAsync(request, cancellationTokenSource.Token).Result;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
-            return response;
         }
     }
 }

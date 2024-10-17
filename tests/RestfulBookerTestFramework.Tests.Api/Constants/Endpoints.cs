@@ -3,4 +3,6 @@
 public static class Endpoints
 {
     public static string AuthEndpoint => "/auth";
+    
+    public static string HealthCheck => "/ping";
 }

@@ -30,4 +30,13 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Features\HappyPaths\AuthEndpointHappyPath.feature.cs">
+      <DependentUpon>AuthEndpointHappyPath.feature</DependentUpon>
+      <AutoGen>true</AutoGen>
+      <DesignTime>true</DesignTime>
+      <Visible>true</Visible>
+    </Compile>
+  </ItemGroup>
+
 </Project>

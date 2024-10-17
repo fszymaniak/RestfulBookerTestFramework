@@ -11,5 +11,11 @@ namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions
         {
             commonDriver.ValidateStatusCode(expectedStatusCode);
         }
+
+        [StepDefinition("Prerequisite: API is running")]
+        public void ValidateIfApiIsRunning()
+        {
+            commonDriver.ValidateHealthCheckBeforeScenarioRun();
+        }
     }
 }

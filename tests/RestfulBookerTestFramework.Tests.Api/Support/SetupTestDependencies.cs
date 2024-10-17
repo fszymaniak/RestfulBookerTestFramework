@@ -1,4 +1,8 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Configuration;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
+using RestfulBookerTestFramework.Tests.Api.Configuration;
 using RestfulBookerTestFramework.Tests.Api.Constants;
 using RestfulBookerTestFramework.Tests.Api.Drivers;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
@@ -55,15 +59,10 @@ public static class SetupTestDependencies
             .SingleInstance();
 
         // Drivers
-        containerBuilder
-            .RegisterType<AuthTokenDriver>()
-            .As<IAuthTokenDriver>()
-            .SingleInstance();
-
-        containerBuilder
-            .RegisterType<CommonDriver>()
-            .As<ICommonDriver>()
-            .SingleInstance();
+        var projectName = Path.GetFileName(Assembly.GetExecutingAssembly().Location).Split(".dll").First();
+        containerBuilder.RegisterAssemblyTypes(Assembly.Load(projectName))
+            .Where(t => t.Name.EndsWith("Driver"))
+            .AsImplementedInterfaces();
 
         // Helpers
         containerBuilder
@@ -74,7 +73,5 @@ public static class SetupTestDependencies
         // register binding classes
         containerBuilder.AddReqnrollBindings<ScenarioHook>();
         containerBuilder.AddReqnrollBindings<CreateTokenSteps>();
-        containerBuilder.AddReqnrollBindings<CommonSteps>();
     }
-   
 }

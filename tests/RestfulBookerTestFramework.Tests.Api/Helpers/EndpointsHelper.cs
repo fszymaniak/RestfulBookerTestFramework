@@ -3,7 +3,7 @@ using RestfulBookerTestFramework.Tests.Api.Constants;
 
 namespace RestfulBookerTestFramework.Tests.Api.Helpers;
 
-public class EndpointsHelper
+public sealed class EndpointsHelper
 {
     private readonly AppSettings _appSettings;
 
@@ -15,5 +15,10 @@ public class EndpointsHelper
     internal string GetAuthEndpoint()
     {
         return _appSettings.Urls.RestfulBookerUrl + Endpoints.AuthEndpoint;
+    }
+    
+    internal string GetPingEndpoint()
+    {
+        return _appSettings.Urls.RestfulBookerUrl + Endpoints.HealthCheck;
     }
 }

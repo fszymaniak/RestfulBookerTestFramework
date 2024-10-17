@@ -10,4 +10,5 @@ global using System.IO;
 global using Microsoft.Extensions.Configuration;
 global using Reqnroll.Autofac;
 global using Reqnroll.Autofac.ReqnrollPlugin;
+global using Reqnroll.UnitTestProvider;
 global using Autofac;
