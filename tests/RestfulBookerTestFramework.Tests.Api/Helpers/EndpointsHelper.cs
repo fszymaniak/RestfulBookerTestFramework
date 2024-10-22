@@ -19,6 +19,11 @@ public sealed class EndpointsHelper
     
     internal string GetPingEndpoint()
     {
-        return _appSettings.Urls.RestfulBookerUrl + Endpoints.HealthCheck;
+        return _appSettings.Urls.RestfulBookerUrl + Endpoints.HealthCheckEndpoint;
+    }
+    
+    internal string GetBookingEndpoint()
+    {
+        return _appSettings.Urls.RestfulBookerUrl + Endpoints.BookingEndpoint;
     }
 }

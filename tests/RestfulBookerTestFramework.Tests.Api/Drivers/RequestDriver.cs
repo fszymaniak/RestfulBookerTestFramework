@@ -24,12 +24,13 @@ public sealed class RequestDriver(RestClient restClient) : IRequestDriver
     public RestResponse SendPostRequest(string endpoint, object body)
     {
         var request = new RestRequest(endpoint, Method.Post);
+        request.AddHeader("Accept", "application/json");
+        request.AddParameter("application/json", body, ParameterType.RequestBody);
 
         var cancellationTokenSource = new CancellationTokenSource();
 
         RestResponse response;
-        request.AddBody(body);
-
+        
         try
         {
             response = restClient.ExecutePostAsync(request, cancellationTokenSource.Token).Result;

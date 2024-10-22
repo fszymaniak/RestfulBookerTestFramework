@@ -4,5 +4,7 @@ public static class Endpoints
 {
     public static string AuthEndpoint => "/auth";
     
-    public static string HealthCheck => "/ping";
+    public static string HealthCheckEndpoint => "/ping";
+    
+    public static string BookingEndpoint => "/booking";
 }

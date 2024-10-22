@@ -10,5 +10,7 @@ global using System.IO;
 global using Microsoft.Extensions.Configuration;
 global using Reqnroll.Autofac;
 global using Reqnroll.Autofac.ReqnrollPlugin;
-global using Reqnroll.UnitTestProvider;
 global using Autofac;
+global using NUnit.Framework;
+global using System.Text.Json.Serialization;
+global using Bogus;

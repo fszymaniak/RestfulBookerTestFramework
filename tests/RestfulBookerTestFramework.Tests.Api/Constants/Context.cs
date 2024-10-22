@@ -5,5 +5,7 @@
         public const string AuthTokenRequest = "authTokenRequest";
 
         public const string Response = "response";
+        
+        public const string BookingRequest = "bookingRequest"; 
     }
 }

@@ -1,5 +1,7 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Constants;
+using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
+using RestfulBookerTestFramework.Tests.Api.Factories;
 
 namespace RestfulBookerTestFramework.Tests.Api.Extensions
 {
@@ -10,5 +12,8 @@ namespace RestfulBookerTestFramework.Tests.Api.Extensions
 
         public static RestResponse GetRestResponse(this ScenarioContext context) =>
             context.Get<RestResponse>(Context.Response);
+        
+        public static Booking GetBookingRequest(this ScenarioContext context) =>
+            context.Get<Booking>(Context.BookingRequest);
     }
 }
