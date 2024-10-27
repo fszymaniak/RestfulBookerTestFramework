@@ -11,7 +11,13 @@ public sealed class CreateBookingSteps(IBookingDriver bookingDriver)
         bookingDriver.GenerateBookingRequest();
     }
 
-    [When("the new booking is created")]
+    [Given("the '(.*)' booking request is created")]
+    public void GivenTheInvalidBookingRequestIsCreated(string invalidBookingRequest)
+    {
+        bookingDriver.GenerateInvalidBookingRequest(invalidBookingRequest);
+    }
+
+    [When("trying to create a new booking")]
     public void WhenTheBookingRequestIsCreated()
     {
         bookingDriver.CreateBooking();

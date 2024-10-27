@@ -13,8 +13,26 @@ public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenari
 
         scenarioContext.SetBookingRequest(requestBookingBody);
     }
+    
+    public void GenerateInvalidBookingRequest(string invalidBookingRequest)
+    {
+        var requestBookingBody = InvalidBookingFactory.GenerateInvalidBooking(invalidBookingRequest);
+
+        scenarioContext.SetBookingRequest(requestBookingBody);
+    }
 
     public void CreateBooking()
+    {
+        string bookingEndpoint = endpointsHelper.GetBookingEndpoint();
+
+        var bookingRequestBody = scenarioContext.GetBookingRequest();
+
+        var response = requestDriver.SendPostRequest(bookingEndpoint, bookingRequestBody);
+
+        scenarioContext.SetRestResponse(response);
+    }
+    
+    public void TryCreateBookingWithInvalidRequestBody()
     {
         string bookingEndpoint = endpointsHelper.GetBookingEndpoint();
 

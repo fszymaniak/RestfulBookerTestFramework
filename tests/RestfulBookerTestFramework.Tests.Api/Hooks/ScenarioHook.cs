@@ -1,7 +1,4 @@
-﻿using Reqnroll;
-using System;
-
-namespace RestfulBookerTestFramework.Tests.Api.Hooks;
+﻿namespace RestfulBookerTestFramework.Tests.Api.Hooks;
 
 [Binding]
 public class ScenarioHook

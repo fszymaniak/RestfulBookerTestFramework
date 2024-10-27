@@ -1,13 +1,10 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Constants;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
 
-namespace RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
+namespace RestfulBookerTestFramework.Tests.Api.DTOs.Requests.Invalid;
 
-public class Booking
+public class InvalidBookingWithoutFirstName
 {
-    [JsonPropertyName(JsonPropertyNames.BookingProperties.FirstName)]
-    public string FirstName { get; set; }
-    
     [JsonPropertyName(JsonPropertyNames.BookingProperties.LastName)]
     public string LastName { get; set; }
     

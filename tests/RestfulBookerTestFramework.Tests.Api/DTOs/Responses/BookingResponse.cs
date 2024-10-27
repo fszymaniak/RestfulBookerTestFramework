@@ -1,5 +1,5 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Constants;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
+using RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
 
 namespace RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
 
