@@ -9,8 +9,12 @@ public interface IBookingDriver
     public void CreateBooking();
 
     public void GetSingleBooking();
+
+    public void GetMultipleBookingsIds();
     
     public void ValidateCreatedBooking();
 
     public void ValidateGetSingleBooking();
+
+    public void ValidateMultipleBookingsIds();
 }

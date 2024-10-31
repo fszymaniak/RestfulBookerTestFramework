@@ -44,6 +44,12 @@
       <DesignTime>true</DesignTime>
       <Visible>true</Visible>
     </Compile>
+    <Compile Update="Features\HappyPaths\GetMultipleBookingHappyPath.feature.cs">
+      <DependentUpon>GetMultipleBookingHappyPath.feature</DependentUpon>
+      <AutoGen>true</AutoGen>
+      <DesignTime>true</DesignTime>
+      <Visible>true</Visible>
+    </Compile>
   </ItemGroup>
 
 </Project>

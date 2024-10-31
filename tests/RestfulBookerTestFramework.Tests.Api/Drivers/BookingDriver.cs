@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 
+using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
 using RestfulBookerTestFramework.Tests.Api.Extensions;
@@ -45,6 +46,15 @@ public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenari
         scenarioContext.SetRestResponse(response);
     }
 
+    public void GetMultipleBookingsIds()
+    {
+        string bookingEndpoint = endpointsHelper.GetBookingEndpoint();
+        
+        var response = requestDriver.SendGetRequest(bookingEndpoint);
+
+        scenarioContext.SetRestResponse(response);
+    }
+
     public void ValidateCreatedBooking()
     {
         var expectedBooking = scenarioContext.GetBookingRequest();
@@ -78,5 +88,14 @@ public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenari
         actualBookingResponse.BookingId.Should().NotBe(null);
         actualBookingResponse.BookingId.Should().Be(expectedBooking.BookingId);
         actualBookingResponse.Should().BeEquivalentTo(expectedBooking);
+    }
+
+    public void ValidateMultipleBookingsIds()
+    {
+        var actualRestResponse = scenarioContext.GetRestResponse();
+        var actualBooking = JsonConvert.DeserializeObject<List<BookingIdentifier>>(actualRestResponse.Content);
+        
+        actualBooking.Count.Should().NotBe(0);
+        actualBooking.Should().NotBeNullOrEmpty();
     }
 }

@@ -1,11 +1,13 @@
-﻿namespace RestfulBookerTestFramework.Tests.Api.Drivers;
+﻿using RestfulBookerTestFramework.Tests.Api.Extensions;
+
+namespace RestfulBookerTestFramework.Tests.Api.Drivers;
 
 public sealed class RequestDriver(RestClient restClient) : IRequestDriver
 {
     public RestResponse SendGetRequest(string endpoint)
     {
         var request = new RestRequest(endpoint);
-        request.AddHeader("Accept", "application/json");
+        request.WithAcceptHeader();
 
         RestResponse response;
         
@@ -25,8 +27,8 @@ public sealed class RequestDriver(RestClient restClient) : IRequestDriver
     public RestResponse SendPostRequest(string endpoint, object body)
     {
         var request = new RestRequest(endpoint, Method.Post);
-        request.AddHeader("Accept", "application/json");
-        request.AddParameter("application/json", body, ParameterType.RequestBody);
+        request.WithAcceptHeader();
+        request.WithBodyParameter(body);
 
         var cancellationTokenSource = new CancellationTokenSource();
 

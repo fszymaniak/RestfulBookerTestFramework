@@ -1,0 +1,14 @@
+﻿namespace RestfulBookerTestFramework.Tests.Api.Extensions;
+
+public static class RestRequestExtensions
+{
+    public static void WithAcceptHeader(this RestRequest request)
+    {
+        request.AddHeader("Accept", "application/json");
+    }
+
+    public static void WithBodyParameter(this RestRequest request, object body)
+    {
+        request.AddParameter("application/json", body, ParameterType.RequestBody);
+    }
+}
