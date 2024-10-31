@@ -7,6 +7,10 @@ public interface IBookingDriver
     public void GenerateInvalidBookingRequest(string invalidBookingRequest);
 
     public void CreateBooking();
+
+    public void GetSingleBooking();
     
-    public void ValidateBooking();
+    public void ValidateCreatedBooking();
+
+    public void ValidateGetSingleBooking();
 }

@@ -5,6 +5,7 @@ public sealed class RequestDriver(RestClient restClient) : IRequestDriver
     public RestResponse SendGetRequest(string endpoint)
     {
         var request = new RestRequest(endpoint);
+        request.AddHeader("Accept", "application/json");
 
         RestResponse response;
         

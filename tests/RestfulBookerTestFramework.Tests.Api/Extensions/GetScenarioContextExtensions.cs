@@ -15,5 +15,11 @@ namespace RestfulBookerTestFramework.Tests.Api.Extensions
         
         public static object GetBookingRequest(this ScenarioContext context) =>
             context.Get<object>(Context.BookingRequest);
+        
+        public static List<Booking> GetBookingsList(this ScenarioContext context) =>
+            context.Get<List<Booking>>(Context.BookingsList);
+        
+        public static List<RestResponse> GetRestResponseList(this ScenarioContext context) =>
+            context.Get<List<RestResponse>>(Context.ResponseList);
     }
 }

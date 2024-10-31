@@ -14,3 +14,6 @@ global using Autofac;
 global using NUnit.Framework;
 global using System.Text.Json.Serialization;
 global using Bogus;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Reflection;

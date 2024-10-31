@@ -6,6 +6,10 @@
 
         public const string Response = "response";
         
+        public const string ResponseList = "responseList";
+        
         public const string BookingRequest = "bookingRequest"; 
+        
+        public const string BookingsList = "bookingList"; 
     }
 }

@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿
 
 using RestfulBookerTestFramework.Tests.Api.Configuration;
 using RestfulBookerTestFramework.Tests.Api.Constants;
-using RestfulBookerTestFramework.Tests.Api.Drivers;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
 
 using ContainerBuilder = Autofac.ContainerBuilder;
@@ -69,11 +66,18 @@ public static class SetupTestDependencies
             .RegisterType<EndpointsHelper>()
             .AsSelf()
             .SingleInstance();
+        
+        containerBuilder
+            .RegisterType<BookingHelper>()
+            .AsSelf()
+            .SingleInstance();
 
         // register binding classes
         containerBuilder.AddReqnrollBindings<ScenarioHook>();
+        containerBuilder.AddReqnrollBindings<BeforeScenarioHook>();
         containerBuilder.AddReqnrollBindings<CreateTokenSteps>();
         containerBuilder.AddReqnrollBindings<CommonSteps>();
         containerBuilder.AddReqnrollBindings<CreateBookingSteps>();
+        containerBuilder.AddReqnrollBindings<GetBookingSteps>();
     }
 }

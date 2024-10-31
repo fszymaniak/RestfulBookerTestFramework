@@ -1,15 +1,18 @@
-﻿using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
+﻿using System.Linq;
+
+using RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
+using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
 using RestfulBookerTestFramework.Tests.Api.Extensions;
 using RestfulBookerTestFramework.Tests.Api.Factories;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers;
 
-public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper) : IBookingDriver
+public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, BookingHelper bookingHelper) : IBookingDriver
 {
     public void GenerateBookingRequest()
     {
-        var requestBookingBody = BookingFactory.GenerateBooking();
+        var requestBookingBody = BookingFactory.GenerateBookings().FirstOrDefault();
 
         scenarioContext.SetBookingRequest(requestBookingBody);
     }
@@ -31,19 +34,18 @@ public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenari
 
         scenarioContext.SetRestResponse(response);
     }
-    
-    public void TryCreateBookingWithInvalidRequestBody()
+
+    public void GetSingleBooking()
     {
-        string bookingEndpoint = endpointsHelper.GetBookingEndpoint();
-
-        var bookingRequestBody = scenarioContext.GetBookingRequest();
-
-        var response = requestDriver.SendPostRequest(bookingEndpoint, bookingRequestBody);
+        int bookingId = bookingHelper.GetBookingId();
+        string bookingEndpoint = endpointsHelper.GetSingleBookingEndpoint(bookingId);
+        
+        var response = requestDriver.SendGetRequest(bookingEndpoint);
 
         scenarioContext.SetRestResponse(response);
     }
 
-    public void ValidateBooking()
+    public void ValidateCreatedBooking()
     {
         var expectedBooking = scenarioContext.GetBookingRequest();
         
@@ -55,5 +57,26 @@ public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenari
         actualBooking.BookingId.Should().NotBe(0);
         actualBooking.BookingId.Should().NotBe(null);
         actualBooking.Booking.Should().BeEquivalentTo(expectedBooking);
+    }
+    
+    public void ValidateGetSingleBooking()
+    {
+        var bookingRequest = scenarioContext.GetRestResponseList().First();
+        var expectedBooking = JsonConvert.DeserializeObject<BookingResponse>(bookingRequest.Content);
+
+        var actualRestResponse = scenarioContext.GetRestResponse();
+        var actualBooking = JsonConvert.DeserializeObject<Booking>(actualRestResponse.Content);
+        int id = endpointsHelper.GetBookingIdFromResponseUri(actualRestResponse.ResponseUri.ToString());
+        var actualBookingResponse = new BookingResponse
+        {
+            BookingId = id,
+            Booking = actualBooking,
+        };
+
+        actualBookingResponse.BookingId.Should().BeOfType(typeof(int));
+        actualBookingResponse.BookingId.Should().NotBe(0);
+        actualBookingResponse.BookingId.Should().NotBe(null);
+        actualBookingResponse.BookingId.Should().Be(expectedBooking.BookingId);
+        actualBookingResponse.Should().BeEquivalentTo(expectedBooking);
     }
 }
