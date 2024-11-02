@@ -27,8 +27,8 @@ public static class BookingFactory
     private static BookingDates CreateBookingDates()
     {
         var bookingDatesFaker = new Faker<BookingDates>()
-            .RuleFor(b => b.CheckIn, f => f.Date.FutureDateOnly(0))
-            .RuleFor(b => b.CheckOut, (f, b) => f.Date.BetweenDateOnly(b.CheckIn, b.CheckIn.AddDays(14)));
+            .RuleFor(b => b.CheckIn, f => f.Date.FutureDateOnly(DateConstants.CheckInYearsToGoForward))
+            .RuleFor(b => b.CheckOut, (f, b) => f.Date.BetweenDateOnly(b.CheckIn, b.CheckIn.AddDays(DateConstants.MaxFutureDaysForCheckOut)));
 
         var bookingDates = bookingDatesFaker.Generate();
         return bookingDates;
