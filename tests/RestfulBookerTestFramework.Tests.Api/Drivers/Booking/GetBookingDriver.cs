@@ -19,11 +19,11 @@ public sealed class GetBookingDriver(IRequestDriver requestDriver, ScenarioConte
     
     public void ValidateGetSingleBooking()
     {
-        var bookingRequest = scenarioContext.GetRestResponsesList().First();
-        var expectedBooking = JsonConvert.DeserializeObject<BookingResponse>(bookingRequest.Content);
+        var bookingResponse = scenarioContext.GetRestResponsesList().First();
+        var expectedBooking = bookingResponse.Deserialize<BookingResponse>();
 
         var actualRestResponse = scenarioContext.GetRestResponse();
-        var actualBooking = JsonConvert.DeserializeObject<DTOs.Requests.Booking>(actualRestResponse.Content);
+        var actualBooking = actualRestResponse.Deserialize<DTOs.Models.Booking>();
         int id = endpointsHelper.GetBookingIdFromResponseUri(actualRestResponse.ResponseUri.ToString());
         var actualBookingResponse = new BookingResponse
         {

@@ -8,12 +8,12 @@ using RestfulBookerTestFramework.Tests.Api.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
-public sealed class DeleteBookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, BookingHelper bookingHelper, IAuthTokenDriver authTokenDriver, AppSettings appSettings, IGetBookingDriver getBookingDriver) : IDeleteBookingDriver
+public sealed class DeleteBookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, IAuthTokenDriver authTokenDriver, AppSettings appSettings, IGetBookingDriver getBookingDriver) : IDeleteBookingDriver
 {
     public void DeleteBooking()
     {
         var expectedBookingResponse = scenarioContext.GetRestResponsesList().FirstOrDefault();
-        var bookingId = JsonConvert.DeserializeObject<BookingIdentifier>(expectedBookingResponse.Content);
+        var bookingId = expectedBookingResponse.Deserialize<BookingIdentifier>();
         scenarioContext.SetBookingId(bookingId.BookingId);
         authTokenDriver.CreateAuthTokenRequest(appSettings.Credentials.UserName, appSettings.Credentials.Password);
         authTokenDriver.CreateAuthToken();

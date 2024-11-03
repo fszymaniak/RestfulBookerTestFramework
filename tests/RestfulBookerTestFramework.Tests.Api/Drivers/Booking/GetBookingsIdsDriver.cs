@@ -32,7 +32,7 @@ public sealed class GetBookingsIdsDriver(IRequestDriver requestDriver, ScenarioC
     public void GetSingleBookingIdWithNameFilter()
     {
         var booking = scenarioContext.GetRestResponsesList()
-            .Select(b => JsonConvert.DeserializeObject<BookingResponse>(b.Content)).First();
+            .Select(b => b.Deserialize<BookingResponse>()).First();
         
         scenarioContext.SetBookingRequest(booking);
 
@@ -46,7 +46,7 @@ public sealed class GetBookingsIdsDriver(IRequestDriver requestDriver, ScenarioC
     public void ValidateMultipleBookingsIds()
     {
         var actualRestResponse = scenarioContext.GetRestResponse();
-        var actualBooking = JsonConvert.DeserializeObject<List<BookingIdentifier>>(actualRestResponse.Content);
+        var actualBooking = actualRestResponse.Deserialize<List<BookingIdentifier>>();
         
         actualBooking.Count.Should().NotBe(0);
         actualBooking.Should().NotBeNullOrEmpty();
@@ -57,7 +57,7 @@ public sealed class GetBookingsIdsDriver(IRequestDriver requestDriver, ScenarioC
         var expectedBookingIds = scenarioContext.GetRestResponsesList().SelectMany(r => JsonConvert.DeserializeObject<List<BookingIdentifier>>(r.Content));
         
         var actualRestResponse = scenarioContext.GetRestResponse();
-        var actualBookingIds = JsonConvert.DeserializeObject<List<BookingIdentifier>>(actualRestResponse.Content);
+        var actualBookingIds = actualRestResponse.Deserialize<List<BookingIdentifier>>();
         
         actualBookingIds.Count.Should().NotBe(0);
         actualBookingIds.Should().NotBeNullOrEmpty();
@@ -68,10 +68,10 @@ public sealed class GetBookingsIdsDriver(IRequestDriver requestDriver, ScenarioC
     public void ValidateSingleBookingIdFilteredByName()
     {
         var expectedBookingResponse = scenarioContext.GetRestResponsesList().FirstOrDefault();
-        var expectedBookingId = JsonConvert.DeserializeObject<BookingIdentifier>(expectedBookingResponse.Content);
+        var expectedBookingId = expectedBookingResponse.Deserialize<BookingIdentifier>();
         
         var actualRestResponse = scenarioContext.GetRestResponse();
-        var actualBookingIds = JsonConvert.DeserializeObject<List<BookingIdentifier>>(actualRestResponse.Content);
+        var actualBookingIds = actualRestResponse.Deserialize<List<BookingIdentifier>>();
         
         actualBookingIds.Count.Should().NotBe(0);
         actualBookingIds.Should().NotBeNullOrEmpty();

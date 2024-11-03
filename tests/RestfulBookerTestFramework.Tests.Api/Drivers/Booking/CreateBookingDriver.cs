@@ -8,7 +8,7 @@ using RestfulBookerTestFramework.Tests.Api.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
-public sealed class CreateBookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, BookingHelper bookingHelper, IAuthTokenDriver authTokenDriver, AppSettings appSettings) : ICreateBookingDriver
+public sealed class CreateBookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper) : ICreateBookingDriver
 {
     public void GenerateBookingRequest()
     {
@@ -40,8 +40,8 @@ public sealed class CreateBookingDriver(IRequestDriver requestDriver, ScenarioCo
         var expectedBooking = scenarioContext.GetBookingRequest();
         
         var actualBookingResponse = scenarioContext.GetRestResponse();
-        
-        var actualBooking = JsonConvert.DeserializeObject<BookingResponse>(actualBookingResponse.Content);
+
+        var actualBooking = actualBookingResponse.Deserialize<BookingResponse>();
 
         actualBooking.BookingId.Should().BeOfType(typeof(int));
         actualBooking.BookingId.Should().NotBe(0);
