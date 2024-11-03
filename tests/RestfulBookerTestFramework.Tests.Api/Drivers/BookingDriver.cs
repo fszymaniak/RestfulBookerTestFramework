@@ -1,4 +1,6 @@
-﻿using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
+﻿using RestfulBookerTestFramework.Tests.Api.Configuration;
+using RestfulBookerTestFramework.Tests.Api.Constants;
+using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
 using RestfulBookerTestFramework.Tests.Api.Extensions;
@@ -7,7 +9,7 @@ using RestfulBookerTestFramework.Tests.Api.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers;
 
-public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, BookingHelper bookingHelper) : IBookingDriver
+public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, BookingHelper bookingHelper, IAuthTokenDriver authTokenDriver, AppSettings appSettings) : IBookingDriver
 {
     public void GenerateBookingRequest()
     {
@@ -34,9 +36,9 @@ public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenari
         scenarioContext.SetRestResponse(response);
     }
 
-    public void GetSingleBooking()
+    public void GetSingleBooking(int? bookingId = null)
     {
-        int bookingId = bookingHelper.GetBookingId();
+        bookingId ??= bookingHelper.GetBookingId();
         string bookingEndpoint = endpointsHelper.GetSingleBookingEndpoint(bookingId);
         
         var response = requestDriver.SendGetRequest(bookingEndpoint);
@@ -75,6 +77,21 @@ public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenari
         string bookingEndpointWithNameFilter = endpointsHelper.GetBookingEndpointWithNameFilter(booking.Booking.FirstName, booking.Booking.LastName);
         
         var response = requestDriver.SendGetRequest(bookingEndpointWithNameFilter);
+
+        scenarioContext.SetRestResponse(response);
+    }
+
+    public void DeleteBooking()
+    {
+        var expectedBookingResponse = scenarioContext.GetRestResponsesList().FirstOrDefault();
+        var bookingId = JsonConvert.DeserializeObject<BookingIdentifier>(expectedBookingResponse.Content);
+        scenarioContext.SetBookingId(bookingId.BookingId);
+        authTokenDriver.CreateAuthTokenRequest(appSettings.Credentials.UserName, appSettings.Credentials.Password);
+        authTokenDriver.CreateAuthToken();
+        
+        string deleteBookingEndpoint = endpointsHelper.GetDeleteBookingEndpoint(bookingId.BookingId);
+        
+        var response = requestDriver.SendDeleteRequest(deleteBookingEndpoint);
 
         scenarioContext.SetRestResponse(response);
     }
@@ -147,5 +164,16 @@ public class BookingDriver(IRequestDriver requestDriver, ScenarioContext scenari
         actualBookingIds.Count.Should().NotBe(0);
         actualBookingIds.Should().NotBeNullOrEmpty();
         actualBookingIds.Should().ContainEquivalentOf(expectedBookingId);
+    }
+    
+    public void ValidateIfBookingHasBeenDeleted()
+    {
+        var expectedBookingId = scenarioContext.GetBookingId();
+        GetSingleBooking(expectedBookingId);
+        
+        var actualRestResponse = scenarioContext.GetRestResponse();
+        actualRestResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        actualRestResponse.Content.Should().NotBeNullOrEmpty();
+        actualRestResponse.Content.Should().Be(ErrorMessages.NotFoundMessage);
     }
 }

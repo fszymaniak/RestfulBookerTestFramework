@@ -1,12 +1,11 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Constants;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
 using RestfulBookerTestFramework.Tests.Api.Extensions;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers
 {
-    public sealed class AuthTokenDriver(IRequestDriver requestDriver, EndpointsHelper endpointsHelper, ScenarioContext scenarioContext)
+    public sealed class AuthTokenDriver(IRequestDriver requestDriver, EndpointsHelper endpointsHelper, ScenarioContext scenarioContext, AuthTokenHelper authTokenHelper)
         : IAuthTokenDriver
     {
         public void CreateAuthTokenRequest(string userName, string password)
@@ -36,19 +35,16 @@ namespace RestfulBookerTestFramework.Tests.Api.Drivers
 
         public void ValidateAuthTokenResponse()
         {
-            var response = scenarioContext.GetRestResponse();
-            var token = JsonConvert.DeserializeObject<AuthTokenResponse>(response.Content);
-
-            token.Token.Should().NotBeNullOrEmpty();
+            string token = authTokenHelper.GetToken();
+            token.Should().NotBeNullOrEmpty();
         }
         
         public void ValidateAuthErrorMessage()
         {
-            var response = scenarioContext.GetRestResponse();
-            var token = JsonConvert.DeserializeObject<AuthErrorResponse>(response.Content);
+            var tokenErrorReason = authTokenHelper.GetAuthErrorReason();
 
-            token.Reason.Should().NotBeNullOrEmpty();
-            token.Reason.Should().Be(ErrorMessages.AuthErrorMessage);
+            tokenErrorReason.Should().NotBeNullOrEmpty();
+            tokenErrorReason.Should().Be(ErrorMessages.AuthErrorMessage);
         }
     }
 }

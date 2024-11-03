@@ -71,6 +71,11 @@ public static class SetupTestDependencies
             .RegisterType<BookingHelper>()
             .AsSelf()
             .SingleInstance();
+        
+        containerBuilder
+            .RegisterType<AuthTokenHelper>()
+            .AsSelf()
+            .SingleInstance();
 
         // register binding classes
         containerBuilder.AddReqnrollBindings<ScenarioHook>();
@@ -79,5 +84,6 @@ public static class SetupTestDependencies
         containerBuilder.AddReqnrollBindings<CommonSteps>();
         containerBuilder.AddReqnrollBindings<CreateBookingSteps>();
         containerBuilder.AddReqnrollBindings<GetBookingSteps>();
+        containerBuilder.AddReqnrollBindings<DeleteBookingSteps>();
     }
 }

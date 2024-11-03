@@ -8,13 +8,15 @@ public interface IBookingDriver
 
     public void CreateBooking();
 
-    public void GetSingleBooking();
+    public void GetSingleBooking(int? bookingId = null);
 
     public void GetMultipleBookingsIds();
 
     public void GetMultipleBookingsIdsWithDateFilter();
 
     public void GetSingleBookingIdWithNameFilter();
+
+    public void DeleteBooking();
     
     public void ValidateCreatedBooking();
 
@@ -25,4 +27,6 @@ public interface IBookingDriver
     public void ValidateMultipleBookingsIdsFilteredByDate();
 
     public void ValidateSingleBookingIdFilteredByName();
+    
+    public void ValidateIfBookingHasBeenDeleted();
 }

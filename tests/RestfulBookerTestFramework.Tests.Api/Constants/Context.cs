@@ -10,6 +10,6 @@
         
         public const string BookingRequest = "bookingRequest"; 
         
-        public const string BookingsList = "bookingList"; 
+        public const string BookingId = "bookingId"; 
     }
 }

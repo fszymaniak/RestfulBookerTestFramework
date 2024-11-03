@@ -11,4 +11,9 @@ public static class RestRequestExtensions
     {
         request.AddParameter("application/json", body, ParameterType.RequestBody);
     }
+    
+    public static void WithCookieTokenHeader(this RestRequest request, string token)
+    {
+        request.AddHeader("Cookie", $"token={token}");
+    }
 }
