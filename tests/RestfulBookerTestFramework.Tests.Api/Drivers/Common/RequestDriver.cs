@@ -1,9 +1,9 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Extensions;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
 
-namespace RestfulBookerTestFramework.Tests.Api.Drivers;
+namespace RestfulBookerTestFramework.Tests.Api.Drivers.Common;
 
-public sealed class RequestDriver(RestClient restClient, ScenarioContext scenarioContext, AuthTokenHelper authTokenHelper) : IRequestDriver
+public sealed class RequestDriver(RestClient restClient, AuthTokenHelper authTokenHelper) : IRequestDriver
 {
     public RestResponse SendGetRequest(string endpoint)
     {

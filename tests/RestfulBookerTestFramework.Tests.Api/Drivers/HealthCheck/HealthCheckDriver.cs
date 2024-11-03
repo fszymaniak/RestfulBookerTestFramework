@@ -1,7 +1,7 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Constants;
+﻿using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
 
-namespace RestfulBookerTestFramework.Tests.Api.Drivers;
+namespace RestfulBookerTestFramework.Tests.Api.Drivers.HealthCheck;
 
 public sealed class HealthCheckDriver(IRequestDriver requestDriver, EndpointsHelper endpointsHelper) : IHealthCheckDriver
 {

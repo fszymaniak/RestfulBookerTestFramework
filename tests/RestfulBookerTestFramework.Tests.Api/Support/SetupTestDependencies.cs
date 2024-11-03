@@ -1,6 +1,4 @@
-﻿
-
-using RestfulBookerTestFramework.Tests.Api.Configuration;
+﻿using RestfulBookerTestFramework.Tests.Api.Configuration;
 using RestfulBookerTestFramework.Tests.Api.Constants;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
 
@@ -84,6 +82,7 @@ public static class SetupTestDependencies
         containerBuilder.AddReqnrollBindings<CommonSteps>();
         containerBuilder.AddReqnrollBindings<CreateBookingSteps>();
         containerBuilder.AddReqnrollBindings<GetBookingSteps>();
+        containerBuilder.AddReqnrollBindings<GetBookingsIdsSteps>();
         containerBuilder.AddReqnrollBindings<DeleteBookingSteps>();
     }
 }

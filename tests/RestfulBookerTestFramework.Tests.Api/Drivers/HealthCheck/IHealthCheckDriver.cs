@@ -1,4 +1,4 @@
-﻿namespace RestfulBookerTestFramework.Tests.Api.Drivers;
+﻿namespace RestfulBookerTestFramework.Tests.Api.Drivers.HealthCheck;
 
 public interface IHealthCheckDriver
 {

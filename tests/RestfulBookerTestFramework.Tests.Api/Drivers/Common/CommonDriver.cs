@@ -1,8 +1,7 @@
-﻿using NUnit.Framework;
-
+﻿using RestfulBookerTestFramework.Tests.Api.Drivers.HealthCheck;
 using RestfulBookerTestFramework.Tests.Api.Extensions;
 
-namespace RestfulBookerTestFramework.Tests.Api.Drivers
+namespace RestfulBookerTestFramework.Tests.Api.Drivers.Common
 {
     public sealed class CommonDriver(IHealthCheckDriver healthCheckDriver, ScenarioContext scenarioContext) : ICommonDriver
     {

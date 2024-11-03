@@ -1,9 +1,10 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Constants;
+using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
 using RestfulBookerTestFramework.Tests.Api.Extensions;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
 
-namespace RestfulBookerTestFramework.Tests.Api.Drivers
+namespace RestfulBookerTestFramework.Tests.Api.Drivers.AuthToken
 {
     public sealed class AuthTokenDriver(IRequestDriver requestDriver, EndpointsHelper endpointsHelper, ScenarioContext scenarioContext, AuthTokenHelper authTokenHelper)
         : IAuthTokenDriver

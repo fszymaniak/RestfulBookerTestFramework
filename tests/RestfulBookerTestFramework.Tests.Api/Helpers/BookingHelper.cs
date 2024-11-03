@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 
 using RestfulBookerTestFramework.Tests.Api.Drivers;
+using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
 using RestfulBookerTestFramework.Tests.Api.Extensions;
 using RestfulBookerTestFramework.Tests.Api.Factories;

@@ -1,31 +1,31 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Drivers;
+﻿using RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
 namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 
 [Binding]
-public sealed class CreateBookingSteps(IBookingDriver bookingDriver)
+public sealed class CreateBookingSteps(ICreateBookingDriver createBookingDriver)
 {
     [Given("a new valid booking request is created")]
     public void GivenANewValidBookingRequestIsGenerated()
     {
-        bookingDriver.GenerateBookingRequest();
+        createBookingDriver.GenerateBookingRequest();
     }
 
     [Given("the '(.*)' booking request is created")]
     public void GivenTheInvalidBookingRequestIsCreated(string invalidBookingRequest)
     {
-        bookingDriver.GenerateInvalidBookingRequest(invalidBookingRequest);
+        createBookingDriver.GenerateInvalidBookingRequest(invalidBookingRequest);
     }
 
     [When("trying to create a new booking")]
     public void WhenTheBookingRequestIsCreated()
     {
-        bookingDriver.CreateBooking();
+        createBookingDriver.CreateBooking();
     }
     
     [Then("the booking should be valid")]
     public void ThenTheBookingShouldBeValid()
     {
-        bookingDriver.ValidateCreatedBooking();
+        createBookingDriver.ValidateCreatedBooking();
     }
-} 
+}

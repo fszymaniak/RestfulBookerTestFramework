@@ -1,19 +1,19 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Drivers;
+﻿using RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
 namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 
 [Binding]
-public class DeleteBookingSteps(IBookingDriver bookingDriver)
+public class DeleteBookingSteps(IDeleteBookingDriver deleteBookingDriver)
 {
     [When("trying to delete booking")]
     public void WhenTheDeleteBookingRequestIsSend()
     {
-        bookingDriver.DeleteBooking();
+        deleteBookingDriver.DeleteBooking();
     }
     
     [Then("the booking should be deleted and not found")]
     public void ThenTheBookingShouldBeDeletedAndNotFound()
     {
-        bookingDriver.ValidateIfBookingHasBeenDeleted();
+        deleteBookingDriver.ValidateIfBookingHasBeenDeleted();
     }
 }
