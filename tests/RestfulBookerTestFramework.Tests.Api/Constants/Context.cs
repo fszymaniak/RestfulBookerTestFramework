@@ -6,6 +6,8 @@
 
         public const string Response = "response";
         
+        public const string AuthTokenResponse = "authTokenResponse";
+        
         public const string ResponseList = "responseList";
         
         public const string BookingRequest = "bookingRequest"; 

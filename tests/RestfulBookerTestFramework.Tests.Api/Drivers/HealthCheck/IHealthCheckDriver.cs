@@ -3,4 +3,6 @@
 public interface IHealthCheckDriver
 {
     public HttpStatusCode GetHealthCheckStatusCode();
+    
+    public void ValidateHealthCheckBeforeScenarioRun();
 }

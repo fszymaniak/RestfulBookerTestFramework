@@ -1,20 +1,19 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Extensions;
-using RestfulBookerTestFramework.Tests.Api.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers.Common;
 
-public sealed class RequestDriver(RestClient restClient, AuthTokenHelper authTokenHelper) : IRequestDriver
+public sealed class RequestDriver(RestClient restClient, ScenarioContext scenarioContext) : IRequestDriver
 {
+    private RestResponse _response;
+
     public RestResponse SendGetRequest(string endpoint)
     {
         var request = new RestRequest(endpoint);
         request.WithAcceptHeader();
 
-        RestResponse response;
-        
         try
         {
-            response = restClient.ExecuteGet(request);
+            _response = restClient.ExecuteGet(request);
         }
         catch (Exception e)
         {
@@ -22,7 +21,7 @@ public sealed class RequestDriver(RestClient restClient, AuthTokenHelper authTok
             throw;
         }
 
-        return response;
+        return _response;
     }
     
     public RestResponse SendPostRequest(string endpoint, object body)
@@ -33,11 +32,9 @@ public sealed class RequestDriver(RestClient restClient, AuthTokenHelper authTok
 
         var cancellationTokenSource = new CancellationTokenSource();
 
-        RestResponse response;
-        
         try
         {
-            response = restClient.ExecutePostAsync(request, cancellationTokenSource.Token).Result;
+            _response = restClient.ExecutePostAsync(request, cancellationTokenSource.Token).Result;
         }
         catch (Exception e)
         {
@@ -45,23 +42,21 @@ public sealed class RequestDriver(RestClient restClient, AuthTokenHelper authTok
             throw;
         }
 
-        return response;
+        return _response;
     }
 
     public RestResponse SendDeleteRequest(string endpoint)
     {
-        string token = authTokenHelper.GetToken();
+        var token = scenarioContext.GetAuthTokenResponse();
         var request = new RestRequest(endpoint, Method.Delete);
         request.WithAcceptHeader();
-        request.WithCookieTokenHeader(token);
+        request.WithCookieTokenHeader(token.Token);
 
         var cancellationTokenSource = new CancellationTokenSource();
 
-        RestResponse response;
-        
         try
         {
-            response = restClient.ExecuteDeleteAsync(request, cancellationTokenSource.Token).Result;
+            _response = restClient.ExecuteDeleteAsync(request, cancellationTokenSource.Token).Result;
         }
         catch (Exception e)
         {
@@ -69,6 +64,6 @@ public sealed class RequestDriver(RestClient restClient, AuthTokenHelper authTok
             throw;
         }
 
-        return response;
+        return _response;
     }
 }

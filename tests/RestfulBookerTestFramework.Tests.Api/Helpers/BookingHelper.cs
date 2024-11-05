@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 
 using RestfulBookerTestFramework.Tests.Api.Drivers;
+using RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
+using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
 using RestfulBookerTestFramework.Tests.Api.Extensions;
 using RestfulBookerTestFramework.Tests.Api.Factories;
@@ -33,5 +35,21 @@ public class BookingHelper(ScenarioContext scenarioContext, EndpointsHelper endp
         var booking = JsonConvert.DeserializeObject<BookingResponse>(bookingRequest.Content);
         
         return booking.BookingId;
+    }
+    
+    public List<int> GetBookingsIds()
+    {
+        var bookingIdentifiers = scenarioContext.GetRestResponsesList()
+            .Select(r => r.Deserialize<BookingResponse>());
+        var bookingIds = bookingIdentifiers.Select(i => i.BookingId).ToList();
+
+        return bookingIds;
+    }
+
+    public void CleanUpBooking(int bookingId)
+    {
+        string deleteBookingEndpoint = endpointsHelper.GetDeleteBookingEndpoint(bookingId);
+        
+        requestDriver.SendDeleteRequest(deleteBookingEndpoint);
     }
 }

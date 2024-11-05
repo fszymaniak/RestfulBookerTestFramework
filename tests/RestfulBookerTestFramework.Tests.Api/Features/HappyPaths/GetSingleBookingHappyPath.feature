@@ -1,4 +1,6 @@
 @SetupOneBooking
+@CleanUpBooking
+@AuthorizeRequest
 
 Feature: Get Single Booking Endpoint Happy Path
 Description: Send the valid GET request with valid booking id  /booking/{id} endpoint and it should return 200 (OK) with proper booking

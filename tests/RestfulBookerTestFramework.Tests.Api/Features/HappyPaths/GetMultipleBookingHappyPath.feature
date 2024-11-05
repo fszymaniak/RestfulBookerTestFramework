@@ -1,4 +1,5 @@
 @SetupMultipleBookings
+@AuthorizeRequest
 
 Feature: Get Multiple Bookings Ids Endpoint Happy Path
 Description: Send the valid GET request to the /booking endpoint and it should return 200 (OK) with list of bookingIds

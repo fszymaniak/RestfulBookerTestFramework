@@ -1,3 +1,5 @@
+@AuthorizeRequest
+
 Feature: Auth endpoint unhappy path tests
 Description: Send the invalid request to the /auth endpoint 
 

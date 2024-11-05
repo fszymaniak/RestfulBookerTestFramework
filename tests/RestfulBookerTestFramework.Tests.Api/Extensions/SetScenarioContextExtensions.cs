@@ -1,5 +1,6 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Constants;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
+using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
 
 namespace RestfulBookerTestFramework.Tests.Api.Extensions;
 
@@ -19,4 +20,7 @@ public static class SetScenarioContextExtensions
     
     public static void SetRestResponsesList(this ScenarioContext context, List<RestResponse> response) =>
         context[Context.ResponseList] = response;
+    
+    public static void SetAuthTokenResponse(this ScenarioContext context, AuthTokenResponse response) =>
+        context[Context.AuthTokenResponse] = response;
 }

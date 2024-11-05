@@ -2,6 +2,7 @@
 
 namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 
+[Binding]
 public class GetBookingsIdsSteps(IGetBookingsIdsDriver getBookingsIdsDriver)
 {
     [When("trying to get multiple bookings Ids")]

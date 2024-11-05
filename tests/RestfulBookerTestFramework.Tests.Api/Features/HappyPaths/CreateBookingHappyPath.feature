@@ -1,3 +1,6 @@
+@CleanUpBooking
+@AuthorizeRequest
+
 Feature: Create Booking Endpoint Happy Path
 Description: Send the valid POST request with valid body to the /booking endpoint and it should return 201 (Created) and created booking entity
 

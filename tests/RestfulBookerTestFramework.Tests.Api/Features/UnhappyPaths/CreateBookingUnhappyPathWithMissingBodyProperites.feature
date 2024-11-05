@@ -1,3 +1,5 @@
+@AuthorizeRequest
+
 Feature: Create Booking Endpoint Unhappy Path with missing Body properites
 Description: Send the invalid POST request with invalid body to the /booking endpoint and it should return 400 (Bad Request)
 

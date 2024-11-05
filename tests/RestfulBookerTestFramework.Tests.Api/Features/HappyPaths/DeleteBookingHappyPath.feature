@@ -1,4 +1,5 @@
 ﻿@SetupOneBooking
+@AuthorizeRequest
 
 Feature: Delete Booking Endpoint Happy Path
 Description: Send the valid DELETE request with valid booking id /booking/{id} endpoint and token then it should return 200 (OK) with proper booking

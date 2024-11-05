@@ -30,5 +30,7 @@ public static class JsonPropertyNames
         public const string UserName = "username";
      
         public const string Password = "password";
+        
+        public const string Token = "token";
     }
 }
