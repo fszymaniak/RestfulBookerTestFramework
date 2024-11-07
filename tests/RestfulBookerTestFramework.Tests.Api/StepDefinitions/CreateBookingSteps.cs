@@ -23,9 +23,5 @@ public sealed class CreateBookingSteps(ICreateBookingDriver createBookingDriver)
         createBookingDriver.CreateBooking();
     }
     
-    [Then("the booking should be valid")]
-    public void ThenTheBookingShouldBeValid()
-    {
-        createBookingDriver.ValidateCreatedBooking();
-    }
+   
 }

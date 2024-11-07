@@ -6,6 +6,11 @@ public static class RestRequestExtensions
     {
         request.AddHeader("Accept", "application/json");
     }
+    
+    public static void WithContentTypeHeader(this RestRequest request)
+    {
+        request.AddHeader("Content-Type", "application/json");
+    }
 
     public static void WithBodyParameter(this RestRequest request, object body)
     {

@@ -9,4 +9,4 @@ Description: Send the valid POST request with valid body to the /booking endpoin
         And a new valid booking request is created
         When trying to create a new booking
         Then status code should be '200'
-        And the booking should be valid                                                                                                                                                                                                                                                                          
+        And the newly created booking should be valid                                                                                                                                                                                                                                                                    

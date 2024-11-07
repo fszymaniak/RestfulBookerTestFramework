@@ -84,7 +84,7 @@ public static class SetupTestDependencies
         containerBuilder.AddReqnrollBindings<ScenarioHook>();
         containerBuilder.AddReqnrollBindings<BeforeScenarioHook>();
         containerBuilder.AddReqnrollBindings<CreateTokenSteps>();
-        containerBuilder.AddReqnrollBindings<CommonSteps>();
+        containerBuilder.AddReqnrollBindings<ValidationSteps>();
         containerBuilder.AddReqnrollBindings<CreateBookingSteps>();
         containerBuilder.AddReqnrollBindings<GetBookingSteps>();
         containerBuilder.AddReqnrollBindings<GetBookingsIdsSteps>();

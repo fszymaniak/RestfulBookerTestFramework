@@ -35,17 +35,5 @@ public sealed class CreateBookingDriver(IRequestDriver requestDriver, ScenarioCo
         scenarioContext.SetRestResponse(response);
     }
   
-    public void ValidateCreatedBooking()
-    {
-        var expectedBooking = scenarioContext.GetBookingRequest();
-        
-        var actualBookingResponse = scenarioContext.GetRestResponse();
-
-        var actualBooking = actualBookingResponse.Deserialize<BookingResponse>();
-
-        actualBooking.BookingId.Should().BeOfType(typeof(int));
-        actualBooking.BookingId.Should().NotBe(0);
-        actualBooking.BookingId.Should().NotBe(null);
-        actualBooking.Booking.Should().BeEquivalentTo(expectedBooking);
-    }
+    
 }

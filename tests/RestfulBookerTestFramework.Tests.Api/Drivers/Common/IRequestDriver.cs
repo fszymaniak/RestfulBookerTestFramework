@@ -6,5 +6,7 @@ public interface IRequestDriver
     
     public RestResponse SendPostRequest(string endpoint, object body);
     
+    public RestResponse SendPutRequest(string endpoint, object body);
+    
     public RestResponse SendDeleteRequest(string endpoint);
 }
