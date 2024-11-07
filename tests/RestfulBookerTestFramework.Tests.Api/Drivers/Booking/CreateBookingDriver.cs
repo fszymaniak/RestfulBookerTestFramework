@@ -19,7 +19,7 @@ public sealed class CreateBookingDriver(IRequestDriver requestDriver, ScenarioCo
     
     public void GenerateInvalidBookingRequest(string invalidBookingRequest)
     {
-        var requestBookingBody = InvalidBookingFactory.GenerateInvalidBooking(invalidBookingRequest);
+        var requestBookingBody = PartiallyBookingFactory.GeneratePartialBookingWithMultipleProperties(invalidBookingRequest);
 
         scenarioContext.SetBookingRequest(requestBookingBody);
     }

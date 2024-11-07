@@ -1,8 +1,8 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Constants;
 
-namespace RestfulBookerTestFramework.Tests.Api.DTOs.Models.Invalid;
+namespace RestfulBookerTestFramework.Tests.Api.DTOs.Models.Partial;
 
-public class InvalidBookingDatesWithoutCheckOut
+public class PartialBookingDatesWithoutCheckOut
 {
     [JsonPropertyName(JsonPropertyNames.BookingProperties.CheckIn)]
     public DateOnly CheckIn { get; set; }
