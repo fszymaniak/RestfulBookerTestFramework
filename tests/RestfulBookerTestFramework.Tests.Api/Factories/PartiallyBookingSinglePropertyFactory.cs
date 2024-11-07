@@ -1,7 +1,6 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Constants;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Models.Partial;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Requests.Partial.MultipleProperties;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Requests.Partial.SingleProperty;
 
 namespace RestfulBookerTestFramework.Tests.Api.Factories;
@@ -13,12 +12,12 @@ public static class PartiallyBookingSinglePropertyFactory
         return partialBookingRequest switch
         {
             nameof(PartialBookingWithOnlyFirstName) => GeneratePartialBookingWithOnlyFirstName(),
-            nameof(PartialBookingWithoutLastName) => GeneratePartialBookingWithOnlyLastName(),
-            nameof(PartialBookingWithoutTotalPrice) => GeneratePartialBookingWithoutTotalPrice(),
-            nameof(InvalidBookingWithoutDepositPaid) => GeneratePartialBookingWithoutDepositPaid(),
-            nameof(PartialBookingWithoutBookingDatesCheckIn) => GeneratePartialBookingWithoutBookingDatesCheckIn(),
-            nameof(PartialBookingWithoutBookingDatesCheckOut) => GeneratePartialBookingWithoutBookingDatesCheckOut(),
-            nameof(PartialBookingWithoutAdditionalNeeds) => GeneratePartialBookingWithoutAdditionalNeeds(),
+            nameof(PartialBookingWithOnlyLastName) => GeneratePartialBookingWithOnlyLastName(),
+            nameof(PartialBookingWithOnlyTotalPrice) => GeneratePartialBookingWithOnlyTotalPrice(),
+            nameof(PartialBookingWithOnlyDepositPaid) => GeneratePartialBookingWithOnlyDepositPaid(),
+            nameof(PartialBookingDatesWithoutCheckOut) => PartialBookingDatesFactory.CreateBookingDatesWithoutCheckOut(),
+            nameof(PartialBookingDatesWithoutCheckIn) => PartialBookingDatesFactory.CreateBookingDatesWithoutCheckIn(),
+            nameof(PartialBookingWithOnlyAdditionalNeeds) => GeneratePartialBookingWithOnlyAdditionalNeeds(),
             _ => throw new ArgumentOutOfRangeException(nameof(partialBookingRequest),
                 $"Not expected invalid booking request value: {partialBookingRequest}")
         };
@@ -46,7 +45,7 @@ public static class PartiallyBookingSinglePropertyFactory
         return booking;
     }
 
-    private static PartialBookingWithOnlyTotalPrice GeneratePartialBookingWithoutTotalPrice()
+    private static PartialBookingWithOnlyTotalPrice GeneratePartialBookingWithOnlyTotalPrice()
     {
         BookingDates bookingDates = BookingDatesFactory.CreateBookingDates();
 
@@ -57,68 +56,25 @@ public static class PartiallyBookingSinglePropertyFactory
         return booking;
     }
 
-    private static InvalidBookingWithoutDepositPaid GeneratePartialBookingWithoutDepositPaid()
+    private static PartialBookingWithOnlyDepositPaid GeneratePartialBookingWithOnlyDepositPaid()
     {
         BookingDates bookingDates = BookingDatesFactory.CreateBookingDates();
 
-        Faker<InvalidBookingWithoutDepositPaid> bookingFaker = new Faker<InvalidBookingWithoutDepositPaid>()
-            .RuleFor(u => u.FirstName, f => f.Name.FirstName())
-            .RuleFor(u => u.LastName, f => f.Name.LastName())
-            
-            .RuleFor(u => u.BookingDates, f => bookingDates)
-            .RuleFor(u => u.AdditionalNeeds, f => f.Random.Enum<AdditionalNeeds>().ToString());
+        Faker<PartialBookingWithOnlyDepositPaid> bookingFaker = new Faker<PartialBookingWithOnlyDepositPaid>()
+            .RuleFor(u => u.DepositPaid, f => f.Random.Bool());
 
-        InvalidBookingWithoutDepositPaid booking = bookingFaker.Generate();
+        PartialBookingWithOnlyDepositPaid booking = bookingFaker.Generate();
         return booking;
     }
 
-    private static PartialBookingWithoutBookingDatesCheckIn GeneratePartialBookingWithoutBookingDatesCheckIn()
-    {
-        PartialBookingDatesWithoutCheckIn bookingDates = PartialBookingDatesFactory.CreateBookingDatesWithoutCheckIn();
-
-        Faker<PartialBookingWithoutBookingDatesCheckIn> bookingFaker =
-            new Faker<PartialBookingWithoutBookingDatesCheckIn>()
-                .RuleFor(u => u.FirstName, f => f.Name.FirstName())
-                .RuleFor(u => u.LastName, f => f.Name.LastName())
-                .RuleFor(u => u.TotalPrice, f => f.Random.Int(50, 300))
-                .RuleFor(u => u.DepositPaid, f => f.Random.Bool())
-                .RuleFor(u => u.BookingDates, f => bookingDates)
-                .RuleFor(u => u.AdditionalNeeds, f => f.Random.Enum<AdditionalNeeds>().ToString());
-
-        PartialBookingWithoutBookingDatesCheckIn booking = bookingFaker.Generate();
-        return booking;
-    }
-
-    private static PartialBookingWithoutBookingDatesCheckOut GeneratePartialBookingWithoutBookingDatesCheckOut()
-    {
-        PartialBookingDatesWithoutCheckOut
-            bookingDates = PartialBookingDatesFactory.CreateBookingDatesWithoutCheckOut();
-
-        Faker<PartialBookingWithoutBookingDatesCheckOut> bookingFaker =
-            new Faker<PartialBookingWithoutBookingDatesCheckOut>()
-                .RuleFor(u => u.FirstName, f => f.Name.FirstName())
-                .RuleFor(u => u.LastName, f => f.Name.LastName())
-                .RuleFor(u => u.TotalPrice, f => f.Random.Int(50, 300))
-                .RuleFor(u => u.DepositPaid, f => f.Random.Bool())
-                .RuleFor(u => u.BookingDates, f => bookingDates)
-                .RuleFor(u => u.AdditionalNeeds, f => f.Random.Enum<AdditionalNeeds>().ToString());
-
-        PartialBookingWithoutBookingDatesCheckOut booking = bookingFaker.Generate();
-        return booking;
-    }
-
-    private static PartialBookingWithoutAdditionalNeeds GeneratePartialBookingWithoutAdditionalNeeds()
+    private static PartialBookingWithOnlyAdditionalNeeds GeneratePartialBookingWithOnlyAdditionalNeeds()
     {
         BookingDates bookingDates = BookingDatesFactory.CreateBookingDates();
 
-        Faker<PartialBookingWithoutAdditionalNeeds> bookingFaker = new Faker<PartialBookingWithoutAdditionalNeeds>()
-            .RuleFor(u => u.FirstName, f => f.Name.FirstName())
-            .RuleFor(u => u.LastName, f => f.Name.LastName())
-            .RuleFor(u => u.TotalPrice, f => f.Random.Int(50, 300))
-            .RuleFor(u => u.DepositPaid, f => f.Random.Bool())
-            .RuleFor(u => u.BookingDates, f => bookingDates);
+        Faker<PartialBookingWithOnlyAdditionalNeeds> bookingFaker = new Faker<PartialBookingWithOnlyAdditionalNeeds>()
+                .RuleFor(u => u.AdditionalNeeds, f => f.Random.Enum<AdditionalNeeds>().ToString());
 
-        PartialBookingWithoutAdditionalNeeds booking = bookingFaker.Generate();
+        PartialBookingWithOnlyAdditionalNeeds booking = bookingFaker.Generate();
         return booking;
     }
 }
