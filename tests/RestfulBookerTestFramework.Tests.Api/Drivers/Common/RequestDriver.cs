@@ -68,6 +68,30 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
 
         return _response;
     }
+    
+    public RestResponse SendPatchRequest(string endpoint, object body)
+    {
+        var token = scenarioContext.GetAuthTokenResponse();
+        var request = new RestRequest(endpoint, Method.Patch);
+        request.WithAcceptHeader();
+        request.WithContentTypeHeader();
+        request.WithCookieTokenHeader(token.Token);
+        request.WithBodyParameter(body);
+
+        var cancellationTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            _response = restClient.ExecutePatchAsync(request, cancellationTokenSource.Token).Result;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return _response;
+    }
 
     public RestResponse SendDeleteRequest(string endpoint)
     {

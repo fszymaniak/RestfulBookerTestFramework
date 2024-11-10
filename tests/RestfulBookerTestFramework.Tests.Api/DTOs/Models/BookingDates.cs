@@ -5,8 +5,8 @@ namespace RestfulBookerTestFramework.Tests.Api.DTOs.Models;
 public class BookingDates
 {
     [JsonPropertyName(JsonPropertyNames.BookingProperties.CheckIn)]
-    public DateOnly CheckIn { get; set; }
+    public string CheckIn { get; set; }
     
     [JsonPropertyName(JsonPropertyNames.BookingProperties.CheckOut)]
-    public DateOnly CheckOut { get; set; }
+    public string CheckOut { get; set; }
 }

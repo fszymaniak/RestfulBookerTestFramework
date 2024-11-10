@@ -15,4 +15,14 @@ public class UpdateBookingDriver(ScenarioContext scenarioContext, IRequestDriver
         var response = requestDriver.SendPutRequest(bookingEndpoint, bookingRequest);
         scenarioContext.SetRestResponse(response);
     }
+    
+    public void PatchUpdateBooking()
+    {
+        var bookingRequest = scenarioContext.GetBookingRequest();
+        int bookingId = bookingHelper.GetBookingId();
+        string bookingEndpoint = endpointsHelper.GetPatchBookingEndpoint(bookingId);
+        
+        var response = requestDriver.SendPatchRequest(bookingEndpoint, bookingRequest);
+        scenarioContext.SetRestResponse(response);
+    }
 }

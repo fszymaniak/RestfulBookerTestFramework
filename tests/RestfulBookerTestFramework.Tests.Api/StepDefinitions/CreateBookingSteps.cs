@@ -1,4 +1,5 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
+using RestfulBookerTestFramework.Tests.Api.Extensions;
 
 namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 
@@ -10,11 +11,19 @@ public sealed class CreateBookingSteps(ICreateBookingDriver createBookingDriver)
     {
         createBookingDriver.GenerateBookingRequest();
     }
-
-    [Given("the '(.*)' booking request is created")]
-    public void GivenTheInvalidBookingRequestIsCreated(string invalidBookingRequest)
+    
+    [StepDefinition("the '(.*)' booking with single property for invalid request is created")]
+    [StepDefinition("the '(.*)' booking with single property request is created")]
+    public void GivenThePartialBookingWithSinglePropertyRequestIsCreated(string partialBookingWithSinglePropertyRequest)
     {
-        createBookingDriver.GenerateInvalidBookingRequest(invalidBookingRequest);
+        createBookingDriver.GeneratePartiallyBookingWithSinglePropertyRequest(partialBookingWithSinglePropertyRequest.AddRequestPostFix());
+    }
+
+    [StepDefinition("the '(.*)' booking property for invalid request is created")]
+    [StepDefinition("the '(.*)' booking request is created")]
+    public void GivenThePartialBookingWithMultiplePropertiesRequestIsCreated(string partialBookingRequest)
+    {
+        createBookingDriver.GeneratePartiallyBookingWithMultiplePropertiesRequest(partialBookingRequest.AddRequestPostFix());
     }
 
     [When("trying to create a new booking")]

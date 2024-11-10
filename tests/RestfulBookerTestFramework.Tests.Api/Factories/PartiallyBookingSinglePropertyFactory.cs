@@ -7,74 +7,74 @@ namespace RestfulBookerTestFramework.Tests.Api.Factories;
 
 public static class PartiallyBookingSinglePropertyFactory
 {
-    public static object GeneratePartialBookingWithMultipleProperties(string partialBookingRequest)
+    public static object GeneratePartialBookingWithSingleProperties(string partialBookingRequest)
     {
         return partialBookingRequest switch
         {
-            nameof(PartialBookingWithOnlyFirstName) => GeneratePartialBookingWithOnlyFirstName(),
-            nameof(PartialBookingWithOnlyLastName) => GeneratePartialBookingWithOnlyLastName(),
-            nameof(PartialBookingWithOnlyTotalPrice) => GeneratePartialBookingWithOnlyTotalPrice(),
-            nameof(PartialBookingWithOnlyDepositPaid) => GeneratePartialBookingWithOnlyDepositPaid(),
-            nameof(PartialBookingDatesWithoutCheckOut) => PartialBookingDatesFactory.CreateBookingDatesWithoutCheckOut(),
-            nameof(PartialBookingDatesWithoutCheckIn) => PartialBookingDatesFactory.CreateBookingDatesWithoutCheckIn(),
-            nameof(PartialBookingWithOnlyAdditionalNeeds) => GeneratePartialBookingWithOnlyAdditionalNeeds(),
+            nameof(PartialBookingWithOnlyFirstNameRequest) => GeneratePartialBookingWithOnlyFirstName(),
+            nameof(PartialBookingWithOnlyLastNameRequest) => GeneratePartialBookingWithOnlyLastName(),
+            nameof(PartialBookingWithOnlyTotalPriceRequest) => GeneratePartialBookingWithOnlyTotalPrice(),
+            nameof(PartialBookingWithOnlyDepositPaidRequest) => GeneratePartialBookingWithOnlyDepositPaid(),
+            nameof(PartialBookingDatesWithOnlyCheckInRequest) => PartialBookingDatesFactory.CreateBookingDatesRequestWithOnlyCheckIn(),
+            nameof(PartialBookingDatesWithOnlyCheckOutRequest) => PartialBookingDatesFactory.CreateBookingDatesRequestWithOnlyCheckOut(),
+            nameof(PartialBookingWithOnlyAdditionalNeedsRequest) => GeneratePartialBookingWithOnlyAdditionalNeeds(),
             _ => throw new ArgumentOutOfRangeException(nameof(partialBookingRequest),
                 $"Not expected invalid booking request value: {partialBookingRequest}")
         };
     }
 
-    private static PartialBookingWithOnlyFirstName GeneratePartialBookingWithOnlyFirstName()
+    private static PartialBookingWithOnlyFirstNameRequest GeneratePartialBookingWithOnlyFirstName()
     {
         BookingDates bookingDates = BookingDatesFactory.CreateBookingDates();
 
-        Faker<PartialBookingWithOnlyFirstName> bookingFaker = new Faker<PartialBookingWithOnlyFirstName>()
+        Faker<PartialBookingWithOnlyFirstNameRequest> bookingFaker = new Faker<PartialBookingWithOnlyFirstNameRequest>()
             .RuleFor(u => u.FirstName, f => f.Name.FirstName());
 
-        PartialBookingWithOnlyFirstName booking = bookingFaker.Generate();
+        PartialBookingWithOnlyFirstNameRequest booking = bookingFaker.Generate();
         return booking;
     }
 
-    private static PartialBookingWithOnlyLastName GeneratePartialBookingWithOnlyLastName()
+    private static PartialBookingWithOnlyLastNameRequest GeneratePartialBookingWithOnlyLastName()
     {
         BookingDates bookingDates = BookingDatesFactory.CreateBookingDates();
 
-        Faker<PartialBookingWithOnlyLastName> bookingFaker = new Faker<PartialBookingWithOnlyLastName>()
+        Faker<PartialBookingWithOnlyLastNameRequest> bookingFaker = new Faker<PartialBookingWithOnlyLastNameRequest>()
             .RuleFor(u => u.LastName, f => f.Name.LastName());
 
-        PartialBookingWithOnlyLastName booking = bookingFaker.Generate();
+        PartialBookingWithOnlyLastNameRequest booking = bookingFaker.Generate();
         return booking;
     }
 
-    private static PartialBookingWithOnlyTotalPrice GeneratePartialBookingWithOnlyTotalPrice()
+    private static PartialBookingWithOnlyTotalPriceRequest GeneratePartialBookingWithOnlyTotalPrice()
     {
         BookingDates bookingDates = BookingDatesFactory.CreateBookingDates();
 
-        Faker<PartialBookingWithOnlyTotalPrice> bookingFaker = new Faker<PartialBookingWithOnlyTotalPrice>()
+        Faker<PartialBookingWithOnlyTotalPriceRequest> bookingFaker = new Faker<PartialBookingWithOnlyTotalPriceRequest>()
             .RuleFor(u => u.TotalPrice, f => f.Random.Int(50, 300));
 
-        PartialBookingWithOnlyTotalPrice booking = bookingFaker.Generate();
+        PartialBookingWithOnlyTotalPriceRequest booking = bookingFaker.Generate();
         return booking;
     }
 
-    private static PartialBookingWithOnlyDepositPaid GeneratePartialBookingWithOnlyDepositPaid()
+    private static PartialBookingWithOnlyDepositPaidRequest GeneratePartialBookingWithOnlyDepositPaid()
     {
         BookingDates bookingDates = BookingDatesFactory.CreateBookingDates();
 
-        Faker<PartialBookingWithOnlyDepositPaid> bookingFaker = new Faker<PartialBookingWithOnlyDepositPaid>()
+        Faker<PartialBookingWithOnlyDepositPaidRequest> bookingFaker = new Faker<PartialBookingWithOnlyDepositPaidRequest>()
             .RuleFor(u => u.DepositPaid, f => f.Random.Bool());
 
-        PartialBookingWithOnlyDepositPaid booking = bookingFaker.Generate();
+        PartialBookingWithOnlyDepositPaidRequest booking = bookingFaker.Generate();
         return booking;
     }
 
-    private static PartialBookingWithOnlyAdditionalNeeds GeneratePartialBookingWithOnlyAdditionalNeeds()
+    private static PartialBookingWithOnlyAdditionalNeedsRequest GeneratePartialBookingWithOnlyAdditionalNeeds()
     {
         BookingDates bookingDates = BookingDatesFactory.CreateBookingDates();
 
-        Faker<PartialBookingWithOnlyAdditionalNeeds> bookingFaker = new Faker<PartialBookingWithOnlyAdditionalNeeds>()
+        Faker<PartialBookingWithOnlyAdditionalNeedsRequest> bookingFaker = new Faker<PartialBookingWithOnlyAdditionalNeedsRequest>()
                 .RuleFor(u => u.AdditionalNeeds, f => f.Random.Enum<AdditionalNeeds>().ToString());
 
-        PartialBookingWithOnlyAdditionalNeeds booking = bookingFaker.Generate();
+        PartialBookingWithOnlyAdditionalNeedsRequest booking = bookingFaker.Generate();
         return booking;
     }
 }

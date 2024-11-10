@@ -17,9 +17,16 @@ public sealed class CreateBookingDriver(IRequestDriver requestDriver, ScenarioCo
         scenarioContext.SetBookingRequest(requestBookingBody);
     }
     
-    public void GenerateInvalidBookingRequest(string invalidBookingRequest)
+    public void GeneratePartiallyBookingWithSinglePropertyRequest(string partialBookingWithSinglePropertyRequest)
     {
-        var requestBookingBody = PartiallyBookingFactory.GeneratePartialBookingWithMultipleProperties(invalidBookingRequest);
+        var requestBookingBody = PartiallyBookingSinglePropertyFactory.GeneratePartialBookingWithSingleProperties(partialBookingWithSinglePropertyRequest);
+
+        scenarioContext.SetBookingRequest(requestBookingBody);
+    }
+    
+    public void GeneratePartiallyBookingWithMultiplePropertiesRequest(string partialBookingWithMultiplePropertiesRequest)
+    {
+        var requestBookingBody = PartiallyBookingFactory.GeneratePartialBookingWithMultipleProperties(partialBookingWithMultiplePropertiesRequest);
 
         scenarioContext.SetBookingRequest(requestBookingBody);
     }

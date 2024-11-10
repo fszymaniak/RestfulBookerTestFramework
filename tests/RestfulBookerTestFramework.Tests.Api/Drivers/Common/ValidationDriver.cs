@@ -32,7 +32,7 @@ public class ValidationDriver(ScenarioContext scenarioContext) : IValidationDriv
         var actualBookingResponse = scenarioContext.GetRestResponse();
 
         var actualBooking = actualBookingResponse.Deserialize<DTOs.Models.Booking>();
-
+        
         actualBooking.Should().BeEquivalentTo(expectedBooking);
     }
 }

@@ -1,9 +1,9 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Constants;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Models.Partial;
+using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
 
 namespace RestfulBookerTestFramework.Tests.Api.DTOs.Requests.Partial.MultipleProperties;
 
-public class PartialBookingWithoutBookingDatesCheckOut
+public class PartialBookingWithoutAdditionalNeedsRequest
 {
     [JsonPropertyName(JsonPropertyNames.BookingProperties.FirstName)]
     public string FirstName { get; set; }
@@ -18,8 +18,5 @@ public class PartialBookingWithoutBookingDatesCheckOut
     public bool DepositPaid { get; set; }
     
     [JsonPropertyName(JsonPropertyNames.BookingProperties.BookingDates)]
-    public PartialBookingDatesWithoutCheckOut BookingDates { get; set; }
-    
-    [JsonPropertyName(JsonPropertyNames.BookingProperties.AdditionalNeeds)]
-    public string AdditionalNeeds { get; set; }
+    public BookingDates BookingDates { get; set; }
 }

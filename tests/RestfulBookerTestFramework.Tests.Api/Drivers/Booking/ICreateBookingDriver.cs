@@ -3,8 +3,10 @@
 public interface ICreateBookingDriver
 {
     public void GenerateBookingRequest();
+
+    public void GeneratePartiallyBookingWithSinglePropertyRequest(string partialBookingRequest);
     
-    public void GenerateInvalidBookingRequest(string invalidBookingRequest);
+    public void GeneratePartiallyBookingWithMultiplePropertiesRequest(string partialBookingRequest);
 
     public void CreateBooking();
 }

@@ -2,7 +2,7 @@
 
 namespace RestfulBookerTestFramework.Tests.Api.DTOs.Requests.Partial.SingleProperty;
 
-public class PartialBookingWithOnlyLastName
+public class PartialBookingWithOnlyLastNameRequest
 {
     [JsonPropertyName(JsonPropertyNames.BookingProperties.LastName)]
     public string LastName { get; set; }

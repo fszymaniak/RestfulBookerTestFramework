@@ -2,8 +2,8 @@
 
 namespace RestfulBookerTestFramework.Tests.Api.DTOs.Models.Partial;
 
-public class PartialBookingDatesWithoutCheckIn
+public class PartialBookingDatesWithOnlyCheckOut
 {
     [JsonPropertyName(JsonPropertyNames.BookingProperties.CheckOut)]
-    public DateOnly CheckOut { get; set; }
+    public string CheckOut { get; set; }
 }

@@ -2,7 +2,7 @@
 
 namespace RestfulBookerTestFramework.Tests.Api.DTOs.Requests.Partial.SingleProperty;
 
-public class PartialBookingWithOnlyAdditionalNeeds
+public class PartialBookingWithOnlyAdditionalNeedsRequest
 {
     [JsonPropertyName(JsonPropertyNames.BookingProperties.AdditionalNeeds)]
     public string AdditionalNeeds { get; set; }

@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-
-using RestfulBookerTestFramework.Tests.Api.Constants;
+﻿using RestfulBookerTestFramework.Tests.Api.Constants;
 using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
 
 namespace RestfulBookerTestFramework.Tests.Api.Factories;
 
@@ -10,7 +7,7 @@ public static class BookingFactory
 {
     public static List<Booking> GenerateBookings(int bookingNumber = 1)
     {
-        var bookingDates = CreateBookingDates();
+        var bookingDates = BookingDatesFactory.CreateBookingDates();
         
         var bookingFaker = new Faker<Booking>()
             .RuleFor(u => u.FirstName, f => f.Name.FirstName())
@@ -22,15 +19,5 @@ public static class BookingFactory
         
         var booking = bookingFaker.Generate(bookingNumber);
         return booking;
-    }
-
-    private static BookingDates CreateBookingDates()
-    {
-        var bookingDatesFaker = new Faker<BookingDates>()
-            .RuleFor(b => b.CheckIn, f => f.Date.FutureDateOnly(DateConstants.CheckInYearsToGoForward))
-            .RuleFor(b => b.CheckOut, (f, b) => f.Date.BetweenDateOnly(b.CheckIn, b.CheckIn.AddDays(DateConstants.MaxFutureDaysForCheckOut)));
-
-        var bookingDates = bookingDatesFaker.Generate();
-        return bookingDates;
     }
 }

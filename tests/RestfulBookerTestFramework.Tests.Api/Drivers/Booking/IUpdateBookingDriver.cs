@@ -3,4 +3,6 @@
 public interface IUpdateBookingDriver
 {
     public void PutUpdateBooking();
+    
+    public void PatchUpdateBooking();
 }

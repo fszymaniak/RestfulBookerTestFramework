@@ -3,7 +3,7 @@ using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
 
 namespace RestfulBookerTestFramework.Tests.Api.DTOs.Requests.Partial.MultipleProperties;
 
-public class InvalidBookingWithoutDepositPaid
+public class PartialBookingWithoutDepositPaidRequest
 {
     [JsonPropertyName(JsonPropertyNames.BookingProperties.FirstName)]
     public string FirstName { get; set; }

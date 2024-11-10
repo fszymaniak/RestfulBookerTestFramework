@@ -46,6 +46,11 @@ public sealed class EndpointsHelper(AppSettings appSettings)
     {
         return GetEndpointWithBookingId(bookingId);
     }
+    
+    internal string GetPatchBookingEndpoint(int bookingId)
+    {
+        return GetEndpointWithBookingId(bookingId);
+    }
 
     internal int GetBookingIdFromResponseUri(string responseUri)
     {

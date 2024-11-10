@@ -5,9 +5,19 @@ namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 [Binding]
 public class UpdateBookingSteps(IUpdateBookingDriver updateBookingDriver)
 {
-    [StepDefinition("trying to PUT update booking")]
-    public void CreateValidAuthTokenAsync()
+    [StepDefinition("trying to '(.*)' update booking")]
+    public void WhenTryingToUpdateBooking(Method requestMethod)
     {
-        updateBookingDriver.PutUpdateBooking();
+        switch (requestMethod)
+        {
+            case Method.Put:
+                updateBookingDriver.PutUpdateBooking();
+                break;
+            case Method.Patch:
+                updateBookingDriver.PatchUpdateBooking();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(requestMethod.ToString(), "Invalid method");
+        }
     }
 }

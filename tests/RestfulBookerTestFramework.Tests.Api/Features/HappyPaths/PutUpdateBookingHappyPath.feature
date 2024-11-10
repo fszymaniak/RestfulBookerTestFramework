@@ -8,6 +8,6 @@ Description: Send the valid PUT request with valid booking request to /booking/{
     Scenario:  Endpoint Booking get single specific entity successfully
         Given Prerequisite: API is running
         And a new valid booking request is created
-        When trying to PUT update booking
+        When trying to 'PUT' update booking
         Then status code should be '200'
         And the newly updated booking should be valid
