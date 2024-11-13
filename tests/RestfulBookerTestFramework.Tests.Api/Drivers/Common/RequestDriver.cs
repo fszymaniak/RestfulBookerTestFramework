@@ -36,8 +36,6 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
         try
         {
             _response = await restClient.ExecutePostAsync(request, cancellationTokenSource.Token);
-            scenarioContext.SetRestResponse(_response);
-            scenarioContext.SetAuthTokenResponse(_response.Deserialize<AuthTokenResponse>());
         }
         catch (Exception e)
         {
