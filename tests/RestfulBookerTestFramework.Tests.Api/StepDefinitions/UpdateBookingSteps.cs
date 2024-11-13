@@ -6,12 +6,12 @@ namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 public class UpdateBookingSteps(IUpdateBookingDriver updateBookingDriver)
 {
     [StepDefinition("trying to '(.*)' update booking")]
-    public void WhenTryingToUpdateBooking(Method requestMethod)
+    public async Task WhenTryingToUpdateBooking(Method requestMethod)
     {
         switch (requestMethod)
         {
             case Method.Put:
-                updateBookingDriver.PutUpdateBooking();
+                await updateBookingDriver.PutUpdateBookingAsync();
                 break;
             case Method.Patch:
                 updateBookingDriver.PatchUpdateBooking();

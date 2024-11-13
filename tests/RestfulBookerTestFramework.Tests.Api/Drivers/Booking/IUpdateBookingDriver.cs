@@ -2,7 +2,7 @@
 
 public interface IUpdateBookingDriver
 {
-    public void PutUpdateBooking();
+    public Task PutUpdateBookingAsync();
     
     public void PatchUpdateBooking();
 }

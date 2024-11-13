@@ -6,13 +6,13 @@ namespace RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
 public class UpdateBookingDriver(ScenarioContext scenarioContext, IRequestDriver requestDriver, BookingHelper bookingHelper, EndpointsHelper endpointsHelper) : IUpdateBookingDriver
 {
-    public void PutUpdateBooking()
+    public async Task PutUpdateBookingAsync()
     {
         var bookingRequest = scenarioContext.GetBookingRequest();
         int bookingId = bookingHelper.GetBookingId();
         string bookingEndpoint = endpointsHelper.GetPutBookingEndpoint(bookingId);
         
-        var response = requestDriver.SendPutRequest(bookingEndpoint, bookingRequest);
+        var response = await requestDriver.SendPutRequestAsync(bookingEndpoint, bookingRequest);
         scenarioContext.SetRestResponse(response);
     }
     

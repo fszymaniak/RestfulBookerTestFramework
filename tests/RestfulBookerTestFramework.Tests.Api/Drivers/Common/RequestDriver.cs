@@ -45,7 +45,7 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
         return _response;
     }
     
-    public RestResponse SendPutRequest(string endpoint, object body)
+    public async Task<RestResponse> SendPutRequestAsync(string endpoint, object body)
     {
         var token = scenarioContext.GetAuthTokenResponse();
         var request = new RestRequest(endpoint, Method.Put);
@@ -58,7 +58,7 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
 
         try
         {
-            _response = restClient.ExecutePutAsync(request, cancellationTokenSource.Token).Result;
+            _response = await restClient.ExecutePutAsync(request, cancellationTokenSource.Token);
         }
         catch (Exception e)
         {
