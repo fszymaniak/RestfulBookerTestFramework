@@ -69,7 +69,7 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
         return _response;
     }
     
-    public RestResponse SendPatchRequest(string endpoint, object body)
+    public async Task<RestResponse> SendPatchRequest(string endpoint, object body)
     {
         var token = scenarioContext.GetAuthTokenResponse();
         var request = new RestRequest(endpoint, Method.Patch);
@@ -82,7 +82,7 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
 
         try
         {
-            _response = restClient.ExecutePatchAsync(request, cancellationTokenSource.Token).Result;
+            _response = await restClient.ExecutePatchAsync(request, cancellationTokenSource.Token);
         }
         catch (Exception e)
         {

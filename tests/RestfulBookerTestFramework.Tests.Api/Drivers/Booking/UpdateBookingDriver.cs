@@ -16,13 +16,13 @@ public class UpdateBookingDriver(ScenarioContext scenarioContext, IRequestDriver
         scenarioContext.SetRestResponse(response);
     }
     
-    public void PatchUpdateBooking()
+    public async Task PatchUpdateBooking()
     {
         var bookingRequest = scenarioContext.GetBookingRequest();
         int bookingId = bookingHelper.GetBookingId();
         string bookingEndpoint = endpointsHelper.GetPatchBookingEndpoint(bookingId);
         
-        var response = requestDriver.SendPatchRequest(bookingEndpoint, bookingRequest);
+        var response = await requestDriver.SendPatchRequest(bookingEndpoint, bookingRequest);
         scenarioContext.SetRestResponse(response);
     }
 }

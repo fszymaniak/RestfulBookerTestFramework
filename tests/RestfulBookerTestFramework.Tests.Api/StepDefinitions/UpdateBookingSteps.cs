@@ -14,10 +14,10 @@ public class UpdateBookingSteps(IUpdateBookingDriver updateBookingDriver)
                 await updateBookingDriver.PutUpdateBookingAsync();
                 break;
             case Method.Patch:
-                updateBookingDriver.PatchUpdateBooking();
+                await updateBookingDriver.PatchUpdateBooking();
                 break;
             default:
-                throw new ArgumentOutOfRangeException(requestMethod.ToString(), "Invalid method");
+                throw new ArgumentOutOfRangeException(requestMethod.ToString(), $"Invalid update method {requestMethod}. Expected Method should be PUT or PATCH.");
         }
     }
 }

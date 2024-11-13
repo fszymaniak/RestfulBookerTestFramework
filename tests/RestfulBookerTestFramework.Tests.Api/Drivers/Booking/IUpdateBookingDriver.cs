@@ -4,5 +4,5 @@ public interface IUpdateBookingDriver
 {
     public Task PutUpdateBookingAsync();
     
-    public void PatchUpdateBooking();
+    public Task PatchUpdateBooking();
 }
