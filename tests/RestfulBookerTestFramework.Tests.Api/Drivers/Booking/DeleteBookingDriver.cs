@@ -25,10 +25,10 @@ public sealed class DeleteBookingDriver(IRequestDriver requestDriver, ScenarioCo
         scenarioContext.SetRestResponse(response);
     }
     
-    public void ValidateIfBookingHasBeenDeleted()
+    public async Task ValidateIfBookingHasBeenDeleted()
     {
         var expectedBookingId = scenarioContext.GetBookingId();
-        getBookingDriver.GetSingleBooking(expectedBookingId);
+        await getBookingDriver.GetSingleBooking(expectedBookingId);
         
         var actualRestResponse = scenarioContext.GetRestResponse();
         actualRestResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);

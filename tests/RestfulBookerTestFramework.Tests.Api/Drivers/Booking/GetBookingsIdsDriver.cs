@@ -8,28 +8,28 @@ namespace RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
 public sealed class GetBookingsIdsDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper) : IGetBookingsIdsDriver
 {
-    public void GetMultipleBookingsIds()
+    public async Task GetMultipleBookingsIds()
     {
         string bookingEndpoint = endpointsHelper.GetBookingEndpoint();
         
-        var response = requestDriver.SendGetRequest(bookingEndpoint);
+        var response = await requestDriver.SendGetRequestAsync(bookingEndpoint);
 
         scenarioContext.SetRestResponse(response);
     }
     
-    public void GetMultipleBookingsIdsWithDateFilter()
+    public async Task GetMultipleBookingsIdsWithDateFilter()
     {
         string checkIn = DateHelper.GetCheckIn();
         string checkOut = DateHelper.GetCheckOut();
         
         string bookingEndpointWithDateFilter = endpointsHelper.GetBookingEndpointWithDateFilter(checkIn, checkOut);
         
-        var response = requestDriver.SendGetRequest(bookingEndpointWithDateFilter);
+        var response = await requestDriver.SendGetRequestAsync(bookingEndpointWithDateFilter);
 
         scenarioContext.SetRestResponse(response);
     }
     
-    public void GetSingleBookingIdWithNameFilter()
+    public async Task GetSingleBookingIdWithNameFilter()
     {
         var booking = scenarioContext.GetRestResponsesList()
             .Select(b => b.Deserialize<BookingResponse>()).First();
@@ -38,7 +38,7 @@ public sealed class GetBookingsIdsDriver(IRequestDriver requestDriver, ScenarioC
 
         string bookingEndpointWithNameFilter = endpointsHelper.GetBookingEndpointWithNameFilter(booking.Booking.FirstName, booking.Booking.LastName);
         
-        var response = requestDriver.SendGetRequest(bookingEndpointWithNameFilter);
+        var response = await requestDriver.SendGetRequestAsync(bookingEndpointWithNameFilter);
 
         scenarioContext.SetRestResponse(response);
     }

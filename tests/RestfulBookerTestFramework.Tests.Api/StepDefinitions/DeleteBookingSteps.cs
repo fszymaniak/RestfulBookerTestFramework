@@ -12,8 +12,8 @@ public class DeleteBookingSteps(IDeleteBookingDriver deleteBookingDriver)
     }
     
     [Then("the booking should be deleted and not found")]
-    public void ThenTheBookingShouldBeDeletedAndNotFound()
+    public async Task ThenTheBookingShouldBeDeletedAndNotFound()
     {
-        deleteBookingDriver.ValidateIfBookingHasBeenDeleted();
+        await deleteBookingDriver.ValidateIfBookingHasBeenDeleted();
     }
 }

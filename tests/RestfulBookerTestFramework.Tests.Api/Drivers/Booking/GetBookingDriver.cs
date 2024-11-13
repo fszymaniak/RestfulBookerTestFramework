@@ -7,12 +7,12 @@ namespace RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
 public sealed class GetBookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, BookingHelper bookingHelper) : IGetBookingDriver
 {
-    public void GetSingleBooking(int? bookingId = null)
+    public async Task GetSingleBooking(int? bookingId = null)
     {
         bookingId ??= bookingHelper.GetBookingId();
         string bookingEndpoint = endpointsHelper.GetSingleBookingEndpoint(bookingId);
         
-        var response = requestDriver.SendGetRequest(bookingEndpoint);
+        var response = await requestDriver.SendGetRequestAsync(bookingEndpoint);
 
         scenarioContext.SetRestResponse(response);
     }

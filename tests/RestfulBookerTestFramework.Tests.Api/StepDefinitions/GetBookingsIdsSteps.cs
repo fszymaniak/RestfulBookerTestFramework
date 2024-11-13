@@ -6,21 +6,21 @@ namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 public class GetBookingsIdsSteps(IGetBookingsIdsDriver getBookingsIdsDriver)
 {
     [When("trying to get multiple bookings Ids")]
-    public void WhenTheGetMultipleBookingsIdsRequestIsSend()
+    public async Task WhenTheGetMultipleBookingsIdsRequestIsSend()
     {
-        getBookingsIdsDriver.GetMultipleBookingsIds();
+        await getBookingsIdsDriver.GetMultipleBookingsIds();
     }
     
     [When("trying to get multiple bookings Ids with checkIn and checkOut filter")]
-    public void WhenTheGetMultipleBookingsIdsWithDateFilterRequestIsSend()
+    public async Task WhenTheGetMultipleBookingsIdsWithDateFilterRequestIsSend()
     {
-        getBookingsIdsDriver.GetMultipleBookingsIdsWithDateFilter();
+        await getBookingsIdsDriver.GetMultipleBookingsIdsWithDateFilter();
     }
     
     [When("trying to get single booking Id with first name and last name filter")]
-    public void WhenTheGetSingleBookingIdWithNameFilterRequestIsSend()
+    public async Task WhenTheGetSingleBookingIdWithNameFilterRequestIsSend()
     {
-        getBookingsIdsDriver.GetSingleBookingIdWithNameFilter();
+        await getBookingsIdsDriver.GetSingleBookingIdWithNameFilter();
     }
     
     [Then("the multiple bookings ids should be exist")]

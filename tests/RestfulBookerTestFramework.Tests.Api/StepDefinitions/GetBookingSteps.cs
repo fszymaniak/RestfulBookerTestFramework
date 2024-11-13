@@ -6,9 +6,9 @@ namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 public sealed class GetBookingSteps(IGetBookingDriver getBookingDriver)
 {
     [When("trying to get single booking")]
-    public void WhenTheGetSingleBookingRequestIsSend()
+    public async Task WhenTheGetSingleBookingRequestIsSend()
     {
-        getBookingDriver.GetSingleBooking();
+        await getBookingDriver.GetSingleBooking();
     }
     
     [Then("the single get booking should be valid")]

@@ -4,5 +4,5 @@ public interface IDeleteBookingDriver
 {
     public void DeleteBooking();
     
-    public void ValidateIfBookingHasBeenDeleted();
+    public Task ValidateIfBookingHasBeenDeleted();
 }

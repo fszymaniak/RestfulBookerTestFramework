@@ -2,7 +2,5 @@
 
 public interface IHealthCheckDriver
 {
-    public HttpStatusCode GetHealthCheckStatusCode();
-    
-    public void ValidateHealthCheckBeforeScenarioRun();
+    public Task ValidateHealthCheckBeforeScenarioRun();
 }

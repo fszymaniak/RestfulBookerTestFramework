@@ -2,7 +2,7 @@
 
 public interface IGetBookingDriver
 {
-    public void GetSingleBooking(int? bookingId = null);
+    public Task GetSingleBooking(int? bookingId = null);
     
     public void ValidateGetSingleBooking();
 }

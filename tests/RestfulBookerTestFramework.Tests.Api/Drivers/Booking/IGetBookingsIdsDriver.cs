@@ -2,11 +2,11 @@
 
 public interface IGetBookingsIdsDriver
 {
-    public void GetMultipleBookingsIds();
+    public Task GetMultipleBookingsIds();
 
-    public void GetMultipleBookingsIdsWithDateFilter();
+    public Task GetMultipleBookingsIdsWithDateFilter();
 
-    public void GetSingleBookingIdWithNameFilter();
+    public Task GetSingleBookingIdWithNameFilter();
     
     public void ValidateMultipleBookingsIds();
 
