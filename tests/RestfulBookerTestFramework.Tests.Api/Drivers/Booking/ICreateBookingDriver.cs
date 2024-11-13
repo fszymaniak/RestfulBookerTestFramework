@@ -8,5 +8,5 @@ public interface ICreateBookingDriver
     
     public void GeneratePartiallyBookingWithMultiplePropertiesRequest(string partialBookingRequest);
 
-    public void CreateBooking();
+    public Task CreateBooking();
 }

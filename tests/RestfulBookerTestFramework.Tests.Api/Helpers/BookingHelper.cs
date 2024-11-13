@@ -8,7 +8,7 @@ namespace RestfulBookerTestFramework.Tests.Api.Helpers;
 
 public class BookingHelper(ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, IRequestDriver requestDriver)
 {
-    public void CreateBookings(int numberOfBookings)
+    public async Task CreateBookings(int numberOfBookings)
     {
         var requestBookingBody = BookingFactory.GenerateBookings(numberOfBookings);
 
@@ -18,7 +18,7 @@ public class BookingHelper(ScenarioContext scenarioContext, EndpointsHelper endp
 
         foreach (var bookingBody in requestBookingBody)
         {
-            var response = requestDriver.SendPostRequest(bookingEndpoint, bookingBody);
+            var response = await requestDriver.SendPostRequestAsync(bookingEndpoint, bookingBody);
             restResponsesList.Add(response);
         }
         

@@ -1,4 +1,5 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Extensions;
+﻿using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
+using RestfulBookerTestFramework.Tests.Api.Extensions;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers.Common;
 
@@ -24,7 +25,7 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
         return _response;
     }
     
-    public RestResponse SendPostRequest(string endpoint, object body)
+    public async Task<RestResponse> SendPostRequestAsync(string endpoint, object body)
     {
         var request = new RestRequest(endpoint, Method.Post);
         request.WithAcceptHeader();
@@ -34,14 +35,16 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
 
         try
         {
-            _response = restClient.ExecutePostAsync(request, cancellationTokenSource.Token).Result;
+            _response = await restClient.ExecutePostAsync(request, cancellationTokenSource.Token);
+            scenarioContext.SetRestResponse(_response);
+            scenarioContext.SetAuthTokenResponse(_response.Deserialize<AuthTokenResponse>());
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
         }
-
+        
         return _response;
     }
     

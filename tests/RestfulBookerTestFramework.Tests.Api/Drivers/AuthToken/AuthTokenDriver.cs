@@ -24,22 +24,23 @@ namespace RestfulBookerTestFramework.Tests.Api.Drivers.AuthToken
             scenarioContext.SetAuthTokenRequest(requestAuthTokenBody);
         }
 
-        public void CreateAuthToken()
+        public async Task CreateAuthTokenAsync()
         {
             string authEndpoint = endpointsHelper.GetAuthEndpoint();
 
             var requestAuthTokenBody = scenarioContext.GetAuthTokenRequest();
 
-            var response = requestDriver.SendPostRequest(authEndpoint, requestAuthTokenBody);
-
+            var response = await requestDriver.SendPostRequestAsync(authEndpoint, requestAuthTokenBody);
             scenarioContext.SetRestResponse(response);
             scenarioContext.SetAuthTokenResponse(response.Deserialize<AuthTokenResponse>());
         }
         
-        public void ValidateAuthTokenResponse()
+        public Task ValidateAuthTokenResponse()
         {
             string token = authTokenDriverHelper.GetToken();
             token.Should().NotBeNullOrEmpty();
+            
+            return Task.CompletedTask;
         }
         
         public void ValidateAuthErrorMessage()

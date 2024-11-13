@@ -6,9 +6,9 @@ namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions
     public sealed class ValidationSteps(IValidationDriver validationDriver)
     {
         [Then("status code should be '(.*)'")]
-        public void ValidateStatusCode(HttpStatusCode expectedStatusCode)
+        public async Task ValidateStatusCode(HttpStatusCode expectedStatusCode)
         {
-            validationDriver.ValidateStatusCode(expectedStatusCode);
+            await validationDriver.ValidateStatusCode(expectedStatusCode);
         }
         
         [Then("the newly created booking should be valid")]

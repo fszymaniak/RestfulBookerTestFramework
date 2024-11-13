@@ -27,9 +27,9 @@ public sealed class CreateBookingSteps(ICreateBookingDriver createBookingDriver)
     }
 
     [When("trying to create a new booking")]
-    public void WhenTheBookingRequestIsCreated()
+    public async Task WhenTheBookingRequestIsCreated()
     {
-        createBookingDriver.CreateBooking();
+        await createBookingDriver.CreateBooking();
     }
     
    

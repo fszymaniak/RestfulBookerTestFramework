@@ -16,7 +16,7 @@ public sealed class DeleteBookingDriver(IRequestDriver requestDriver, ScenarioCo
         var bookingId = expectedBookingResponse.Deserialize<BookingIdentifier>();
         scenarioContext.SetBookingId(bookingId.BookingId);
         authTokenDriver.CreateAuthTokenRequest(appSettings.Credentials.UserName, appSettings.Credentials.Password);
-        authTokenDriver.CreateAuthToken();
+        authTokenDriver.CreateAuthTokenAsync();
         
         string deleteBookingEndpoint = endpointsHelper.GetDeleteBookingEndpoint(bookingId.BookingId);
         

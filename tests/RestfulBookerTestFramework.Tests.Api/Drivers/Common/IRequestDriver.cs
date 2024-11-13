@@ -4,7 +4,7 @@ public interface IRequestDriver
 {
     public RestResponse SendGetRequest(string endpoint);
     
-    public RestResponse SendPostRequest(string endpoint, object body);
+    public Task<RestResponse> SendPostRequestAsync(string endpoint, object body);
     
     public RestResponse SendPutRequest(string endpoint, object body);
     

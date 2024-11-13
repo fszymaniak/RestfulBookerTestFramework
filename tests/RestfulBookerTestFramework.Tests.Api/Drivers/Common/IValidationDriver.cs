@@ -2,7 +2,7 @@
 
 public interface IValidationDriver
 {
-    public void ValidateStatusCode(HttpStatusCode expectedStatusCode);
+    public Task ValidateStatusCode(HttpStatusCode expectedStatusCode);
 
     public void ValidateCreatedBooking();
     

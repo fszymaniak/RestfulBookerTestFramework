@@ -7,20 +7,20 @@ namespace RestfulBookerTestFramework.Tests.Api.Hooks;
 public class BeforeScenarioHook(BookingHelper bookingHelper, AuthTokenRequestHelper authTokenRequestHelper)
 {
     [BeforeScenario("SetupOneBooking")]
-    public void BeforeScenarioSetUpOneBookings()
+    public async Task BeforeScenarioSetUpOneBookingsAsync()
     {
-        bookingHelper.CreateBookings(NumberOfBookings.SingleBooking);
+        await bookingHelper.CreateBookings(NumberOfBookings.SingleBooking);
     }
     
     [BeforeScenario("SetupMultipleBookings")]
-    public void BeforeScenarioSetUpMultipleBookings()
+    public async Task BeforeScenarioSetUpMultipleBookingsAsync()
     {
-        bookingHelper.CreateBookings(NumberOfBookings.MultipleBookings);
+        await bookingHelper.CreateBookings(NumberOfBookings.MultipleBookings);
     }
     
     [BeforeScenario("AuthorizeRequest")]
-    public void BeforeScenarioAuthorizeRequest()
+    public async Task BeforeScenarioAuthorizeRequest()
     {
-        authTokenRequestHelper.AuthorizeRequest();
+        await authTokenRequestHelper.AuthorizeRequestAsync();
     }
 }

@@ -4,9 +4,9 @@ public interface IAuthTokenDriver
 {
     public void CreateAuthTokenRequest(string userName, string password);
 
-    public void CreateAuthToken();
+    public Task CreateAuthTokenAsync();
     
-    public void ValidateAuthTokenResponse();
+    public Task ValidateAuthTokenResponse();
 
     public void ValidateAuthErrorMessage();
 }

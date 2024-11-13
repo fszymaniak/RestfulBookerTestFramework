@@ -5,10 +5,12 @@ namespace RestfulBookerTestFramework.Tests.Api.Drivers.Common;
 
 public class ValidationDriver(ScenarioContext scenarioContext) : IValidationDriver
 {
-    public void ValidateStatusCode(HttpStatusCode expectedStatusCode)
+    public Task ValidateStatusCode(HttpStatusCode expectedStatusCode)
     {
         var actualStatusCode = scenarioContext.GetRestResponse().StatusCode;
         actualStatusCode.Should().Be(expectedStatusCode);
+        
+        return Task.CompletedTask;
     }
     
     public void ValidateCreatedBooking()

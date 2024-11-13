@@ -5,9 +5,9 @@ namespace RestfulBookerTestFramework.Tests.Api.Helpers;
 
 public sealed class AuthTokenRequestHelper(IAuthTokenDriver authTokenDriver, AppSettings appSettings)
 {
-    public void AuthorizeRequest()
+    public async Task AuthorizeRequestAsync()
     {
         authTokenDriver.CreateAuthTokenRequest(appSettings.Credentials.UserName, appSettings.Credentials.Password);
-        authTokenDriver.CreateAuthToken();
+        await authTokenDriver.CreateAuthTokenAsync();
     }
 }

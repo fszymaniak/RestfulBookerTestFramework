@@ -31,14 +31,14 @@ public sealed class CreateBookingDriver(IRequestDriver requestDriver, ScenarioCo
         scenarioContext.SetBookingRequest(requestBookingBody);
     }
 
-    public void CreateBooking()
+    public async Task CreateBooking()
     {
         string bookingEndpoint = endpointsHelper.GetBookingEndpoint();
-
+        
         var bookingRequestBody = scenarioContext.GetBookingRequest();
-
-        var response = requestDriver.SendPostRequest(bookingEndpoint, bookingRequestBody);
-
+        
+        var response = await requestDriver.SendPostRequestAsync(bookingEndpoint, bookingRequestBody);
+        
         scenarioContext.SetRestResponse(response);
     }
   

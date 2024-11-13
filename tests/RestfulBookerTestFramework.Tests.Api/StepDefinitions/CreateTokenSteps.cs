@@ -21,9 +21,9 @@ public sealed class CreateTokenSteps(IAuthTokenDriver authTokenDriver, AppSettin
     }
 
     [StepDefinition("the new auth token is created")]
-    public void CreateValidAuthTokenAsync()
+    public async Task CreateValidAuthTokenAsync()
     {
-        authTokenDriver.CreateAuthToken();
+        await authTokenDriver.CreateAuthTokenAsync();
     }
 
     [Then("authorization token should be valid")]
