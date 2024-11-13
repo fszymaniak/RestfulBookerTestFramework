@@ -22,7 +22,7 @@ public class UpdateBookingDriver(ScenarioContext scenarioContext, IRequestDriver
         int bookingId = bookingHelper.GetBookingId();
         string bookingEndpoint = endpointsHelper.GetPatchBookingEndpoint(bookingId);
         
-        var response = await requestDriver.SendPatchRequest(bookingEndpoint, bookingRequest);
+        var response = await requestDriver.SendPatchRequestAsync(bookingEndpoint, bookingRequest);
         scenarioContext.SetRestResponse(response);
     }
 }

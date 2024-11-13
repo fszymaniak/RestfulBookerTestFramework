@@ -8,7 +8,7 @@ namespace RestfulBookerTestFramework.Tests.Api.Hooks;
 public class AfterScenarioHook(BookingHelper bookingHelper, ScenarioContext scenarioContext)
 {
     [AfterScenario("CleanUpBooking")]
-    public void AfterScenarioCleanUpBooking()
+    public async Task AfterScenarioCleanUpBooking()
     {
         RestResponse restResponse = null;
         try
@@ -25,18 +25,18 @@ public class AfterScenarioHook(BookingHelper bookingHelper, ScenarioContext scen
 
         if (bookingId != 0)
         {
-            bookingHelper.CleanUpBooking(bookingId);
+            await bookingHelper.CleanUpBookingAsync(bookingId);
         }
     }
     
     [AfterScenario("SetupMultipleBookings")]
-    public void AfterScenarioCleanUpAllBookings(ScenarioContext scenarioContext)
+    public async Task AfterScenarioCleanUpAllBookings()
     {
         var bookingsIds = bookingHelper.GetBookingsIds();
 
         foreach (var id in bookingsIds)
         {
-            bookingHelper.CleanUpBooking(id);
+            await bookingHelper.CleanUpBookingAsync(id);
         }
     }
 }

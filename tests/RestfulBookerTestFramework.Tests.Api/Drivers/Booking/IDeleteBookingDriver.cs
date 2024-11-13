@@ -2,7 +2,7 @@
 
 public interface IDeleteBookingDriver
 {
-    public void DeleteBooking();
+    public Task DeleteBookingAsync();
     
     public Task ValidateIfBookingHasBeenDeleted();
 }

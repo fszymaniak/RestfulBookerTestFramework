@@ -10,17 +10,17 @@ namespace RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
 public sealed class DeleteBookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, IAuthTokenDriver authTokenDriver, AppSettings appSettings, IGetBookingDriver getBookingDriver) : IDeleteBookingDriver
 {
-    public void DeleteBooking()
+    public async Task DeleteBookingAsync()
     {
         var expectedBookingResponse = scenarioContext.GetRestResponsesList().FirstOrDefault();
         var bookingId = expectedBookingResponse.Deserialize<BookingIdentifier>();
         scenarioContext.SetBookingId(bookingId.BookingId);
         authTokenDriver.CreateAuthTokenRequest(appSettings.Credentials.UserName, appSettings.Credentials.Password);
-        authTokenDriver.CreateAuthTokenAsync();
+        await authTokenDriver.CreateAuthTokenAsync();
         
         string deleteBookingEndpoint = endpointsHelper.GetDeleteBookingEndpoint(bookingId.BookingId);
         
-        var response = requestDriver.SendDeleteRequest(deleteBookingEndpoint);
+        var response = await requestDriver.SendDeleteRequestAsync(deleteBookingEndpoint);
 
         scenarioContext.SetRestResponse(response);
     }

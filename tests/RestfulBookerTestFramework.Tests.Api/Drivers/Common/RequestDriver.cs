@@ -69,7 +69,7 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
         return _response;
     }
     
-    public async Task<RestResponse> SendPatchRequest(string endpoint, object body)
+    public async Task<RestResponse> SendPatchRequestAsync(string endpoint, object body)
     {
         var token = scenarioContext.GetAuthTokenResponse();
         var request = new RestRequest(endpoint, Method.Patch);
@@ -93,7 +93,7 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
         return _response;
     }
 
-    public RestResponse SendDeleteRequest(string endpoint)
+    public async Task<RestResponse> SendDeleteRequestAsync(string endpoint)
     {
         var token = scenarioContext.GetAuthTokenResponse();
         var request = new RestRequest(endpoint, Method.Delete);
@@ -104,7 +104,7 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
 
         try
         {
-            _response = restClient.ExecuteDeleteAsync(request, cancellationTokenSource.Token).Result;
+            _response = await restClient.ExecuteDeleteAsync(request, cancellationTokenSource.Token);
         }
         catch (Exception e)
         {

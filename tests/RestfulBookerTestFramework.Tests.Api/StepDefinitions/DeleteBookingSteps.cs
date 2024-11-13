@@ -6,9 +6,9 @@ namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 public class DeleteBookingSteps(IDeleteBookingDriver deleteBookingDriver)
 {
     [When("trying to delete booking")]
-    public void WhenTheDeleteBookingRequestIsSend()
+    public async Task WhenTheDeleteBookingRequestIsSend()
     {
-        deleteBookingDriver.DeleteBooking();
+        await deleteBookingDriver.DeleteBookingAsync();
     }
     
     [Then("the booking should be deleted and not found")]

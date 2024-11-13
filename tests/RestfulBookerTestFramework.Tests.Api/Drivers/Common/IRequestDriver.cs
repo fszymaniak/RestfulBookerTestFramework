@@ -8,7 +8,7 @@ public interface IRequestDriver
     
     public Task<RestResponse> SendPutRequestAsync(string endpoint, object body);
     
-    public Task<RestResponse> SendPatchRequest(string endpoint, object body);
+    public Task<RestResponse> SendPatchRequestAsync(string endpoint, object body);
     
-    public RestResponse SendDeleteRequest(string endpoint);
+    public Task<RestResponse> SendDeleteRequestAsync(string endpoint);
 }

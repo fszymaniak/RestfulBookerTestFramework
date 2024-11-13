@@ -42,27 +42,10 @@ public class BookingHelper(ScenarioContext scenarioContext, EndpointsHelper endp
         return bookingIds;
     }
 
-    public void CleanUpBooking(int bookingId)
+    public async Task CleanUpBookingAsync(int bookingId)
     {
         string deleteBookingEndpoint = endpointsHelper.GetDeleteBookingEndpoint(bookingId);
         
-        requestDriver.SendDeleteRequest(deleteBookingEndpoint);
+        await requestDriver.SendDeleteRequestAsync(deleteBookingEndpoint);
     }
-
-    // public BookingResponse UpdateExpectedBookingWithPartialPatchRequest(RestRequest expectedBookingRequest,
-    //     object partialPatchRequest, string partialPatchRequestString)
-    // {
-    //     return partialPatchRequestString switch
-    //     {
-    //         nameof(PartialBookingWithOnlyFirstNameRequest) => GeneratePartialBookingWithOnlyFirstName(),
-    //         nameof(PartialBookingWithOnlyLastNameRequest) => GeneratePartialBookingWithOnlyLastName(),
-    //         nameof(PartialBookingWithOnlyTotalPriceRequest) => GeneratePartialBookingWithOnlyTotalPrice(),
-    //         nameof(PartialBookingWithOnlyDepositPaidRequest) => GeneratePartialBookingWithOnlyDepositPaid(),
-    //         nameof(PartialBookingDatesWithOnlyCheckInRequest) => PartialBookingDatesFactory.CreateBookingDatesRequestWithOnlyCheckIn(),
-    //         nameof(PartialBookingDatesWithOnlyCheckOutRequest) => PartialBookingDatesFactory.CreateBookingDatesRequestWithOnlyCheckOut(),
-    //         nameof(PartialBookingWithOnlyAdditionalNeedsRequest) => GeneratePartialBookingWithOnlyAdditionalNeeds(),
-    //         _ => throw new ArgumentOutOfRangeException(nameof(partialPatchRequestString),
-    //             $"Not found the expected partial booking request value: {partialPatchRequestString}")
-    //     };
-    // }
 }
