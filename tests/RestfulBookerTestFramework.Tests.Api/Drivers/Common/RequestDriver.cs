@@ -8,12 +8,9 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
 
     public async Task<RestResponse> SendGetRequestAsync(string endpoint)
     {
-        var request = new RestRequest(endpoint);
-        request.WithAcceptHeader();
-
         try
         {
-            _response = await restClient.ExecuteGetAsync(request);
+            _response = await ExecuteRequestAsync(endpoint, Method.Get);
         }
         catch (Exception e)
         {
@@ -26,15 +23,9 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
     
     public async Task<RestResponse> SendPostRequestAsync(string endpoint, object body)
     {
-        var request = new RestRequest(endpoint, Method.Post);
-        request.WithAcceptHeader();
-        request.WithBodyParameter(body);
-
-        var cancellationTokenSource = new CancellationTokenSource();
-
         try
         {
-            _response = await restClient.ExecutePostAsync(request, cancellationTokenSource.Token);
+            _response = await ExecuteRequestAsync(endpoint, Method.Post, body);
         }
         catch (Exception e)
         {
@@ -47,18 +38,9 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
     
     public async Task<RestResponse> SendPutRequestAsync(string endpoint, object body)
     {
-        var token = scenarioContext.GetAuthTokenResponse();
-        var request = new RestRequest(endpoint, Method.Put);
-        request.WithAcceptHeader();
-        request.WithContentTypeHeader();
-        request.WithCookieTokenHeader(token.Token);
-        request.WithBodyParameter(body);
-
-        var cancellationTokenSource = new CancellationTokenSource();
-
         try
         {
-            _response = await restClient.ExecutePutAsync(request, cancellationTokenSource.Token);
+            _response = await ExecuteRequestAsync(endpoint, Method.Put, body);
         }
         catch (Exception e)
         {
@@ -71,18 +53,9 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
     
     public async Task<RestResponse> SendPatchRequestAsync(string endpoint, object body)
     {
-        var token = scenarioContext.GetAuthTokenResponse();
-        var request = new RestRequest(endpoint, Method.Patch);
-        request.WithAcceptHeader();
-        request.WithContentTypeHeader();
-        request.WithCookieTokenHeader(token.Token);
-        request.WithBodyParameter(body);
-
-        var cancellationTokenSource = new CancellationTokenSource();
-
         try
         {
-            _response = await restClient.ExecutePatchAsync(request, cancellationTokenSource.Token);
+            _response = await ExecuteRequestAsync(endpoint, Method.Patch, body);
         }
         catch (Exception e)
         {
@@ -95,16 +68,9 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
 
     public async Task<RestResponse> SendDeleteRequestAsync(string endpoint)
     {
-        var token = scenarioContext.GetAuthTokenResponse();
-        var request = new RestRequest(endpoint, Method.Delete);
-        request.WithAcceptHeader();
-        request.WithCookieTokenHeader(token.Token);
-
-        var cancellationTokenSource = new CancellationTokenSource();
-
         try
         {
-            _response = await restClient.ExecuteDeleteAsync(request, cancellationTokenSource.Token);
+            _response = await ExecuteRequestAsync(endpoint, Method.Delete);
         }
         catch (Exception e)
         {
@@ -113,5 +79,29 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
         }
 
         return _response;
+    }
+    
+    private async Task<RestResponse> ExecuteRequestAsync(string endpoint, Method method, object body = null)
+    {
+        var request = new RestRequest(endpoint, method);
+        request.WithAcceptHeader();
+        request.AddAuthorization(method, scenarioContext);
+        request.AddBodyParameter(method, body);
+
+        return method switch
+        {
+            Method.Get => await restClient.ExecuteGetAsync(request, GetCancellationToken()),
+            Method.Post => await restClient.ExecutePostAsync(request, GetCancellationToken()),
+            Method.Put => await restClient.ExecutePutAsync(request, GetCancellationToken()),
+            Method.Patch => await restClient.ExecutePatchAsync(request, GetCancellationToken()),
+            Method.Delete => await restClient.ExecuteDeleteAsync(request, GetCancellationToken()),
+            _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+        };
+    }
+
+    private CancellationToken GetCancellationToken()
+    {
+        var cancellationTokenSource = new CancellationTokenSource();
+        return cancellationTokenSource.Token;
     }
 }

@@ -21,4 +21,26 @@ public static class RestRequestExtensions
     {
         request.AddHeader("Cookie", $"token={token}");
     }
+    
+    public static void AddAuthorization(this RestRequest request, Method method, ScenarioContext scenarioContext)
+    {
+        if (method is not (Method.Put or Method.Patch or Method.Delete))
+        {
+            return;
+        }
+
+        var token = scenarioContext.GetAuthTokenResponse();
+        request.WithCookieTokenHeader(token.Token);
+    }
+
+    public static void AddBodyParameter(this RestRequest request, Method method,object body)
+    {
+        if (method is not (Method.Put or Method.Patch or Method.Post))
+        {
+            return;
+        }
+
+        request.WithContentTypeHeader();
+        request.WithBodyParameter(body);
+    }
 }
