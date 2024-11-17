@@ -29,7 +29,8 @@ public class BookingHelper(ScenarioContext scenarioContext, EndpointsHelper endp
     {
         var bookingRequest = scenarioContext.GetRestResponsesList().First();
         var booking = JsonConvert.DeserializeObject<BookingResponse>(bookingRequest.Content);
-        
+        scenarioContext.SetBookingId(booking.BookingId);
+
         return booking.BookingId;
     }
     

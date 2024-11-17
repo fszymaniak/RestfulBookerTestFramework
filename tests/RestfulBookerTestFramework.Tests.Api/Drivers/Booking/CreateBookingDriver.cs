@@ -38,8 +38,10 @@ public sealed class CreateBookingDriver(IRequestDriver requestDriver, ScenarioCo
         var bookingRequestBody = scenarioContext.GetBookingRequest();
         
         var response = await requestDriver.SendPostRequestAsync(bookingEndpoint, bookingRequestBody);
-        
+
+        response.SetBookingId(scenarioContext);
         scenarioContext.SetRestResponse(response);
+        
     }
   
     

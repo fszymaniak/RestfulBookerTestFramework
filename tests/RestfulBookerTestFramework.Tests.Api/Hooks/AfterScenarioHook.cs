@@ -10,18 +10,7 @@ public class AfterScenarioHook(BookingHelper bookingHelper, ScenarioContext scen
     [AfterScenario("CleanUpBooking")]
     public async Task AfterScenarioCleanUpBooking()
     {
-        RestResponse restResponse = null;
-        try
-        {
-            restResponse = scenarioContext.GetRestResponse();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-        
-        int bookingId = restResponse.Deserialize<BookingIdentifier>().BookingId;
+        int bookingId = scenarioContext.GetBookingId();
 
         if (bookingId != 0)
         {
