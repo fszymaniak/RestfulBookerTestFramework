@@ -84,9 +84,7 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
     private async Task<RestResponse> ExecuteRequestAsync(string endpoint, Method method, object body = null)
     {
         var request = new RestRequest(endpoint, method);
-        request.WithAcceptHeader();
-        request.AddAuthorization(method, scenarioContext);
-        request.AddBodyParameter(method, body);
+        request.SetupRequestWithAuthorizationAndBody(body, method, scenarioContext);
 
         return method switch
         {
