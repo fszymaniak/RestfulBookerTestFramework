@@ -8,15 +8,13 @@ using RestfulBookerTestFramework.Tests.Api.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
-public sealed class DeleteBookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, IAuthTokenDriver authTokenDriver, AppSettings appSettings, IGetBookingDriver getBookingDriver) : IDeleteBookingDriver
+public sealed class DeleteBookingDriver(IRequestDriver requestDriver, ScenarioContext scenarioContext, EndpointsHelper endpointsHelper, IGetBookingDriver getBookingDriver) : IDeleteBookingDriver
 {
     public async Task DeleteBookingAsync()
     {
         var expectedBookingResponse = scenarioContext.GetRestResponsesList().FirstOrDefault();
         var bookingId = expectedBookingResponse.Deserialize<BookingIdentifier>();
         scenarioContext.SetBookingId(bookingId.BookingId);
-        authTokenDriver.CreateAuthTokenRequest(appSettings.Credentials.UserName, appSettings.Credentials.Password);
-        await authTokenDriver.CreateAuthTokenAsync();
         
         string deleteBookingEndpoint = endpointsHelper.GetDeleteBookingEndpoint(bookingId.BookingId);
         
@@ -24,7 +22,16 @@ public sealed class DeleteBookingDriver(IRequestDriver requestDriver, ScenarioCo
 
         scenarioContext.SetRestResponse(response);
     }
-    
+
+    public async Task TryToDeleteNotExistingBookingAsync(int invalidBookingId = 0)
+    {
+        string deleteBookingEndpoint = endpointsHelper.GetDeleteBookingEndpoint(invalidBookingId);
+        
+        var response = await requestDriver.SendDeleteRequestAsync(deleteBookingEndpoint);
+
+        scenarioContext.SetRestResponse(response);
+    }
+
     public async Task ValidateIfBookingHasBeenDeleted()
     {
         var expectedBookingId = scenarioContext.GetBookingId();
