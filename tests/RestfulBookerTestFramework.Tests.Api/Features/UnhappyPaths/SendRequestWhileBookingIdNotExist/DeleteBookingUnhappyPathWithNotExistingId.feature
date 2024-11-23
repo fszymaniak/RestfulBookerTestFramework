@@ -1,7 +1,7 @@
 @AuthorizeRequest
 
 Feature: Delete Booking Endpoint Unhappy Path
-Description: Send the valid DELETE request with valid booking id /booking/{id} endpoint and token then it should return 200 (OK) with proper booking
+Description: Send the valid DELETE request with not existing booking id to the /booking/{id} endpoint then it should return 404 (Not Found)
 
     @ignore 
     # ignored due to the bug in the DELETE request when {id} is not exist
