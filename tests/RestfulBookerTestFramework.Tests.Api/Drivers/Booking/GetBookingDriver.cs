@@ -37,4 +37,13 @@ public sealed class GetBookingDriver(IRequestDriver requestDriver, ScenarioConte
         actualBookingResponse.BookingId.Should().Be(expectedBooking.BookingId);
         actualBookingResponse.Should().BeEquivalentTo(expectedBooking);
     }
+
+    public async Task TryToGetNotExistingBookingAsync(int invalidBookingId = 0)
+    {
+        string getBookingEndpoint = endpointsHelper.GetSingleBookingEndpoint(invalidBookingId);
+        
+        var response = await requestDriver.SendGetRequestAsync(getBookingEndpoint);
+
+        scenarioContext.SetRestResponse(response);
+    }
 }
