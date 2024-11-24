@@ -3,7 +3,7 @@
 namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 
 [Binding]
-public class CommonSteps(IDeleteBookingDriver deleteBookingDriver, IGetBookingDriver getBookingDriver)
+public class CommonSteps(IDeleteBookingDriver deleteBookingDriver, IGetBookingDriver getBookingDriver, IUpdateBookingDriver updateBookingDriver)
 {
     [StepDefinition("trying to send '(.*)' method for not existing booking")]
     public async Task WhenTryingToUpdateBooking(Method requestMethod)
@@ -15,6 +15,9 @@ public class CommonSteps(IDeleteBookingDriver deleteBookingDriver, IGetBookingDr
                 break;
             case Method.Get:
                 await getBookingDriver.TryToGetNotExistingBookingAsync();
+                break;
+            case Method.Put:
+                await updateBookingDriver.TryToPutUpdateNotExistingBookingAsync();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(requestMethod.ToString(), $"Invalid update method {requestMethod}.");

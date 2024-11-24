@@ -25,4 +25,14 @@ public class UpdateBookingDriver(ScenarioContext scenarioContext, IRequestDriver
         var response = await requestDriver.SendPatchRequestAsync(bookingEndpoint, bookingRequest);
         scenarioContext.SetRestResponse(response);
     }
+
+    public async Task TryToPutUpdateNotExistingBookingAsync(int invalidBookingId = 0)
+    {
+        var bookingRequest = scenarioContext.GetBookingRequest();
+        string putBookingEndpoint = endpointsHelper.GetPutBookingEndpoint(invalidBookingId);
+        
+        var response = await requestDriver.SendPutRequestAsync(putBookingEndpoint, bookingRequest);
+
+        scenarioContext.SetRestResponse(response);
+    }
 }
