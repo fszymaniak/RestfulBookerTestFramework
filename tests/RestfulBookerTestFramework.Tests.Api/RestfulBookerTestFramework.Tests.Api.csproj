@@ -56,13 +56,13 @@
       <DesignTime>true</DesignTime>
       <Visible>true</Visible>
     </Compile>
-    <Compile Update="Features\UnhappyPaths\SendRequestWhileBookingIdNotExist\PutBookingUnhappyPathWithNotExisting.feature.cs">
+    <Compile Update="Features\UnhappyPaths\SendRequestWhileBookingIdNotExist\PutBookingUnhappyPathWithNotExistingId.feature.cs">
       <DependentUpon>PutBookingUnhappyPathWithNotExisting.feature</DependentUpon>
       <AutoGen>true</AutoGen>
       <DesignTime>true</DesignTime>
       <Visible>true</Visible>
     </Compile>
-    <Compile Update="Features\UnhappyPaths\SendRequestWhileBookingIdNotExist\PatchBookingUnhappyPathWithNotExisting.feature.cs">
+    <Compile Update="Features\UnhappyPaths\SendRequestWhileBookingIdNotExist\PatchBookingUnhappyPathWithNotExistingId.feature.cs">
       <DependentUpon>PatchBookingUnhappyPathWithNotExisting.feature</DependentUpon>
       <AutoGen>true</AutoGen>
       <DesignTime>true</DesignTime>
