@@ -8,6 +8,6 @@ Description: Send the valid PUT request with not existing booking id to the /boo
     # 405 (Method Not Allowed) is returned while the 404 (Not Found) error should be used
     Scenario: Endpoint Booking cannot Put update specific entity as it is not exists
         Given Prerequisite: API is running
-        Given a new valid booking request is created
+        And a new valid booking request is created
         When trying to send 'Put' method for not existing booking
         Then status code should be '404'
