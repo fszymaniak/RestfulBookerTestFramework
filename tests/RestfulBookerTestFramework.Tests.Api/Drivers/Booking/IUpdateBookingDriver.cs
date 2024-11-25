@@ -7,4 +7,6 @@ public interface IUpdateBookingDriver
     public Task PatchUpdateBooking();
     
     public Task TryToPutUpdateNotExistingBookingAsync(int invalidBookingId = 0);
+    
+    public Task TryToPatchUpdateNotExistingBookingAsync(int invalidBookingId = 0);
 }

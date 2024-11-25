@@ -35,4 +35,14 @@ public class UpdateBookingDriver(ScenarioContext scenarioContext, IRequestDriver
 
         scenarioContext.SetRestResponse(response);
     }
+    
+    public async Task TryToPatchUpdateNotExistingBookingAsync(int invalidBookingId = 0)
+    {
+        var bookingRequest = scenarioContext.GetBookingRequest();
+        string patchBookingEndpoint = endpointsHelper.GetPatchBookingEndpoint(invalidBookingId);
+        
+        var response = await requestDriver.SendPatchRequestAsync(patchBookingEndpoint, bookingRequest);
+
+        scenarioContext.SetRestResponse(response);
+    }
 }

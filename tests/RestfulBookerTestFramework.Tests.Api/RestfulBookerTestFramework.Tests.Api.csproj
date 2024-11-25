@@ -62,6 +62,12 @@
       <DesignTime>true</DesignTime>
       <Visible>true</Visible>
     </Compile>
+    <Compile Update="Features\UnhappyPaths\SendRequestWhileBookingIdNotExist\PatchBookingUnhappyPathWithNotExisting.feature.cs">
+      <DependentUpon>PatchBookingUnhappyPathWithNotExisting.feature</DependentUpon>
+      <AutoGen>true</AutoGen>
+      <DesignTime>true</DesignTime>
+      <Visible>true</Visible>
+    </Compile>
   </ItemGroup>
 
 </Project>

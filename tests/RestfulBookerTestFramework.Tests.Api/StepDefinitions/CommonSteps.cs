@@ -19,6 +19,9 @@ public class CommonSteps(IDeleteBookingDriver deleteBookingDriver, IGetBookingDr
             case Method.Put:
                 await updateBookingDriver.TryToPutUpdateNotExistingBookingAsync();
                 break;
+            case Method.Patch:
+                await updateBookingDriver.TryToPatchUpdateNotExistingBookingAsync();
+                break;
             default:
                 throw new ArgumentOutOfRangeException(requestMethod.ToString(), $"Invalid update method {requestMethod}.");
         }
