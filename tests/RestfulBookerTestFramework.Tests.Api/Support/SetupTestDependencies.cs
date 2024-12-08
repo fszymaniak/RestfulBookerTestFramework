@@ -1,9 +1,9 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Configuration;
-using RestfulBookerTestFramework.Tests.Api.Constants;
-using RestfulBookerTestFramework.Tests.Api.Helpers;
 using ContainerBuilder = Autofac.ContainerBuilder;
 using RestfulBookerTestFramework.Tests.Api.Hooks;
 using RestfulBookerTestFramework.Tests.Api.StepDefinitions;
+using RestfulBookerTestFramework.Tests.Commons.Configuration;
+using RestfulBookerTestFramework.Tests.Commons.Constants;
 using RestfulBookerTestFramework.Tests.Commons.Extensions;
 
 namespace RestfulBookerTestFramework.Tests.Api.Support;
@@ -14,22 +14,10 @@ public static class SetupTestDependencies
     public static void SetupGlobalContainer(ContainerBuilder containerBuilder)
     {
         // Register globally scoped runtime dependencies
-        // Config classes
-        containerBuilder
-            .RegisterType<AppSettings>()
-            .AsSelf()
-            .SingleInstance();
-
-        containerBuilder
-            .RegisterType<Urls>()
-            .AsSelf()
-            .SingleInstance();
-
-        containerBuilder
-            .RegisterType<Credentials>()
-            .AsSelf()
-            .SingleInstance();
-
+        // register RestfulBookerTestFramework.Tests.Commons configuration dependencies
+        containerBuilder.AddCommonDependenciesGlobalContainer();
+        
+        // configuration
         var config = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile(FileNames.AppSettingsJson, optional: true, reloadOnChange: true)
@@ -46,39 +34,7 @@ public static class SetupTestDependencies
     public static void SetupScenarioContainer(ContainerBuilder containerBuilder)
     {
         // Register scenario scoped runtime dependencies
-
-        // RestSharp
-        containerBuilder  
-            .RegisterType<RestClient>()
-            .AsSelf()
-            .SingleInstance();
-
-        // Drivers
-        var projectName = Path.GetFileName(Assembly.GetExecutingAssembly().Location).Split(".dll").First();
-        containerBuilder.RegisterAssemblyTypes(Assembly.Load(projectName))
-            .Where(t => t.Name.EndsWith("Driver"))
-            .AsImplementedInterfaces();
-
-        // Helpers
-        containerBuilder
-            .RegisterType<EndpointsHelper>()
-            .AsSelf()
-            .SingleInstance();
-        
-        containerBuilder
-            .RegisterType<BookingHelper>()
-            .AsSelf()
-            .SingleInstance();
-        
-        containerBuilder
-            .RegisterType<AuthTokenDriverHelper>()
-            .AsSelf()
-            .SingleInstance();
-        
-        containerBuilder
-            .RegisterType<AuthTokenRequestHelper>()
-            .AsSelf()
-            .SingleInstance();
+        containerBuilder.AddCommonDependenciesScenarioContainer();
         
         // register binding classes
         containerBuilder.AddReqnrollBindings<ScenarioHook>();
@@ -90,8 +46,5 @@ public static class SetupTestDependencies
         containerBuilder.AddReqnrollBindings<GetBookingsIdsSteps>();
         containerBuilder.AddReqnrollBindings<DeleteBookingSteps>();
         containerBuilder.AddReqnrollBindings<HealthCheckSteps>();
-        
-        // register RestfulBookerTestFramework.Tests.Commons dependencies
-        containerBuilder.AddCommonDependencies();
     }
 }

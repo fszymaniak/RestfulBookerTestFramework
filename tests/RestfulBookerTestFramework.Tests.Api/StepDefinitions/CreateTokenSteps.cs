@@ -1,5 +1,5 @@
-using RestfulBookerTestFramework.Tests.Api.Configuration;
-using RestfulBookerTestFramework.Tests.Api.Drivers.AuthToken;
+using RestfulBookerTestFramework.Tests.Commons.Configuration;
+using RestfulBookerTestFramework.Tests.Commons.Drivers.AuthToken;
 
 namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 
@@ -27,9 +27,9 @@ public sealed class CreateTokenSteps(IAuthTokenDriver authTokenDriver, AppSettin
     }
 
     [Then("authorization token should be valid")]
-    public void ValidateAuthResponse()
+    public async Task ValidateAuthResponse()
     {
-        authTokenDriver.ValidateAuthTokenResponse();
+        await authTokenDriver.ValidateAuthTokenResponse();
     }
     
     [Then("bad credentials message should occur")]

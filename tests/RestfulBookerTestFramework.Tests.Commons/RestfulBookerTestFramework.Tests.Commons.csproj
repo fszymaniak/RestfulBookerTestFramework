@@ -13,6 +13,7 @@
     <ItemGroup>
       <PackageReference Include="Autofac" />
       <PackageReference Include="Autofac.Extensions.DependencyInjection" />
+      <PackageReference Include="Bogus" />
       <PackageReference Include="FluentAssertions" />
       <PackageReference Include="NUnit" />
       <PackageReference Include="Reqnroll.NUnit" />

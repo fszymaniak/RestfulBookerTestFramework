@@ -1,4 +1,4 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Drivers.HealthCheck;
+﻿using RestfulBookerTestFramework.Tests.Commons.Drivers.HealthCheck;
 
 namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 

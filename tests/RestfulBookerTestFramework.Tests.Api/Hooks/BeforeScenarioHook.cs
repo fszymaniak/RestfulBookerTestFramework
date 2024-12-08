@@ -1,5 +1,5 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Constants;
-using RestfulBookerTestFramework.Tests.Api.Helpers;
+﻿using RestfulBookerTestFramework.Tests.Commons.Constants;
+using RestfulBookerTestFramework.Tests.Commons.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Api.Hooks;
 
