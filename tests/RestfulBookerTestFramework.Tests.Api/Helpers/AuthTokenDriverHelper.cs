@@ -1,5 +1,5 @@
-﻿using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
-using RestfulBookerTestFramework.Tests.Api.Extensions;
+﻿using RestfulBookerTestFramework.Tests.Commons.Extensions;
+using RestfulBookerTestFramework.Tests.Commons.Payloads.Responses;
 
 namespace RestfulBookerTestFramework.Tests.Api.Helpers;
 

@@ -7,6 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulBookerTestFramework.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B4D8BB74-35CB-4E23-8FB4-0E730D0AEDDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestfulBookerTestFramework.Tests.Commons", "tests\RestfulBookerTestFramework.Tests.Commons\RestfulBookerTestFramework.Tests.Commons.csproj", "{E8487089-EBC8-4287-9DF7-9E1F8352D5D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6A50D98E-73D8-474B-9A18-C463CA4F3C85}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +24,10 @@ Global
 		{8A30A43E-AE71-48E1-B688-9B43CC36269F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A30A43E-AE71-48E1-B688-9B43CC36269F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A30A43E-AE71-48E1-B688-9B43CC36269F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8487089-EBC8-4287-9DF7-9E1F8352D5D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8487089-EBC8-4287-9DF7-9E1F8352D5D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8487089-EBC8-4287-9DF7-9E1F8352D5D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8487089-EBC8-4287-9DF7-9E1F8352D5D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -26,5 +37,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8A30A43E-AE71-48E1-B688-9B43CC36269F} = {B4D8BB74-35CB-4E23-8FB4-0E730D0AEDDE}
+		{E8487089-EBC8-4287-9DF7-9E1F8352D5D3} = {B4D8BB74-35CB-4E23-8FB4-0E730D0AEDDE}
 	EndGlobalSection
 EndGlobal

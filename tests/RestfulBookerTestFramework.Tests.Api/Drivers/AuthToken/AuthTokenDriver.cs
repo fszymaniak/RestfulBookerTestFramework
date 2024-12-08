@@ -1,9 +1,9 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Constants;
-using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Requests;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
-using RestfulBookerTestFramework.Tests.Api.Extensions;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
+using RestfulBookerTestFramework.Tests.Commons.Drivers;
+using RestfulBookerTestFramework.Tests.Commons.Extensions;
+using RestfulBookerTestFramework.Tests.Commons.Payloads.Requests;
+using RestfulBookerTestFramework.Tests.Commons.Payloads.Responses;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers.AuthToken
 {

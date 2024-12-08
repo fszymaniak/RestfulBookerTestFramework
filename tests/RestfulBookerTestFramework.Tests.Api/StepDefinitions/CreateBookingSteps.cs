@@ -1,5 +1,5 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
-using RestfulBookerTestFramework.Tests.Api.Extensions;
+using RestfulBookerTestFramework.Tests.Commons.Extensions;
 
 namespace RestfulBookerTestFramework.Tests.Api.StepDefinitions;
 

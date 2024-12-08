@@ -1,8 +1,8 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Requests.Partial.SingleProperty;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
-using RestfulBookerTestFramework.Tests.Api.Extensions;
+﻿using System.Text.Json;
 using RestfulBookerTestFramework.Tests.Api.Factories;
+using RestfulBookerTestFramework.Tests.Commons.Drivers;
+using RestfulBookerTestFramework.Tests.Commons.Extensions;
+using RestfulBookerTestFramework.Tests.Commons.Payloads.Responses;
 
 namespace RestfulBookerTestFramework.Tests.Api.Helpers;
 
@@ -28,7 +28,8 @@ public class BookingHelper(ScenarioContext scenarioContext, EndpointsHelper endp
     public int GetBookingId()
     {
         var bookingRequest = scenarioContext.GetRestResponsesList().First();
-        var booking = JsonConvert.DeserializeObject<BookingResponse>(bookingRequest.Content);
+        var booking = JsonSerializer.Deserialize<BookingResponse>(bookingRequest.Content);
+        // var booking = JsonConvert.DeserializeObject<BookingResponse>(bookingRequest.Content);
         scenarioContext.SetBookingId(booking.BookingId);
 
         return booking.BookingId;

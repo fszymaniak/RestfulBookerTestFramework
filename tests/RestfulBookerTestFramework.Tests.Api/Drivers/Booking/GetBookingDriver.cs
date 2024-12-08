@@ -1,7 +1,7 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
-using RestfulBookerTestFramework.Tests.Api.Extensions;
-using RestfulBookerTestFramework.Tests.Api.Helpers;
+﻿using RestfulBookerTestFramework.Tests.Api.Helpers;
+using RestfulBookerTestFramework.Tests.Commons.Drivers;
+using RestfulBookerTestFramework.Tests.Commons.Extensions;
+using RestfulBookerTestFramework.Tests.Commons.Payloads.Responses;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
@@ -23,7 +23,7 @@ public sealed class GetBookingDriver(IRequestDriver requestDriver, ScenarioConte
         var expectedBooking = bookingResponse.Deserialize<BookingResponse>();
 
         var actualRestResponse = scenarioContext.GetRestResponse();
-        var actualBooking = actualRestResponse.Deserialize<DTOs.Models.Booking>();
+        var actualBooking = actualRestResponse.Deserialize<Commons.DTOs.Models.Booking>();
         int id = endpointsHelper.GetBookingIdFromResponseUri(actualRestResponse.ResponseUri.ToString());
         var actualBookingResponse = new BookingResponse
         {

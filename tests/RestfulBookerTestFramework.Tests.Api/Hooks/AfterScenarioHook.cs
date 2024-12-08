@@ -1,6 +1,5 @@
-﻿using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
-using RestfulBookerTestFramework.Tests.Api.Extensions;
-using RestfulBookerTestFramework.Tests.Api.Helpers;
+﻿using RestfulBookerTestFramework.Tests.Api.Helpers;
+using RestfulBookerTestFramework.Tests.Commons.Extensions;
 
 namespace RestfulBookerTestFramework.Tests.Api.Hooks;
 

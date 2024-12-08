@@ -1,5 +1,5 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
-using RestfulBookerTestFramework.Tests.Api.Helpers;
+﻿using RestfulBookerTestFramework.Tests.Api.Helpers;
+using RestfulBookerTestFramework.Tests.Commons.Drivers;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers.HealthCheck;
 

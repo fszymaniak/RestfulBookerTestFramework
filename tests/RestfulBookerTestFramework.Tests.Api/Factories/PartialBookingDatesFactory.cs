@@ -1,6 +1,6 @@
-﻿using RestfulBookerTestFramework.Tests.Api.DTOs.Models.Partial;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Requests.Partial.SingleProperty;
-using RestfulBookerTestFramework.Tests.Api.Extensions;
+﻿using RestfulBookerTestFramework.Tests.Commons.DTOs.Models.Partial;
+using RestfulBookerTestFramework.Tests.Commons.Extensions;
+using RestfulBookerTestFramework.Tests.Commons.Payloads.Requests.Partial.SingleProperty;
 
 namespace RestfulBookerTestFramework.Tests.Api.Factories;
 

@@ -1,10 +1,10 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Configuration;
 using RestfulBookerTestFramework.Tests.Api.Constants;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
-
 using ContainerBuilder = Autofac.ContainerBuilder;
 using RestfulBookerTestFramework.Tests.Api.Hooks;
 using RestfulBookerTestFramework.Tests.Api.StepDefinitions;
+using RestfulBookerTestFramework.Tests.Commons.Extensions;
 
 namespace RestfulBookerTestFramework.Tests.Api.Support;
 
@@ -90,5 +90,8 @@ public static class SetupTestDependencies
         containerBuilder.AddReqnrollBindings<GetBookingsIdsSteps>();
         containerBuilder.AddReqnrollBindings<DeleteBookingSteps>();
         containerBuilder.AddReqnrollBindings<HealthCheckSteps>();
+        
+        // register RestfulBookerTestFramework.Tests.Commons dependencies
+        containerBuilder.AddCommonDependencies();
     }
 }

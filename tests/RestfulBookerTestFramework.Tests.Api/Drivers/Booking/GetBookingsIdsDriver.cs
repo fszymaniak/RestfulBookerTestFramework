@@ -1,8 +1,10 @@
-﻿using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Responses;
-using RestfulBookerTestFramework.Tests.Api.Extensions;
+﻿using System.Text.Json;
+
 using RestfulBookerTestFramework.Tests.Api.Helpers;
+using RestfulBookerTestFramework.Tests.Commons.Drivers;
+using RestfulBookerTestFramework.Tests.Commons.DTOs.Models;
+using RestfulBookerTestFramework.Tests.Commons.Extensions;
+using RestfulBookerTestFramework.Tests.Commons.Payloads.Responses;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 
@@ -54,7 +56,7 @@ public sealed class GetBookingsIdsDriver(IRequestDriver requestDriver, ScenarioC
     
     public void ValidateMultipleBookingsIdsFilteredByDate()
     {
-        var expectedBookingIds = scenarioContext.GetRestResponsesList().SelectMany(r => JsonConvert.DeserializeObject<List<BookingIdentifier>>(r.Content));
+        var expectedBookingIds = scenarioContext.GetRestResponsesList().SelectMany(r => JsonSerializer.Deserialize<List<BookingIdentifier>>(r.Content));
         
         var actualRestResponse = scenarioContext.GetRestResponse();
         var actualBookingIds = actualRestResponse.Deserialize<List<BookingIdentifier>>();

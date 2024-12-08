@@ -1,10 +1,10 @@
 ﻿using RestfulBookerTestFramework.Tests.Api.Configuration;
 using RestfulBookerTestFramework.Tests.Api.Constants;
 using RestfulBookerTestFramework.Tests.Api.Drivers.AuthToken;
-using RestfulBookerTestFramework.Tests.Api.Drivers.Common;
-using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
-using RestfulBookerTestFramework.Tests.Api.Extensions;
 using RestfulBookerTestFramework.Tests.Api.Helpers;
+using RestfulBookerTestFramework.Tests.Commons.Drivers;
+using RestfulBookerTestFramework.Tests.Commons.DTOs.Models;
+using RestfulBookerTestFramework.Tests.Commons.Extensions;
 
 namespace RestfulBookerTestFramework.Tests.Api.Drivers.Booking;
 

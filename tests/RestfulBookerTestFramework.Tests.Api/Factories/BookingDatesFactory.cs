@@ -1,5 +1,5 @@
-﻿using RestfulBookerTestFramework.Tests.Api.DTOs.Models;
-using RestfulBookerTestFramework.Tests.Api.Extensions;
+﻿using RestfulBookerTestFramework.Tests.Commons.DTOs.Models;
+using RestfulBookerTestFramework.Tests.Commons.Extensions;
 
 namespace RestfulBookerTestFramework.Tests.Api.Factories;
 
