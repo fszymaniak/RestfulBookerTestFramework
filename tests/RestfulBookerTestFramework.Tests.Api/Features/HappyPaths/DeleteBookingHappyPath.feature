@@ -1,8 +1,11 @@
 ﻿@SetupOneBooking
 @AuthorizeRequest
-
 Feature: Delete Booking Endpoint Happy Path
-Description: Send the valid DELETE request with valid booking id /booking/{id} endpoint and token then it should return 200 (OK) with proper booking
+
+Description:
+    As RestfulBooker user
+    I want to sent valid DELETE request with valid existing booking id to the /booking/{id} endpoint
+    So that I will be able to sucessfully (201) delete existing booking
 
     Scenario: Endpoint Booking delete specific entity successfully
         Given Prerequisite: API is running

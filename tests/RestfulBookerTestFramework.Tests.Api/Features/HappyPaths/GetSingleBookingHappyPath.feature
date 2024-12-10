@@ -1,9 +1,12 @@
 @SetupOneBooking
 @CleanUpBooking
 @AuthorizeRequest
-
 Feature: Get Single Booking Endpoint Happy Path
-Description: Send the valid GET request with valid booking id  /booking/{id} endpoint and it should return 200 (OK) with proper booking
+
+Description:
+    As RestfulBooker user
+    I want to sent valid GET request with valid existing booking id to the /booking/{id} endpoint
+    So that I will be able to sucessfully (200 OK Status Code) get existing booking
 
     Scenario:  Endpoint Booking get single specific entity successfully
         Given Prerequisite: API is running

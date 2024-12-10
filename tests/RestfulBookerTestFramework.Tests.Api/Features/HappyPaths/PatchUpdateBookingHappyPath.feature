@@ -1,9 +1,12 @@
 ﻿@SetupOneBooking
 @CleanUpBooking
 @AuthorizeRequest
-
 Feature: Patch Update Booking Endpoint Happy Path
-Description: Send the valid PATCH request with valid booking request to /booking/{id} endpoint and it should return 200 (OK) with proper booking
+
+Description:
+    As RestfulBooker user
+    I want to sent valid PATCH request with existing booking id and valid partial request to the /booking/{id} endpoint
+    So that I will be able to sucessfully (200 OK Status Code) update existing booking
 
     Scenario Outline: Endpoint Booking update partial booking with single property request successfully
         Given Prerequisite: API is running

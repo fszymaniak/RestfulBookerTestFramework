@@ -1,8 +1,11 @@
 @SetupMultipleBookings
 @AuthorizeRequest
-
 Feature: Get Multiple Bookings Ids Endpoint Happy Path
-Description: Send the valid GET request to the /booking endpoint and it should return 200 (OK) with list of bookingIds
+
+Description:
+    As RestfulBooker user
+    I want to sent valid GET request to the /booking endpoint
+    So that I will be able to sucessfully (200 OK Status Code) retrive existing booking Ids list
 
     Scenario: Endpoint Booking get multiple booking Ids successfully
         Given Prerequisite: API is running

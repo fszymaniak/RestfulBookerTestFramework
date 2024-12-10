@@ -1,9 +1,12 @@
 @SetupOneBooking
 @CleanUpBooking
 @AuthorizeRequest
-
 Feature: Put Update Booking Endpoint Unhappy Path with missing Body properites
-Description: Send the invalid PUT request with invalid body to the /booking/{id} endpoint and it should return 400 (Bad Request)
+    
+Description:
+    As RestfulBooker user
+    I want to sent PUT request with invalid body for the existing booking to the /booking/{id} endpoint
+    So that I will be able to get error code (400 Bad Request Status Code) and the booking cannot be updated
 
     Scenario Outline: Booking Endpoint invalid request without one of the property should return Bad Request
         Given Prerequisite: API is running

@@ -1,9 +1,12 @@
 ﻿@SetupOneBooking
 @CleanUpBooking
 @AuthorizeRequest
-
 Feature: Put Update Booking Endpoint Happy Path
-Description: Send the valid PUT request with valid booking request to /booking/{id} endpoint and it should return 200 (OK) with proper booking
+
+Description:
+    As RestfulBooker user
+    I want to sent valid PUT request with existing booking id and valid full request to the /booking/{id} endpoint
+    So that I will be able to sucessfully (200 OK Status Code) update existing booking
 
     Scenario:  Endpoint Booking get single specific entity successfully
         Given Prerequisite: API is running

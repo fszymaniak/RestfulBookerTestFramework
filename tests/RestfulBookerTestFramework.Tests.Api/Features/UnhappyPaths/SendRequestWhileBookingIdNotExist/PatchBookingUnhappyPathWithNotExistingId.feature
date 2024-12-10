@@ -1,7 +1,10 @@
 @AuthorizeRequest
-
 Feature: Patch Booking Endpoint Unhappy Path when Booking not exist
-Description: Send the valid PATCH request with not existing booking id to the /booking/{id} endpoint then it should return 404 (Not Found)
+
+Description:
+    As RestfulBooker user
+    I want to sent valid PATCH request with not existing booking id to the /booking/{id} endpoint
+    So that I will be able to get error code (404 Not Found Status Code) and the booking cannot be updated
 
     @ignore
     # ignored due to the bug in the PATCH request when {id} is not exist

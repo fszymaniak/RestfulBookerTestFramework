@@ -1,8 +1,11 @@
 @CleanUpBooking
 @AuthorizeRequest
-
 Feature: Create Booking Endpoint Happy Path
-Description: Send the valid POST request with valid body to the /booking endpoint and it should return 201 (Created) and created booking entity
+
+Description: 
+    As RestfulBooker user
+    I want to sent valid POST request with valid body to the /booking endpoint
+    So that I will be able to sucessfully (201 Created Status Code) create booking entity
 
     Scenario: Booking Endpoint Valid Booking entity is created successfully
         Given Prerequisite: API is running

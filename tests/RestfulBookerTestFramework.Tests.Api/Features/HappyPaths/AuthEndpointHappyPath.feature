@@ -1,5 +1,8 @@
 Feature: Auth Endpoint Happy Path
-Description: Send the valid request to the /auth endpoint and it should return 200 (OK) response including token
+Description:
+    As RestfulBooker user
+    I want to sent valid POST request to the /auth endpoint
+    So that I will be able to sucessfully (200 OK Status Code) retrive token
 
 Scenario: Authorization Endpoint Valid Token is created successfully 
     Given Prerequisite: API is running
