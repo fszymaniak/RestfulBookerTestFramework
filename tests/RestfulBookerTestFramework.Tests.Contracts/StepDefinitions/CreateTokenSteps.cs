@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using Reqnroll;
 using RestfulBookerTestFramework.Tests.Commons.Configuration;
 using RestfulBookerTestFramework.Tests.Commons.Drivers.AuthToken;
 

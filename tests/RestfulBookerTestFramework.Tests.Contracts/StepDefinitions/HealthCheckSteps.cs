@@ -1,5 +1,4 @@
-﻿using Reqnroll;
-using RestfulBookerTestFramework.Tests.Commons.Drivers.HealthCheck;
+﻿using RestfulBookerTestFramework.Tests.Commons.Drivers.HealthCheck;
 
 namespace RestfulBookerTestFramework.Tests.Contracts.StepDefinitions;
 

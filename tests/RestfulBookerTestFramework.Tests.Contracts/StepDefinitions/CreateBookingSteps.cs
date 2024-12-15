@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using Reqnroll;
-using RestfulBookerTestFramework.Tests.Commons.Drivers.Booking;
+﻿using RestfulBookerTestFramework.Tests.Commons.Drivers.Booking;
 using RestfulBookerTestFramework.Tests.Commons.Extensions;
 
 namespace RestfulBookerTestFramework.Tests.Contracts.StepDefinitions;

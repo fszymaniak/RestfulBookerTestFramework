@@ -1,5 +1,4 @@
-﻿using Reqnroll;
-using RestfulBookerTestFramework.Tests.Contracts.Drivers;
+﻿using RestfulBookerTestFramework.Tests.Contracts.Drivers;
 
 namespace RestfulBookerTestFramework.Tests.Contracts.StepDefinitions
 {

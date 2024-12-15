@@ -1,6 +1,5 @@
 ﻿global using System;
 global using System.Threading.Tasks;
-global using FluentAssertions;
 global using Reqnroll;
 global using RestSharp;
 global using System.Net;
@@ -10,7 +9,3 @@ global using Reqnroll.Autofac;
 global using Reqnroll.Autofac.ReqnrollPlugin;
 global using Autofac;
 global using NUnit.Framework;
-global using Bogus;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System.Reflection;
