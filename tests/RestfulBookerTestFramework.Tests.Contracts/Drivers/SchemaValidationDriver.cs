@@ -19,6 +19,9 @@ public class SchemaValidationDriver(ScenarioContext scenarioContext) : ISchemaVa
             case "Authentication":
                 ValidateSchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.AuthenticationSchemaFileName));
                 break;
+            case "BookingCreation":
+                ValidateSchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.CreateBookingSchemaFileName));
+                break;
             default:
                 throw new ArgumentOutOfRangeException(schemaSource.ToString(), $"Invalid schema source {schemaSource}.");
         }
