@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using FluentAssertions;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Reqnroll;
+﻿
 using RestfulBookerTestFramework.Tests.Commons.Extensions;
 using RestfulBookerTestFramework.Tests.Contracts.Constants;
 using RestfulBookerTestFramework.Tests.Contracts.Resolver;
@@ -22,6 +17,9 @@ public class SchemaValidationDriver(ScenarioContext scenarioContext) : ISchemaVa
             case "BookingCreation":
                 ValidateSchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.CreateBookingSchemaFileName));
                 break;
+            case "BookingsIds":
+                ValidateArraySchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.BookingsIdsSchemaFileName));
+                break;
             default:
                 throw new ArgumentOutOfRangeException(schemaSource.ToString(), $"Invalid schema source {schemaSource}.");
         }
@@ -29,15 +27,45 @@ public class SchemaValidationDriver(ScenarioContext scenarioContext) : ISchemaVa
 
     private void ValidateSchemaSchema(string pathToSchemaFile)
     {
-        var response = scenarioContext.GetRestResponse().Content;
-        
-        string schema = File.ReadAllText(pathToSchemaFile);
-
-        var model = JObject.Parse(response);
-        var jsonSchema = JSchema.Parse(schema);
+        var model = GetObjectSchemaModel();
+        var jsonSchema = GetJsonSchema(pathToSchemaFile);
 
         bool valid = model.IsValid(jsonSchema);
 
         valid.Should().BeTrue();
+    }
+    
+    private void ValidateArraySchemaSchema(string pathToSchemaFile)
+    {
+        var model = GetArraySchemaModel();
+        var jsonSchema = GetJsonSchema(pathToSchemaFile);
+
+        bool valid = model.IsValid(jsonSchema);
+
+        valid.Should().BeTrue();
+    }
+
+    private JSchema GetJsonSchema(string pathToSchemaFile)
+    {
+        string schema = File.ReadAllText(pathToSchemaFile);
+        var jsonSchema = JSchema.Parse(schema);
+        
+        return jsonSchema;
+    }
+
+    private JObject GetObjectSchemaModel()
+    {
+        var response = scenarioContext.GetRestResponse().Content;
+        var modelObject = JObject.Parse(response);
+
+        return modelObject;
+    }
+    
+    private JArray GetArraySchemaModel()
+    {
+        var response = scenarioContext.GetRestResponse().Content;
+        var modeArray = JArray.Parse(response);
+
+        return modeArray;
     }
 }

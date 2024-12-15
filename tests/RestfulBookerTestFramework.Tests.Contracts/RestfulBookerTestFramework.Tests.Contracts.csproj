@@ -37,6 +37,9 @@
       <None Update="Schemas\create.booking.response.schema.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="Schemas\bookings.ids.response.schema.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

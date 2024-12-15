@@ -1,4 +1,5 @@
 @CleanUpBooking
+@AuthorizeRequest
 Feature: Create Booking Happy Patch Schema Validation
 
 Description:
