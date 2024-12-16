@@ -5,3 +5,4 @@ global using System;
 global using System.IO;
 global using Newtonsoft.Json.Linq;
 global using Newtonsoft.Json.Schema;
+global using NUnit.Framework;

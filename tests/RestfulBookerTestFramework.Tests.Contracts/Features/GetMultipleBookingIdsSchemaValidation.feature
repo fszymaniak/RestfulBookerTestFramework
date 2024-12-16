@@ -1,6 +1,6 @@
 ﻿@SetupMultipleBookings
 @AuthorizeRequest
-Feature: Get Multiple Bookings Ids Endpoint Happy Path
+Feature: Get Multiple Bookings Ids Schema Validation
 
 Description:
     

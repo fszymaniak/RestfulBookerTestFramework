@@ -1,5 +1,4 @@
-﻿
-using RestfulBookerTestFramework.Tests.Commons.Extensions;
+﻿using RestfulBookerTestFramework.Tests.Commons.Extensions;
 using RestfulBookerTestFramework.Tests.Contracts.Constants;
 using RestfulBookerTestFramework.Tests.Contracts.Resolver;
 
@@ -7,25 +6,28 @@ namespace RestfulBookerTestFramework.Tests.Contracts.Drivers;
 
 public class SchemaValidationDriver(ScenarioContext scenarioContext) : ISchemaValidationDriver
 {
-    public void ValidateResponseSchema(string schemaSource)
+    public async Task ValidateResponseSchema(string schemaSource)
     {
         switch (schemaSource)
         {
             case "Authentication":
-                ValidateSchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.AuthenticationSchemaFileName));
+                await ValidateSchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.AuthenticationSchemaFileName));
                 break;
-            case "BookingCreation":
-                ValidateSchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.CreateBookingSchemaFileName));
+            case "CreatedBooking":
+                await ValidateSchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.CreateBookingSchemaFileName));
                 break;
             case "BookingsIds":
-                ValidateArraySchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.BookingsIdsSchemaFileName));
+                await ValidateArraySchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.BookingsIdsSchemaFileName));
+                break;
+            case "Booking":
+                await ValidateSchemaSchema(FilePathResolver.GetSchemaFilePath(SchemaFileNames.SingleBookingSchemaFileName));
                 break;
             default:
                 throw new ArgumentOutOfRangeException(schemaSource.ToString(), $"Invalid schema source {schemaSource}.");
         }
     }
 
-    private void ValidateSchemaSchema(string pathToSchemaFile)
+    private Task ValidateSchemaSchema(string pathToSchemaFile)
     {
         var model = GetObjectSchemaModel();
         var jsonSchema = GetJsonSchema(pathToSchemaFile);
@@ -33,9 +35,11 @@ public class SchemaValidationDriver(ScenarioContext scenarioContext) : ISchemaVa
         bool valid = model.IsValid(jsonSchema);
 
         valid.Should().BeTrue();
+        
+        return Task.CompletedTask;
     }
     
-    private void ValidateArraySchemaSchema(string pathToSchemaFile)
+    private Task ValidateArraySchemaSchema(string pathToSchemaFile)
     {
         var model = GetArraySchemaModel();
         var jsonSchema = GetJsonSchema(pathToSchemaFile);
@@ -43,6 +47,8 @@ public class SchemaValidationDriver(ScenarioContext scenarioContext) : ISchemaVa
         bool valid = model.IsValid(jsonSchema);
 
         valid.Should().BeTrue();
+        
+        return Task.CompletedTask;
     }
 
     private JSchema GetJsonSchema(string pathToSchemaFile)

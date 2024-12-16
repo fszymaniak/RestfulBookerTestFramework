@@ -6,9 +6,9 @@ namespace RestfulBookerTestFramework.Tests.Contracts.StepDefinitions
     public sealed class SchemaValidationSteps(ISchemaValidationDriver schemaValidationDriver)
     {
         [Then("'(.*)' response schema is valid")]
-        public void ValidateResponseSchema(string schemaSource)
+        public async Task ValidateResponseSchema(string schemaSource)
         {
-            schemaValidationDriver.ValidateResponseSchema(schemaSource);
+            await schemaValidationDriver.ValidateResponseSchema(schemaSource);
         }
     }
 }

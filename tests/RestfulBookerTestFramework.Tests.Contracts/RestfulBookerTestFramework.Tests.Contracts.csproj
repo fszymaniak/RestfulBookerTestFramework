@@ -40,6 +40,9 @@
       <None Update="Schemas\bookings.ids.response.schema.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="Schemas\single.booking.response.schema.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

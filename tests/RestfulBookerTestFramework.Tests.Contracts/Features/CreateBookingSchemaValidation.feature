@@ -11,4 +11,4 @@ Description:
         Given Prerequisite: API is running
         And a new valid booking request is created
         When trying to create a new booking
-        Then 'BookingCreation' response schema is valid                                                                                                                                                                                                                                                                    
+        Then 'CreatedBooking' response schema is valid                                                                                                                                                                                                                                                                    

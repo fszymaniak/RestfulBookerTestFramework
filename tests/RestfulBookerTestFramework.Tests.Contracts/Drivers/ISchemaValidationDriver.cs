@@ -2,6 +2,6 @@
 
 public interface ISchemaValidationDriver
 {
-    public void ValidateResponseSchema(string schemaSource);
+    public Task ValidateResponseSchema(string schemaSource);
 
 }
