@@ -11,4 +11,4 @@ Description:
     Scenario:  Endpoint Booking get single specific entity successfully
         Given Prerequisite: API is running
         When trying to get single booking
-        Then 'Booking' response schema is valid                                                                                                                                                                                                                                              
+        Then 'Booking' response schema is valid                                                                                                                                                                                                                           
