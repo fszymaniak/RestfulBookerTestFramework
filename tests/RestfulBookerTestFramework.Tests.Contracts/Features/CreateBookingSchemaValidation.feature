@@ -1,6 +1,6 @@
 @CleanUpBooking
 @AuthorizeRequest
-Feature: Create Booking Happy Patch Schema Validation
+Feature: Create Booking Happy Path Schema Validation
 
 Description:
     As RestfulBooker user
