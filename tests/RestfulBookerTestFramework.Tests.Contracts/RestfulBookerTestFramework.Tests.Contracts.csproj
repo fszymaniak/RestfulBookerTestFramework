@@ -45,4 +45,13 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Features\PutUpdateBookingSchemaValidation.feature.cs">
+        <DependentUpon>PutUpdateBookingSchemaValidation.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
+    </ItemGroup>
+
 </Project>
