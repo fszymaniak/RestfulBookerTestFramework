@@ -1,10 +1,10 @@
-﻿namespace RestfulBookerTestFramework.Tests.Commons.Drivers.Booking;
+﻿using RestSharp;
+
+namespace RestfulBookerTestFramework.Tests.Commons.Drivers.Booking;
 
 public interface IUpdateBookingDriver
 {
-    public Task PutUpdateBookingAsync();
-    
-    public Task PatchUpdateBooking();
+    public Task UpdateBookingAsync(Method requestMethod);
     
     public Task TryToPutUpdateNotExistingBookingAsync(int invalidBookingId = 0);
     
