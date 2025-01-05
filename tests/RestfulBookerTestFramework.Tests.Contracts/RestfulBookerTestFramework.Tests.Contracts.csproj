@@ -52,6 +52,12 @@
         <DesignTime>true</DesignTime>
         <Visible>true</Visible>
       </Compile>
+      <Compile Update="Features\PatchUpdateBookingSchemaValidation.feature.cs">
+        <DependentUpon>PatchUpdateBookingSchemaValidation.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
     </ItemGroup>
 
 </Project>
