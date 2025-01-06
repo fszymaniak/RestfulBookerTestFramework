@@ -1,4 +1,4 @@
-﻿using RestfulBookerTestFramework.Tests.Commons.Extensions;
+﻿using RestfulBookerTestFramework.Tests.Commons.Helpers.SchemaHelpers;
 using RestfulBookerTestFramework.Tests.Contracts.Constants;
 using RestfulBookerTestFramework.Tests.Contracts.Resolver;
 
@@ -29,49 +29,21 @@ public class SchemaValidationDriver(ScenarioContext scenarioContext) : ISchemaVa
 
     private Task ValidateSchemaSchema(string pathToSchemaFile)
     {
-        var model = GetObjectSchemaModel();
-        var jsonSchema = GetJsonSchema(pathToSchemaFile);
+        var model = ObjectSchemaHelper.GetObjectSchemaModel(scenarioContext);
+        var jsonSchema = JsonSchemaHelper.GetJsonSchema(pathToSchemaFile);
 
-        bool valid = model.IsValid(jsonSchema);
-
-        valid.Should().BeTrue();
+        ObjectSchemaHelper.ValidateObjectSchemaModel(model, jsonSchema);
         
         return Task.CompletedTask;
     }
     
     private Task ValidateArraySchemaSchema(string pathToSchemaFile)
     {
-        var model = GetArraySchemaModel();
-        var jsonSchema = GetJsonSchema(pathToSchemaFile);
+        var model = ArraySchemaHelper.GetArraySchemaModel(scenarioContext);
+        var jsonSchema = JsonSchemaHelper.GetJsonSchema(pathToSchemaFile);
 
-        bool valid = model.IsValid(jsonSchema);
-
-        valid.Should().BeTrue();
+        ArraySchemaHelper.ValidateArraySchemaModel(model, jsonSchema);
         
         return Task.CompletedTask;
-    }
-
-    private JSchema GetJsonSchema(string pathToSchemaFile)
-    {
-        string schema = File.ReadAllText(pathToSchemaFile);
-        var jsonSchema = JSchema.Parse(schema);
-        
-        return jsonSchema;
-    }
-
-    private JObject GetObjectSchemaModel()
-    {
-        var response = scenarioContext.GetRestResponse().Content;
-        var modelObject = JObject.Parse(response);
-
-        return modelObject;
-    }
-    
-    private JArray GetArraySchemaModel()
-    {
-        var response = scenarioContext.GetRestResponse().Content;
-        var modeArray = JArray.Parse(response);
-
-        return modeArray;
     }
 }

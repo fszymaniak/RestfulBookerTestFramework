@@ -15,6 +15,7 @@
       <PackageReference Include="Autofac.Extensions.DependencyInjection" />
       <PackageReference Include="Bogus" />
       <PackageReference Include="FluentAssertions" />
+      <PackageReference Include="Newtonsoft.Json.Schema" />
       <PackageReference Include="NUnit" />
       <PackageReference Include="Reqnroll.NUnit" />
       <PackageReference Include="RestSharp" />
