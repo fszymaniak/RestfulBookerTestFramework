@@ -1,3 +1,6 @@
+@HappyPath
+@ApiIntegrationTest
+@GetBookingIdsFeature
 @SetupMultipleBookings
 @AuthorizeRequest
 Feature: Get Multiple Bookings Ids Endpoint Happy Path

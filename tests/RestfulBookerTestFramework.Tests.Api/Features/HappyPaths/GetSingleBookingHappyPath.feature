@@ -1,3 +1,6 @@
+@HappyPath
+@ApiIntegrationTest
+@GetBookingFeature
 @SetupOneBooking
 @CleanUpBooking
 @AuthorizeRequest

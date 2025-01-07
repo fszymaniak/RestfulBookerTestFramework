@@ -1,3 +1,6 @@
+@HappyPath
+@ApiIntegrationTest
+@AuthorizationFeature
 Feature: Auth Endpoint Happy Path
 Description:
     As RestfulBooker user

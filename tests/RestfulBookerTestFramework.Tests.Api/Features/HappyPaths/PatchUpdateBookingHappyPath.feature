@@ -1,4 +1,7 @@
-﻿@SetupOneBooking
+﻿@HappyPath
+@ApiIntegrationTest
+@PatchBookingFeature
+@SetupOneBooking
 @CleanUpBooking
 @AuthorizeRequest
 Feature: Patch Update Booking Endpoint Happy Path

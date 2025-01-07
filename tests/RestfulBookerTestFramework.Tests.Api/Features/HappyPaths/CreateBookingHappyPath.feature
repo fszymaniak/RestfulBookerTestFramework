@@ -1,3 +1,6 @@
+@HappyPath
+@ApiIntegrationTest
+@BookingCreationFeature
 @CleanUpBooking
 @AuthorizeRequest
 Feature: Create Booking Endpoint Happy Path

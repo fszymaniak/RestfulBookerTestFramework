@@ -1,4 +1,7 @@
-﻿@SetupOneBooking
+﻿@HappyPath
+@ApiIntegrationTest
+@DeleteBookingFeature
+@SetupOneBooking
 @AuthorizeRequest
 Feature: Delete Booking Endpoint Happy Path
 
