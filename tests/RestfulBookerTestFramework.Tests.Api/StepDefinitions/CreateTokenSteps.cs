@@ -15,8 +15,8 @@ public sealed class CreateTokenSteps(IAuthTokenDriver authTokenDriver, AppSettin
     [Given("an invalid auth token request with is following user name: '(.*)' and password: '(.*)' is created")]
     public void CreateValidAuthTokenRequest(string userName, string password)
     {
-        userName = userName.ToLower() == "validuser" ? appSettings.Credentials.UserName : userName;
-        password = password.ToLower() == "validpassword" ? appSettings.Credentials.Password : password;
+        userName = string.Equals(userName.ToLower(), "validuser") ? appSettings.Credentials.UserName : userName;
+        password = string.Equals(password.ToLower(), "validpassword") ? appSettings.Credentials.Password : password;
         authTokenDriver.CreateAuthTokenRequest(userName, password);
     }
 
