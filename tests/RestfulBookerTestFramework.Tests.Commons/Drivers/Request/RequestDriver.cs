@@ -99,7 +99,7 @@ public sealed class RequestDriver(RestClient restClient, ScenarioContext scenari
         };
     }
 
-    private CancellationToken GetCancellationToken()
+    private static CancellationToken GetCancellationToken()
     {
         var cancellationTokenSource = new CancellationTokenSource();
         return cancellationTokenSource.Token;
