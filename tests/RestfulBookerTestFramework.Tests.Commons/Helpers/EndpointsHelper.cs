@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using RestfulBookerTestFramework.Tests.Commons.Configuration;
 using RestfulBookerTestFramework.Tests.Commons.Constants;
+using RestfulBookerTestFramework.Tests.Commons.Regex;
 
 namespace RestfulBookerTestFramework.Tests.Commons.Helpers;
 
@@ -51,11 +52,8 @@ public sealed class EndpointsHelper(AppSettings appSettings)
         return GetEndpointWithBookingId(bookingId);
     }
 
-    internal int GetBookingIdFromResponseUri(string responseUri)
-    {
-        string id = Regex.Match(responseUri, @"\d+").Value;
-        return int.Parse(id);
-    }
+    internal int GetBookingIdFromResponseUri(string responseUri) =>
+        int.Parse(ResponseUriRegex.GetResponseUriRegex().Match(responseUri).Value);
 
     private string GetEndpointWithBookingId(int? bookingId) => appSettings.Urls.RestfulBookerUrl + Endpoints.BookingEndpoint + $"/{bookingId}";
 }
