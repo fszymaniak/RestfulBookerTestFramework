@@ -1,7 +1,6 @@
-﻿namespace RestfulBookerTestFramework.Tests.Api.Configuration
+﻿namespace RestfulBookerTestFramework.Tests.Contracts.Configuration
 {
     internal abstract class TestBaseSetup
     {
     }
-
 }
