@@ -1,14 +1,13 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using Autofac;
 using Microsoft.Extensions.Configuration;
 using Reqnroll.Autofac;
 using Reqnroll.Autofac.ReqnrollPlugin;
-using RestfulBookerTestFramework.Tests.Api.Configuration;
 using RestfulBookerTestFramework.Tests.Commons.Configuration;
 using RestfulBookerTestFramework.Tests.Commons.Constants;
 using RestfulBookerTestFramework.Tests.Commons.Extensions;
+using RestfulBookerTestFramework.Tests.Contracts.Configuration;
 using RestfulBookerTestFramework.Tests.Contracts.StepDefinitions;
 using ContainerBuilder = Autofac.ContainerBuilder;
 
