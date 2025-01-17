@@ -41,6 +41,4 @@ public sealed class CreateBookingDriver(IRequestDriver requestDriver, ScenarioCo
         scenarioContext.SetRestResponse(response);
         
     }
-  
-    
 }
