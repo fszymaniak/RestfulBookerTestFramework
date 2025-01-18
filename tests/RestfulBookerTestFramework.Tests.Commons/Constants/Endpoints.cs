@@ -2,9 +2,9 @@
 
 public static class Endpoints
 {
-    public static string AuthEndpoint => "/auth";
+    public const string AuthEndpoint = "/auth";
     
-    public static string HealthCheckEndpoint => "/ping";
+    public const string HealthCheckEndpoint = "/ping";
     
-    public static string BookingEndpoint => "/booking";
+    public const string BookingEndpoint = "/booking";
 }
