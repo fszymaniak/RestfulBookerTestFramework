@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using RestfulBookerTestFramework.Tests.Commons.Configuration;
+﻿using RestfulBookerTestFramework.Tests.Commons.Configuration;
 using RestfulBookerTestFramework.Tests.Commons.Constants;
 using RestfulBookerTestFramework.Tests.Commons.Regex;
 
@@ -17,7 +16,7 @@ public sealed class EndpointsHelper(AppSettings appSettings)
         return appSettings.Urls.RestfulBookerUrl + Endpoints.HealthCheckEndpoint;
     }
     
-    internal string GetBookingEndpoint()
+    public string GetBookingEndpoint()
     {
         return appSettings.Urls.RestfulBookerUrl + Endpoints.BookingEndpoint;
     }
