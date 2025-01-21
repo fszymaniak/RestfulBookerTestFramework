@@ -26,9 +26,9 @@ public class PerformanceSteps(EndpointsHelper endpointsHelper)
             })
             .WithoutWarmUp()
             .WithLoadSimulations(
-                Simulation.Inject(rate: 5, 
-                    interval: TimeSpan.FromSeconds(1),
-                    during: TimeSpan.FromSeconds(5))
+                Simulation.Inject(rate: rate, 
+                    interval: TimeSpan.FromSeconds(interval),
+                    during: TimeSpan.FromSeconds(during))
             );
 
         NBomberRunner
