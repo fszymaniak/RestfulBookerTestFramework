@@ -13,8 +13,8 @@ public class PerformanceSteps(EndpointsHelper endpointsHelper)
 {
     private static readonly HttpClient HttpClient = new();
     
-    [When("run performance scenario: '(.*)' for '(.*)' method and '(.*)' endpoint with Rate: (.*), Interval in seconds: (.*) and During in seconds: (.*)")]
-    public void CreatePerformanceScenario(string scenarioName, string method, string endpoint, int rate, int interval, int during)
+    [When("run inject performance scenario: '(.*)' for '(.*)' method and '(.*)' endpoint with Rate: (.*), Interval in seconds: (.*) and During in seconds: (.*)")]
+    public void RunInjectPerformanceScenario(string scenarioName, string method, string endpoint, int rate, int interval, int during)
     {
         var scenario = Scenario.Create("http_scenario", async context =>
             {
@@ -27,6 +27,29 @@ public class PerformanceSteps(EndpointsHelper endpointsHelper)
             .WithoutWarmUp()
             .WithLoadSimulations(
                 Simulation.Inject(rate: rate, 
+                    interval: TimeSpan.FromSeconds(interval),
+                    during: TimeSpan.FromSeconds(during))
+            );
+
+        NBomberRunner
+            .RegisterScenarios(scenario)
+            .Run();
+    }
+    
+    [When("run ramping inject performance scenario: '(.*)' for '(.*)' method and '(.*)' endpoint with Rate: (.*), Interval in seconds: (.*) and During in seconds: (.*)")]
+    public void RunRampingInjectPerformanceScenario(string scenarioName, string method, string endpoint, int rate, int interval, int during)
+    {
+        var scenario = Scenario.Create("http_scenario", async context =>
+            {
+                var request = CreatePerformanceRequest(method, endpoint);
+
+                var response = await Http.Send(HttpClient, request);
+
+                return response;
+            })
+            .WithoutWarmUp()
+            .WithLoadSimulations(
+                Simulation.RampingInject(rate: rate, 
                     interval: TimeSpan.FromSeconds(interval),
                     during: TimeSpan.FromSeconds(during))
             );

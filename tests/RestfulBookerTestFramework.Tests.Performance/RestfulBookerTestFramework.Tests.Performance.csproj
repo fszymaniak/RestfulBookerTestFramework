@@ -33,4 +33,19 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Features\InjectFeatures\PerformanceTestInjectGetMultipleBookingIds.feature.cs">
+        <DependentUpon>PerformanceTestGetMultipleBookingIds.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
+      <Compile Update="Features\RampingInjectFeatures\PerformanceTestRampingInjectGetMultipleBookingIds.feature.cs">
+        <DependentUpon>PerformanceTestGetMultipleBookingIds.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
+    </ItemGroup>
+
 </Project>

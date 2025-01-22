@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace RestfulBookerTestFramework.Tests.Performance.Features
+namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectFeatures
 {
     using Reqnroll;
     using System;
@@ -20,19 +20,19 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Performance test of getting multiple booking ids")]
-    public partial class PerformanceTestOfGettingMultipleBookingIdsFeature
+    [NUnit.Framework.DescriptionAttribute("Performance test inject of getting multiple booking ids")]
+    public partial class PerformanceTestInjectOfGettingMultipleBookingIdsFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Performance test of getting multiple booking ids", "    Description:\r\n    As RestfulBooker user\r\n    I want to sent valid GET request" +
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/InjectFeatures", "Performance test inject of getting multiple booking ids", "    Description:\r\n    As RestfulBooker user\r\n    I want to sent valid GET request" +
                 " to the /booking endpoint\r\n    So that I will be able to sucessfully (200 OK Sta" +
                 "tus Code) test performance of this endpoint", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
-#line 1 "PerformanceTestGetMultipleBookingIds.feature"
+#line 1 "PerformanceTestInjectGetMultipleBookingIds.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
@@ -84,12 +84,12 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Performance Get Multiple Booking Ids Endpoint")]
-        public async System.Threading.Tasks.Task PerformanceGetMultipleBookingIdsEndpoint()
+        [NUnit.Framework.DescriptionAttribute("Performance Inject Get Multiple Booking Ids Endpoint")]
+        public async System.Threading.Tasks.Task PerformanceInjectGetMultipleBookingIdsEndpoint()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performance Get Multiple Booking Ids Endpoint", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performance Inject Get Multiple Booking Ids Endpoint", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 7
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -104,8 +104,9 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features
         await testRunner.GivenAsync("Prerequisite: API is running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 9
-        await testRunner.WhenAsync("run performance scenario: \'Get multiple bookings ids\' for \'GET\' method and \'/book" +
-                        "ing\' endpoint with Rate: 5, Interval in seconds: 1 and During in seconds: 5", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+        await testRunner.WhenAsync("run inject performance scenario: \'Get multiple bookings ids (inject)\' for \'GET\' m" +
+                        "ethod and \'/booking\' endpoint with Rate: 5, Interval in seconds: 1 and During in" +
+                        " seconds: 5", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
