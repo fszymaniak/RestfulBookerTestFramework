@@ -46,6 +46,12 @@
         <DesignTime>true</DesignTime>
         <Visible>true</Visible>
       </Compile>
+      <Compile Update="Features\InjectRandomFeature\PerformanceTestInjectRandomGetMultipleBookingIds.feature.cs">
+        <DependentUpon>PerformanceTestInjectGetMultipleBookingIds.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
     </ItemGroup>
 
 </Project>

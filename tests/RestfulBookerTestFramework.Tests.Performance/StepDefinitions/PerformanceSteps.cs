@@ -59,6 +59,31 @@ public class PerformanceSteps(EndpointsHelper endpointsHelper)
             .Run();
     }
     
+    [When("run inject random performance scenario: '(.*)' for '(.*)' method and '(.*)' endpoint with MinRate: (.*), MaxRate: (.*), Interval in seconds: (.*) and During in seconds: (.*)")]
+    public void RunInjectRandomPerformanceScenario(string scenarioName, string method, string endpoint, int minRate, int maxRate, int interval, int during)
+    {
+        var scenario = Scenario.Create("http_scenario", async context =>
+            {
+                var request = CreatePerformanceRequest(method, endpoint);
+
+                var response = await Http.Send(HttpClient, request);
+
+                return response;
+            })
+            .WithoutWarmUp()
+            .WithLoadSimulations(
+                Simulation.InjectRandom(
+                    minRate: minRate, 
+                    maxRate: maxRate, 
+                    interval: TimeSpan.FromSeconds(interval),
+                    during: TimeSpan.FromSeconds(during))
+            );
+
+        NBomberRunner
+            .RegisterScenarios(scenario)
+            .Run();
+    }
+    
     private HttpRequestMessage CreatePerformanceRequest(string method, string endpoint)
     {
         string url = GetEndpoint(endpoint, endpointsHelper);
