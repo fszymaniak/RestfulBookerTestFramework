@@ -43,8 +43,8 @@ public static class SetupTestDependencies
         
         // Helpers
         containerBuilder
-            .RegisterType<IPerformanceHelper>()
-            .As<PerformanceHelper>()
+            .RegisterType<PerformanceHelper>()
+            .As<IPerformanceHelper>()
             .SingleInstance();
         
         // register binding classes
