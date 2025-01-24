@@ -7,6 +7,7 @@ using RestfulBookerTestFramework.Tests.Commons.Configuration;
 using RestfulBookerTestFramework.Tests.Commons.Constants;
 using RestfulBookerTestFramework.Tests.Commons.Extensions;
 using RestfulBookerTestFramework.Tests.Performance.Configuration;
+using RestfulBookerTestFramework.Tests.Performance.Helpers;
 using RestfulBookerTestFramework.Tests.Performance.StepDefinitions;
 using ContainerBuilder = Autofac.ContainerBuilder;
 
@@ -39,6 +40,12 @@ public static class SetupTestDependencies
     {
         // Register scenario scoped runtime dependencies
         containerBuilder.AddCommonDependenciesScenarioContainer();
+        
+        // Helpers
+        containerBuilder
+            .RegisterType<IPerformanceHelper>()
+            .As<PerformanceHelper>()
+            .SingleInstance();
         
         // register binding classes
         containerBuilder.AddReqnrollBindings<PerformanceSteps>();
