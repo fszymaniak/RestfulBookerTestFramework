@@ -48,7 +48,9 @@ public static class SetupTestDependencies
             .SingleInstance();
         
         // register binding classes
-        containerBuilder.AddReqnrollBindings<PerformanceSteps>();
+        containerBuilder.AddReqnrollBindings<PerformanceInjectLoadSimulationSteps>();
+        containerBuilder.AddReqnrollBindings<PerformanceRampingInjectLoadSimulationSteps>();
+        containerBuilder.AddReqnrollBindings<PerformanceInjectRandomLoadSimulationSteps>();
         containerBuilder.AddReqnrollBindings<HealthCheckSteps>();
     }
 }
