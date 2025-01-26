@@ -31,7 +31,7 @@ public sealed class EndpointsHelper(AppSettings appSettings)
         return appSettings.Urls.RestfulBookerUrl + Endpoints.BookingEndpoint + $"?firstname={firstName}&lastname={lastName}";
     }
     
-    internal string GetSingleBookingEndpoint(int? bookingId)
+    public string GetSingleBookingEndpoint(int? bookingId)
     {
         return GetEndpointWithBookingId(bookingId);
     }

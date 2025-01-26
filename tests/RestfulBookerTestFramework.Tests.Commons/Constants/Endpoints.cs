@@ -7,4 +7,6 @@ public static class Endpoints
     public const string HealthCheckEndpoint = "/ping";
     
     public const string BookingEndpoint = "/booking";
+    
+    public const string BookingEndpointSingleId = "/booking/{id}";
 }

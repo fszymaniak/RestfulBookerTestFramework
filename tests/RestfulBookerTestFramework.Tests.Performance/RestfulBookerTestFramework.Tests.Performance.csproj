@@ -52,6 +52,24 @@
         <DesignTime>true</DesignTime>
         <Visible>true</Visible>
       </Compile>
+      <Compile Update="Features\InjectFeatures\PerformanceTestInjectGetBookingId.feature.cs">
+        <DependentUpon>PerformanceTestInjectGetBookingId.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
+      <Compile Update="Features\InjectRandomFeatures\PerformanceTestInjectRandomGetBookingId.feature.cs">
+        <DependentUpon>PerformanceTestInjectGetBookingId.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
+      <Compile Update="Features\RampingInjectFeatures\PerformanceTestRampingInjectGetBookingId.feature.cs">
+        <DependentUpon>PerformanceTestInjectGetBookingId.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
     </ItemGroup>
 
 </Project>
