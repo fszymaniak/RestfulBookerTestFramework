@@ -15,7 +15,7 @@ public class PerformanceInjectRandomLoadSimulationSteps(IPerformanceHelper perfo
     [When("run inject random performance scenario: '(.*)' for '(.*)' method and '(.*)' endpoint with MinRate: (.*), MaxRate: (.*), Interval in seconds: (.*) and During in seconds: (.*)")]
     public void RunInjectRandomPerformanceScenario(string scenarioName, string method, string endpoint, int minRate, int maxRate, int interval, int during)
     {
-        var scenario = Scenario.Create("http_scenario", async context =>
+        var scenario = Scenario.Create(scenarioName, async context =>
             {
                 var request = performanceHelper.CreatePerformanceRequest(method, endpoint);
 

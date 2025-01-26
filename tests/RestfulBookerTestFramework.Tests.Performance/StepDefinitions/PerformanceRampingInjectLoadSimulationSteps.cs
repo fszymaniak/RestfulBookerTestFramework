@@ -15,7 +15,7 @@ public class PerformanceRampingInjectLoadSimulationSteps(IPerformanceHelper perf
     [When("run ramping inject performance scenario: '(.*)' for '(.*)' method and '(.*)' endpoint with Rate: (.*), Interval in seconds: (.*) and During in seconds: (.*)")]
     public void RunRampingInjectPerformanceScenario(string scenarioName, string method, string endpoint, int rate, int interval, int during)
     {
-        var scenario = Scenario.Create("http_scenario", async context =>
+        var scenario = Scenario.Create(scenarioName, async context =>
             {
                 var request = performanceHelper.CreatePerformanceRequest(method, endpoint);
 
