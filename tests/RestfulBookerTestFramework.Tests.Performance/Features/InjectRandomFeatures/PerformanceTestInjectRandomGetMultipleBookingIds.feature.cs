@@ -21,12 +21,18 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeat
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Performance test inject random of getting multiple booking ids")]
+    [NUnit.Framework.CategoryAttribute("PerformanceTest")]
+    [NUnit.Framework.CategoryAttribute("InjectRandom")]
+    [NUnit.Framework.CategoryAttribute("GetBookingIdsFeature")]
     public partial class PerformanceTestInjectRandomOfGettingMultipleBookingIdsFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
-        private static string[] featureTags = ((string[])(null));
+        private static string[] featureTags = new string[] {
+                "PerformanceTest",
+                "InjectRandom",
+                "GetBookingIdsFeature"};
         
         private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/InjectRandomFeatures", "Performance test inject random of getting multiple booking ids", "    Description:\r\n    As RestfulBooker user\r\n    I want to sent valid GET request" +
                 " to the /booking endpoint\r\n    So that I will be able to sucessfully (200 OK Sta" +
@@ -90,7 +96,7 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeat
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performance Inject Random Get Multiple Booking Ids Endpoint", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 7
+#line 10
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -100,10 +106,10 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeat
             else
             {
                 await this.ScenarioStartAsync();
-#line 8
+#line 11
         await testRunner.GivenAsync("Prerequisite: API is running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 9
+#line 12
         await testRunner.WhenAsync("run inject random performance scenario: \'Get multiple bookings ids (inject random" +
                         ")\' for \'GET\' method and \'/booking\' endpoint with MinRate: 5, MaxRate: 10, Interv" +
                         "al in seconds: 1 and During in seconds: 5", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");

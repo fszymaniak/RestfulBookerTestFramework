@@ -21,12 +21,18 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.RampingInjectFea
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Performance test ramping inject of getting multiple booking ids")]
+    [NUnit.Framework.CategoryAttribute("PerformanceTest")]
+    [NUnit.Framework.CategoryAttribute("RampingInject")]
+    [NUnit.Framework.CategoryAttribute("GetBookingIdsFeature")]
     public partial class PerformanceTestRampingInjectOfGettingMultipleBookingIdsFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
-        private static string[] featureTags = ((string[])(null));
+        private static string[] featureTags = new string[] {
+                "PerformanceTest",
+                "RampingInject",
+                "GetBookingIdsFeature"};
         
         private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/RampingInjectFeatures", "Performance test ramping inject of getting multiple booking ids", "    Description:\r\n    As RestfulBooker user\r\n    I want to sent valid GET request" +
                 " to the /booking endpoint\r\n    So that I will be able to sucessfully (200 OK Sta" +
@@ -90,7 +96,7 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.RampingInjectFea
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performance Ramping Inject Get Multiple Booking Ids Endpoint", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 7
+#line 10
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -100,10 +106,10 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.RampingInjectFea
             else
             {
                 await this.ScenarioStartAsync();
-#line 8
+#line 11
         await testRunner.GivenAsync("Prerequisite: API is running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 9
+#line 12
         await testRunner.WhenAsync("run ramping inject performance scenario: \'Get multiple bookings ids (ramping inje" +
                         "ct)\' for \'GET\' method and \'/booking\' endpoint with Rate: 5, Interval in seconds:" +
                         " 1 and During in seconds: 5", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");

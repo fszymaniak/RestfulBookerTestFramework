@@ -1,4 +1,7 @@
-﻿Feature: Performance test ramping inject of getting multiple booking ids
+﻿@PerformanceTest
+@RampingInject
+@GetBookingIdsFeature
+Feature: Performance test ramping inject of getting multiple booking ids
     Description:
     As RestfulBooker user
     I want to sent valid GET request to the /booking endpoint
