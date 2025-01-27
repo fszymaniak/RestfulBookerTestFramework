@@ -1,3 +1,5 @@
+@ContractTest
+@BookingCreationFeature
 @CleanUpBooking
 @AuthorizeRequest
 Feature: Create Booking Happy Path Schema Validation

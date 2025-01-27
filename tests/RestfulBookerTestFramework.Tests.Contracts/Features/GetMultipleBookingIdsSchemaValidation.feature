@@ -1,4 +1,6 @@
-﻿@SetupMultipleBookings
+﻿@ContractTest
+@GetBookingIdsFeature
+@SetupMultipleBookings
 @AuthorizeRequest
 Feature: Get Multiple Bookings Ids Schema Validation
 

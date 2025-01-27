@@ -1,3 +1,5 @@
+@ContractTest
+@PutBookingFeature
 @SetupOneBooking
 @CleanUpBooking
 @AuthorizeRequest

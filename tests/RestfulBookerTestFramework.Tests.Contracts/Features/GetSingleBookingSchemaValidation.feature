@@ -1,4 +1,6 @@
-﻿@SetupOneBooking
+﻿@ContractTest
+@GetBookingFeature
+@SetupOneBooking
 @CleanUpBooking
 @AuthorizeRequest
 Feature: Get Single Booking Endpoint Schema Validation

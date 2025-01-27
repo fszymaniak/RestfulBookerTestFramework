@@ -1,3 +1,5 @@
+@ContractTest
+@AuthorizationFeature
 Feature: Auth Endpoint Happy Path Schema Validation
 
 Description:
