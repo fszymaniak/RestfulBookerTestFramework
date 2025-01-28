@@ -6,7 +6,7 @@ namespace RestfulBookerTestFramework.Tests.Commons.Helpers;
 
 public sealed class EndpointsHelper(AppSettings appSettings)
 {
-    internal string GetAuthEndpoint()
+    public string GetAuthEndpoint()
     {
         return appSettings.Urls.RestfulBookerUrl + Endpoints.AuthEndpoint;
     }
