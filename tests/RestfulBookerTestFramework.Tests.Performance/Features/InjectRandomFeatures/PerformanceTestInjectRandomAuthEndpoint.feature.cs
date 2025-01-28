@@ -20,14 +20,11 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeat
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Performance test inject random of getting single booking id")]
+    [NUnit.Framework.DescriptionAttribute("Performance test inject random of creating authentication token")]
     [NUnit.Framework.CategoryAttribute("PerformanceTest")]
     [NUnit.Framework.CategoryAttribute("InjectRandom")]
-    [NUnit.Framework.CategoryAttribute("GetBookingFeature")]
-    [NUnit.Framework.CategoryAttribute("SetupOneBooking")]
-    [NUnit.Framework.CategoryAttribute("CleanUpBooking")]
-    [NUnit.Framework.CategoryAttribute("AuthorizeRequest")]
-    public partial class PerformanceTestInjectRandomOfGettingSingleBookingIdFeature
+    [NUnit.Framework.CategoryAttribute("AuthorizationFeature")]
+    public partial class PerformanceTestInjectRandomOfCreatingAuthenticationTokenFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
@@ -35,16 +32,14 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeat
         private static string[] featureTags = new string[] {
                 "PerformanceTest",
                 "InjectRandom",
-                "GetBookingFeature",
-                "SetupOneBooking",
-                "CleanUpBooking",
-                "AuthorizeRequest"};
+                "AuthorizationFeature"};
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/InjectRandomFeatures", "Performance test inject random of getting single booking id", "    Description:\r\n    As RestfulBooker user\r\n    I want to sent valid GET request" +
-                " to the /booking/{id} endpoint\r\n    So that I will be able to sucessfully (200 O" +
-                "K Status Code) test performance of this endpoint", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/InjectRandomFeatures", "Performance test inject random of creating authentication token", "    Description:\r\n    As RestfulBooker user\r\n    I want to sent valid POST reques" +
+                "t with username and password to the /auth endpoint\r\n    So that I will be able t" +
+                "o sucessfully create auth token (200 OK Status Code) and test performance of thi" +
+                "s endpoint", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
-#line 1 "PerformanceTestInjectRandomGetBookingId.feature"
+#line 1 "PerformanceTestInjectRandomAuthEndpoint.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
@@ -96,13 +91,13 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeat
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Performance Inject Random Get Single Booking Id Endpoint")]
-        public async System.Threading.Tasks.Task PerformanceInjectRandomGetSingleBookingIdEndpoint()
+        [NUnit.Framework.DescriptionAttribute("Performance Inject Random Authentication Endpoint")]
+        public async System.Threading.Tasks.Task PerformanceInjectRandomAuthenticationEndpoint()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performance Inject Random Get Single Booking Id Endpoint", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 13
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performance Inject Random Authentication Endpoint", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 10
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -112,13 +107,16 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeat
             else
             {
                 await this.ScenarioStartAsync();
-#line 14
+#line 11
         await testRunner.GivenAsync("Prerequisite: API is running", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 15
-        await testRunner.WhenAsync("run inject random performance scenario: \'Get single bookings ids (inject random)\'" +
-                        " for \'GET\' method and \'/booking/{id}\' endpoint with MinRate: 5, MaxRate: 10, Int" +
-                        "erval in seconds: 1 and During in seconds: 5", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 12
+        await testRunner.AndAsync("a new valid auth token request is created", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 13
+        await testRunner.WhenAsync("run inject random performance scenario: \'Create auth token (inject)\' for \'POST\' m" +
+                        "ethod and \'/auth\' endpoint with MinRate: 5, MaxRate: 10, Interval in seconds: 1 " +
+                        "and During in seconds: 5", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

@@ -12,4 +12,4 @@ Feature: Performance test inject random of getting single booking id
 
     Scenario: Performance Inject Random Get Single Booking Id Endpoint 
         Given Prerequisite: API is running
-        When run inject performance scenario: 'Get single bookings ids (inject random)' for 'GET' method and '/booking/{id}' endpoint with Rate: 5, Interval in seconds: 1 and During in seconds: 5
+        When run inject random performance scenario: 'Get single bookings ids (inject random)' for 'GET' method and '/booking/{id}' endpoint with MinRate: 5, MaxRate: 10, Interval in seconds: 1 and During in seconds: 5
