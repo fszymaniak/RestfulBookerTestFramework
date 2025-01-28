@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeatures
+namespace RestfulBookerTestFramework.Tests.Performance.Features.RampingInjectFeatures
 {
     using Reqnroll;
     using System;
@@ -20,26 +20,26 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeat
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Performance test inject random of creating authentication token")]
+    [NUnit.Framework.DescriptionAttribute("Performance test ramping inject of creating authentication token")]
     [NUnit.Framework.CategoryAttribute("PerformanceTest")]
-    [NUnit.Framework.CategoryAttribute("InjectRandom")]
+    [NUnit.Framework.CategoryAttribute("RampingInject")]
     [NUnit.Framework.CategoryAttribute("AuthorizationFeature")]
-    public partial class PerformanceTestInjectRandomOfCreatingAuthenticationTokenFeature
+    public partial class PerformanceTestRampingInjectOfCreatingAuthenticationTokenFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = new string[] {
                 "PerformanceTest",
-                "InjectRandom",
+                "RampingInject",
                 "AuthorizationFeature"};
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/InjectRandomFeatures", "Performance test inject random of creating authentication token", "    Description:\r\n    As RestfulBooker user\r\n    I want to sent valid POST reques" +
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/RampingInjectFeatures", "Performance test ramping inject of creating authentication token", "    Description:\r\n    As RestfulBooker user\r\n    I want to sent valid POST reques" +
                 "t with username and password to the /auth endpoint\r\n    So that I will be able t" +
                 "o sucessfully create auth token (200 OK Status Code) and test performance of thi" +
                 "s endpoint", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
-#line 1 "PerformanceTestInjectRandomAuthEndpoint.feature"
+#line 1 "PerformanceTestRampingInjectAuthEndpoint.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
@@ -91,12 +91,12 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeat
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Performance Inject Random Authentication Endpoint")]
-        public async System.Threading.Tasks.Task PerformanceInjectRandomAuthenticationEndpoint()
+        [NUnit.Framework.DescriptionAttribute("Performance Ramping Inject Authentication Endpoint")]
+        public async System.Threading.Tasks.Task PerformanceRampingInjectAuthenticationEndpoint()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performance Inject Random Authentication Endpoint", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performance Ramping Inject Authentication Endpoint", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 10
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -114,9 +114,9 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeat
         await testRunner.AndAsync("a new valid auth token request is created", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 13
-        await testRunner.WhenAsync("run inject random performance scenario: \'Create auth token (inject random)\' for \'" +
-                        "POST\' method and \'/auth\' endpoint with MinRate: 5, MaxRate: 10, Interval in seco" +
-                        "nds: 1 and During in seconds: 5", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+        await testRunner.WhenAsync("run ramping inject performance scenario: \'Create auth token (ramping inject)\' for" +
+                        " \'POST\' method and \'/auth\' endpoint with Rate: 5, Interval in seconds: 1 and Dur" +
+                        "ing in seconds: 5", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

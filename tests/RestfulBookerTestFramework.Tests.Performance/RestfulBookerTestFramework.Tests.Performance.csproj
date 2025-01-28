@@ -82,6 +82,12 @@
         <DesignTime>true</DesignTime>
         <Visible>true</Visible>
       </Compile>
+      <Compile Update="Features\RampingInjectFeatures\PerformanceTestRampingInjectAuthEndpoint.feature.cs">
+        <DependentUpon>PerformanceTestInjectAuthEndpoint.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
     </ItemGroup>
 
 </Project>
