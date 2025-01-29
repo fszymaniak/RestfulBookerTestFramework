@@ -20,6 +20,9 @@ namespace RestfulBookerTestFramework.Tests.Commons.Extensions
         public static int GetBookingId(this ScenarioContext context) =>
             context.Get<int>(Context.BookingId);
         
+        public static List<int> GetBookingIdsList(this ScenarioContext context) =>
+            context.Get<List<int>>(Context.BookingIdsList);
+        
         public static List<RestResponse> GetRestResponsesList(this ScenarioContext context) =>
             context.Get<List<RestResponse>>(Context.ResponseList);
         

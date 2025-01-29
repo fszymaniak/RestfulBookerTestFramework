@@ -20,6 +20,9 @@ public static class SetScenarioContextExtensions
     public static void SetBookingId(this ScenarioContext context, int bookingId) =>
         context[Context.BookingId] = bookingId;
     
+    public static void SetBookingIdsList(this ScenarioContext context, List<int> bookingIdList) =>
+        context[Context.BookingIdsList] = bookingIdList;
+    
     public static void SetRestResponsesList(this ScenarioContext context, List<RestResponse> response) =>
         context[Context.ResponseList] = response;
     
