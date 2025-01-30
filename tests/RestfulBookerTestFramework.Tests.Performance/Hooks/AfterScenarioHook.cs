@@ -8,14 +8,17 @@ namespace RestfulBookerTestFramework.Tests.Performance.Hooks;
 [Binding]
 public class AfterScenarioHook(BookingHelper bookingHelper, ScenarioContext scenarioContext)
 {
-    [AfterScenario("CleanUpBooking")]
+    [AfterScenario("CleanUpPerformanceBookings")]
     public async Task AfterScenarioCleanUpBooking()
     {
-        int bookingId = scenarioContext.GetBookingId();
+        var bookingIds = scenarioContext.GetBookingIdsList();
 
-        if (bookingId != 0)
+        if (bookingIds.Count != 0)
         {
-            await bookingHelper.CleanUpBookingAsync(bookingId);
+            foreach (var id in bookingIds)
+            {
+                await bookingHelper.CleanUpBookingAsync(id);
+            }
         }
     }
     

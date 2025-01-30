@@ -20,6 +20,7 @@
       <PackageReference Include="NUnit" />
       <PackageReference Include="Reqnroll.NUnit" />
       <PackageReference Include="RestSharp" />
+      <PackageReference Include="System.Text.Json" />
     </ItemGroup>
 
 </Project>
