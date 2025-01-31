@@ -88,6 +88,12 @@
         <DesignTime>true</DesignTime>
         <Visible>true</Visible>
       </Compile>
+      <Compile Update="Features\InjectRandomFeatures\PerformanceTestInjectRandomCreateBooking.feature.cs">
+        <DependentUpon>PerformanceTestInjectCreateBooking.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
     </ItemGroup>
 
 </Project>

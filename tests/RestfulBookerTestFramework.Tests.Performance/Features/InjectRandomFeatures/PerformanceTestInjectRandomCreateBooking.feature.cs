@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectFeatures
+namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectRandomFeatures
 {
     using Reqnroll;
     using System;
@@ -20,29 +20,29 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectFeatures
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Performance test inject of creating booking")]
+    [NUnit.Framework.DescriptionAttribute("Performance test inject random of creating booking")]
     [NUnit.Framework.CategoryAttribute("PerformanceTest")]
-    [NUnit.Framework.CategoryAttribute("Inject")]
+    [NUnit.Framework.CategoryAttribute("InjectRandom")]
     [NUnit.Framework.CategoryAttribute("BookingCreationFeature")]
     [NUnit.Framework.CategoryAttribute("CleanUpPerformanceBookings")]
     [NUnit.Framework.CategoryAttribute("AuthorizeRequest")]
-    public partial class PerformanceTestInjectOfCreatingBookingFeature
+    public partial class PerformanceTestInjectRandomOfCreatingBookingFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = new string[] {
                 "PerformanceTest",
-                "Inject",
+                "InjectRandom",
                 "BookingCreationFeature",
                 "CleanUpPerformanceBookings",
                 "AuthorizeRequest"};
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/InjectFeatures", "Performance test inject of creating booking", "Description:\r\nAs RestfulBooker user\r\nI want to sent valid POST request with valid" +
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/InjectRandomFeatures", "Performance test inject random of creating booking", "Description:\r\nAs RestfulBooker user\r\nI want to sent valid POST request with valid" +
                 " body to the /booking endpoint\r\nSo that I will be able to sucessfully create boo" +
                 "king entity (201 Created Status Code) and test performance of this endpoint", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
-#line 1 "PerformanceTestInjectCreateBooking.feature"
+#line 1 "PerformanceTestInjectRandomCreateBooking.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
@@ -94,12 +94,12 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectFeatures
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Performance Inject Create Booking Endpoint")]
-        public async System.Threading.Tasks.Task PerformanceInjectCreateBookingEndpoint()
+        [NUnit.Framework.DescriptionAttribute("Performance Inject Random Create Booking Endpoint")]
+        public async System.Threading.Tasks.Task PerformanceInjectRandomCreateBookingEndpoint()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performance Inject Create Booking Endpoint", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Performance Inject Random Create Booking Endpoint", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 13
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -117,9 +117,9 @@ namespace RestfulBookerTestFramework.Tests.Performance.Features.InjectFeatures
         await testRunner.AndAsync("a new valid booking request is created", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 16
-        await testRunner.WhenAsync("run inject performance scenario: \'Create booking (inject)\' for \'POST\' method and " +
-                        "\'/booking\' endpoint with Rate: 5, Interval in seconds: 1 and During in seconds: " +
-                        "5", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+        await testRunner.WhenAsync("run inject random performance scenario: \'Create booking (inject random)\' for \'POS" +
+                        "T\' method and \'/booking\' endpoint with MinRate: 5, MaxRate: 10, Interval in seco" +
+                        "nds: 1 and During in seconds: 5", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
