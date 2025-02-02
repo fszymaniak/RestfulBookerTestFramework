@@ -7,6 +7,7 @@ using Reqnroll;
 using RestfulBookerTestFramework.Tests.Commons.Constants;
 using RestfulBookerTestFramework.Tests.Commons.Extensions;
 using RestfulBookerTestFramework.Tests.Commons.Payloads.Responses;
+using RestfulBookerTestFramework.Tests.Performance.Extensions;
 using RestfulBookerTestFramework.Tests.Performance.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Performance.StepDefinitions;
@@ -25,14 +26,8 @@ public class PerformanceInjectLoadSimulationSteps(IPerformanceHelper performance
                 var request = performanceHelper.CreatePerformanceRequest(method, endpoint);
 
                 var response = await Http.Send(HttpClient, request);
-
-                var booking = response.Deserialize<BookingResponse>();
-
-                if (method.Equals("POST") && endpoint.Equals(Endpoints.BookingEndpoint))
-                {
-                    _bookingIdsList.Add(booking.BookingId);
-                    scenarioContext.SetBookingIdsList(_bookingIdsList);
-                }
+                
+                _bookingIdsList.SetCreatedBookingIds(method, endpoint, response, scenarioContext);
 
                 return response;
             })
