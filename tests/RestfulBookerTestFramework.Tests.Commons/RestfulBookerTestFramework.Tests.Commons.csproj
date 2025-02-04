@@ -16,6 +16,7 @@
       <PackageReference Include="Bogus" />
       <PackageReference Include="FluentAssertions" />
       <PackageReference Include="NBomber.Contracts" />
+      <PackageReference Include="NBomber.Http" />
       <PackageReference Include="Newtonsoft.Json.Schema" />
       <PackageReference Include="NUnit" />
       <PackageReference Include="Reqnroll.NUnit" />
