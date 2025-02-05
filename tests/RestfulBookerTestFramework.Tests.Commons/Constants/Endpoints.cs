@@ -9,4 +9,6 @@ public static class Endpoints
     public const string BookingEndpoint = "/booking";
     
     public const string BookingEndpointSingleId = "/booking/{id}";
+    
+    public const string DeleteEndpoint = "/booking/{idToDelete}";
 }
