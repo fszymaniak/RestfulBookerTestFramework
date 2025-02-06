@@ -36,7 +36,7 @@ public sealed class EndpointsHelper(AppSettings appSettings)
         return GetEndpointWithBookingId(bookingId);
     }
     
-    internal string GetDeleteBookingEndpoint(int bookingId)
+    public string GetDeleteBookingEndpoint(int? bookingId)
     {
         return GetEndpointWithBookingId(bookingId);
     }
