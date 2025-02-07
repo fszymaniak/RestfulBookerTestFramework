@@ -7,20 +7,17 @@ using RestfulBookerTestFramework.Tests.Commons.Constants;
 using RestfulBookerTestFramework.Tests.Commons.Extensions;
 using RestfulBookerTestFramework.Tests.Commons.Helpers;
 using RestfulBookerTestFramework.Tests.Commons.JsonNamingPolicy;
-using SpecFlow.Internal.Json;
 
 namespace RestfulBookerTestFramework.Tests.Performance.Helpers;
 
 public class PerformanceHelper(EndpointsHelper endpointsHelper, BookingHelper bookingHelper, ScenarioContext scenarioContext) : IPerformanceHelper
 {
-    public HttpRequestMessage CreatePerformanceRequest(string method, string endpoint)
+    public HttpRequestMessage CreatePerformanceRequest(string method, string endpoint, int? id = null)
     {
         SetGlobalJsonSerializerOptions();
-        string url = GetEndpoint(endpoint);
+        string url = GetEndpoint(endpoint, id);
 
-        var request =
-            Http.CreateRequest(method, url)
-                .WithHeader(RestRequestConstants.Headers.Accept, RestRequestConstants.Values.ApplicationJson);
+        var request = HttpRequestMessageExtension.CreateRequest(method, url);
 
         if (endpoint.Equals(Endpoints.AuthEndpoint))
         {
@@ -31,13 +28,16 @@ public class PerformanceHelper(EndpointsHelper endpointsHelper, BookingHelper bo
         {
             request.WithJsonBody(scenarioContext.GetBookingRequest());
         }
-        
-        var req = request.Content.ReadAsStringAsync().Result;
+
+        if (endpoint.Equals(Endpoints.DeleteEndpoint))
+        {
+            request.SetupRequestWithAuthorization(scenarioContext);
+        }
         
         return request;
     }
 
-    private string GetEndpoint(string endpointName)
+    private string GetEndpoint(string endpointName, int? bookingId = null)
     {
         switch (endpointName)
         {
@@ -47,6 +47,8 @@ public class PerformanceHelper(EndpointsHelper endpointsHelper, BookingHelper bo
                 return endpointsHelper.GetSingleBookingEndpoint(bookingHelper.GetBookingId());
             case Endpoints.AuthEndpoint:
                 return endpointsHelper.GetAuthEndpoint();
+            case Endpoints.DeleteEndpoint:
+                return endpointsHelper.GetDeleteBookingEndpoint(bookingId);
             default:
                 throw new ArgumentOutOfRangeException(endpointName, $"Invalid endpoint name: {endpointName}.");
         }

@@ -4,5 +4,5 @@ namespace RestfulBookerTestFramework.Tests.Performance.Helpers;
 
 public interface IPerformanceHelper
 {
-    public HttpRequestMessage CreatePerformanceRequest(string method, string endpoint);
+    public HttpRequestMessage CreatePerformanceRequest(string method, string endpoint, int? id = null);
 }
