@@ -60,25 +60,13 @@ jobs:
     - name: Build solution
       run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
 
-    - name: Run API Integration Tests (Happy Paths)
+    - name: Run API Integration Tests
       run: |
         dotnet test tests/RestfulBookerTestFramework.Tests.Api/RestfulBookerTestFramework.Tests.Api.csproj \
           --configuration Release \
           --no-build \
-          --logger "trx;LogFileName=api-integration-happy-path-results.trx" \
+          --logger "trx;LogFileName=api-integration-test-results.trx" \
           --logger "console;verbosity=detailed" \
-          --filter "Category=HappyPath|Category=ApiIntegrationTest" \
-          --results-directory ./TestResults/Integration
-      continue-on-error: false
-
-    - name: Run API Integration Tests (Unhappy Paths)
-      run: |
-        dotnet test tests/RestfulBookerTestFramework.Tests.Api/RestfulBookerTestFramework.Tests.Api.csproj \
-          --configuration Release \
-          --no-build \
-          --logger "trx;LogFileName=api-integration-unhappy-path-results.trx" \
-          --logger "console;verbosity=detailed" \
-          --filter "Category=UnhappyPath|Category=ApiIntegrationTest" \
           --results-directory ./TestResults/Integration
       continue-on-error: false
 
@@ -125,7 +113,6 @@ jobs:
           --no-build \
           --logger "trx;LogFileName=contract-test-results.trx" \
           --logger "console;verbosity=detailed" \
-          --filter "Category=ContractTest" \
           --results-directory ./TestResults/Contracts
       continue-on-error: false
 

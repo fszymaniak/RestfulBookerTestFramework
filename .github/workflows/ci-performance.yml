@@ -82,7 +82,7 @@ jobs:
           --no-build \
           --logger "trx;LogFileName=performance-inject-results.trx" \
           --logger "console;verbosity=detailed" \
-          --filter "Category=Inject&Category=PerformanceTest" \
+          --filter "Category=Inject" \
           --results-directory ./TestResults/Performance/Inject
       continue-on-error: true
 
@@ -124,7 +124,7 @@ jobs:
           --no-build \
           --logger "trx;LogFileName=performance-ramping-results.trx" \
           --logger "console;verbosity=detailed" \
-          --filter "Category=RampingInject&Category=PerformanceTest" \
+          --filter "Category=RampingInject" \
           --results-directory ./TestResults/Performance/Ramping
       continue-on-error: true
 
@@ -166,7 +166,7 @@ jobs:
           --no-build \
           --logger "trx;LogFileName=performance-random-results.trx" \
           --logger "console;verbosity=detailed" \
-          --filter "Category=InjectRandom&Category=PerformanceTest" \
+          --filter "Category=InjectRandom" \
           --results-directory ./TestResults/Performance/Random
       continue-on-error: true
 
