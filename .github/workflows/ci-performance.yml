@@ -1,0 +1,238 @@
+name: CI - Performance Tests
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  schedule:
+    # Run performance tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      test_type:
+        description: 'Performance test type to run'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - inject
+          - ramping
+          - random
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  SOLUTION_FILE: 'RestfulBookerTestFramework.sln'
+
+jobs:
+  build:
+    name: Build Solution
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SOLUTION_FILE }}
+
+    - name: Build solution
+      run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: performance-build-artifacts
+        path: |
+          tests/**/bin/Release/**
+          !tests/**/bin/Release/**/ref/**
+        retention-days: 1
+
+  performance-inject-tests:
+    name: Performance Tests - Inject (Constant Rate)
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event.inputs.test_type == 'inject' || github.event.inputs.test_type == 'all' || github.event.inputs.test_type == ''
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SOLUTION_FILE }}
+
+    - name: Build solution
+      run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
+
+    - name: Run Inject Performance Tests
+      run: |
+        dotnet test tests/RestfulBookerTestFramework.Tests.Performance/RestfulBookerTestFramework.Tests.Performance.csproj \
+          --configuration Release \
+          --no-build \
+          --logger "trx;LogFileName=performance-inject-results.trx" \
+          --logger "console;verbosity=detailed" \
+          --filter "Category=Inject&Category=PerformanceTest" \
+          --results-directory ./TestResults/Performance/Inject
+      continue-on-error: true
+
+    - name: Upload Inject Performance Test Results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: performance-inject-test-results
+        path: |
+          TestResults/Performance/Inject/**/*.trx
+          TestResults/Performance/Inject/**/*.html
+        retention-days: 30
+
+  performance-ramping-tests:
+    name: Performance Tests - Ramping Inject
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event.inputs.test_type == 'ramping' || github.event.inputs.test_type == 'all' || github.event.inputs.test_type == ''
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SOLUTION_FILE }}
+
+    - name: Build solution
+      run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
+
+    - name: Run Ramping Inject Performance Tests
+      run: |
+        dotnet test tests/RestfulBookerTestFramework.Tests.Performance/RestfulBookerTestFramework.Tests.Performance.csproj \
+          --configuration Release \
+          --no-build \
+          --logger "trx;LogFileName=performance-ramping-results.trx" \
+          --logger "console;verbosity=detailed" \
+          --filter "Category=RampingInject&Category=PerformanceTest" \
+          --results-directory ./TestResults/Performance/Ramping
+      continue-on-error: true
+
+    - name: Upload Ramping Performance Test Results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: performance-ramping-test-results
+        path: |
+          TestResults/Performance/Ramping/**/*.trx
+          TestResults/Performance/Ramping/**/*.html
+        retention-days: 30
+
+  performance-random-tests:
+    name: Performance Tests - Inject Random
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event.inputs.test_type == 'random' || github.event.inputs.test_type == 'all' || github.event.inputs.test_type == ''
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SOLUTION_FILE }}
+
+    - name: Build solution
+      run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
+
+    - name: Run Random Inject Performance Tests
+      run: |
+        dotnet test tests/RestfulBookerTestFramework.Tests.Performance/RestfulBookerTestFramework.Tests.Performance.csproj \
+          --configuration Release \
+          --no-build \
+          --logger "trx;LogFileName=performance-random-results.trx" \
+          --logger "console;verbosity=detailed" \
+          --filter "Category=InjectRandom&Category=PerformanceTest" \
+          --results-directory ./TestResults/Performance/Random
+      continue-on-error: true
+
+    - name: Upload Random Performance Test Results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: performance-random-test-results
+        path: |
+          TestResults/Performance/Random/**/*.trx
+          TestResults/Performance/Random/**/*.html
+        retention-days: 30
+
+  performance-summary:
+    name: Performance Test Summary
+    needs: [performance-inject-tests, performance-ramping-tests, performance-random-tests]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+    - name: Download all performance test results
+      uses: actions/download-artifact@v4
+      with:
+        pattern: 'performance-*-test-results'
+        merge-multiple: true
+        path: ./all-performance-results
+
+    - name: Display performance test summary
+      run: |
+        echo "## Performance Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Test Runs:" >> $GITHUB_STEP_SUMMARY
+
+        if [ "${{ needs.performance-inject-tests.result }}" != "skipped" ]; then
+          if [ "${{ needs.performance-inject-tests.result }}" == "success" ]; then
+            echo "✅ Inject (Constant Rate) Performance Tests - PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Inject (Constant Rate) Performance Tests - COMPLETED (see results)" >> $GITHUB_STEP_SUMMARY
+          fi
+        fi
+
+        if [ "${{ needs.performance-ramping-tests.result }}" != "skipped" ]; then
+          if [ "${{ needs.performance-ramping-tests.result }}" == "success" ]; then
+            echo "✅ Ramping Inject Performance Tests - PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Ramping Inject Performance Tests - COMPLETED (see results)" >> $GITHUB_STEP_SUMMARY
+          fi
+        fi
+
+        if [ "${{ needs.performance-random-tests.result }}" != "skipped" ]; then
+          if [ "${{ needs.performance-random-tests.result }}" == "success" ]; then
+            echo "✅ Random Inject Performance Tests - PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Random Inject Performance Tests - COMPLETED (see results)" >> $GITHUB_STEP_SUMMARY
+          fi
+        fi
+
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "📊 Detailed performance metrics and NBomber reports are available in the artifacts." >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Notes:" >> $GITHUB_STEP_SUMMARY
+        echo "- Performance tests are marked as 'continue-on-error' to collect metrics even on threshold violations" >> $GITHUB_STEP_SUMMARY
+        echo "- Review NBomber HTML reports for detailed performance analysis" >> $GITHUB_STEP_SUMMARY
+        echo "- Test results are retained for 30 days for trend analysis" >> $GITHUB_STEP_SUMMARY
+
+    - name: List all test result files
+      run: |
+        echo "Performance test result files:"
+        find ./all-performance-results -type f -name "*.trx" -o -name "*.html" || echo "No test result files found"
