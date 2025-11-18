@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using NBomber.CSharp;
 using NBomber.Http.CSharp;
 using Reqnroll;
+using RestfulBookerTestFramework.Tests.Performance.Configuration;
 using RestfulBookerTestFramework.Tests.Performance.Extensions;
 using RestfulBookerTestFramework.Tests.Performance.Helpers;
 
 namespace RestfulBookerTestFramework.Tests.Performance.StepDefinitions;
 
 [Binding]
-public class PerformanceRampingInjectLoadSimulationSteps(IPerformanceHelper performanceHelper, ScenarioContext scenarioContext)
+public class PerformanceRampingInjectLoadSimulationSteps(
+    IPerformanceHelper performanceHelper,
+    IPerformanceAssertions performanceAssertions,
+    PerformanceSettings performanceSettings,
+    ScenarioContext scenarioContext)
 {
     private static readonly HttpClient HttpClient = new();
     private List<int> _bookingIdsList = new();
@@ -23,20 +29,35 @@ public class PerformanceRampingInjectLoadSimulationSteps(IPerformanceHelper perf
                 var request = performanceHelper.CreatePerformanceRequest(method, endpoint);
 
                 var response = await Http.Send(HttpClient, request);
-                
+
                 _bookingIdsList.SetCreatedBookingIds(method, endpoint, response, scenarioContext);
 
                 return response;
             })
             .WithoutWarmUp()
             .WithLoadSimulations(
-                Simulation.RampingInject(rate: rate, 
+                Simulation.RampingInject(rate: rate,
                     interval: TimeSpan.FromSeconds(interval),
                     during: TimeSpan.FromSeconds(during))
             );
 
-        NBomberRunner
-            .RegisterScenarios(scenario)
-            .Run();
+        var runner = NBomberRunner.RegisterScenarios(scenario);
+
+        // Configure reporting if enabled
+        if (performanceSettings.Reporting.Enabled)
+        {
+            var reportFormats = performanceSettings.Reporting.ReportFormats
+                .Select(f => Enum.Parse<ReportFormat>(f))
+                .ToArray();
+
+            runner = runner
+                .WithReportFolder(performanceSettings.Reporting.ReportFolder)
+                .WithReportFormats(reportFormats);
+        }
+
+        var stats = runner.Run();
+
+        // Validate performance metrics against thresholds
+        performanceAssertions.ValidatePerformanceMetrics(stats, scenarioName);
     }
 }
