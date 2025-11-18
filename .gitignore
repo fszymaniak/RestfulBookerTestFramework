@@ -518,3 +518,6 @@ dist
 
 # IDE files
 .idea
+
+# Performance test reports
+performance-reports/

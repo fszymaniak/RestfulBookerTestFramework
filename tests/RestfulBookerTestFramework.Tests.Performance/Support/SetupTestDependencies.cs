@@ -30,8 +30,10 @@ public static class SetupTestDependencies
             .Build();
 
         var appSettingsConfig = config.GetSection(nameof(AppSettings)).Get<AppSettings>();
+        var performanceSettings = config.GetSection(nameof(PerformanceSettings)).Get<PerformanceSettings>();
 
         containerBuilder.RegisterInstance(appSettingsConfig).AsSelf().SingleInstance();
+        containerBuilder.RegisterInstance(performanceSettings).AsSelf().SingleInstance();
         containerBuilder.RegisterInstance(config).As<IConfiguration>().SingleInstance();
     }
 
@@ -46,7 +48,12 @@ public static class SetupTestDependencies
             .RegisterType<PerformanceHelper>()
             .As<IPerformanceHelper>()
             .SingleInstance();
-        
+
+        containerBuilder
+            .RegisterType<PerformanceAssertions>()
+            .As<IPerformanceAssertions>()
+            .SingleInstance();
+
         // register binding classes
         containerBuilder.AddReqnrollBindings<PerformanceInjectLoadSimulationSteps>();
         containerBuilder.AddReqnrollBindings<PerformanceRampingInjectLoadSimulationSteps>();
