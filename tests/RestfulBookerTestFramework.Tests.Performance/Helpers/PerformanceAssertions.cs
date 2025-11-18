@@ -42,24 +42,24 @@ public class PerformanceAssertions(PerformanceSettings performanceSettings) : IP
         Console.WriteLine("==========================================================\n");
 
         // Assert on latency thresholds
-        Assert.LessOrEqual(scenarioStats.Ok.Latency.Percent50, thresholds.MaxLatencyP50Ms,
+        Assert.That(scenarioStats.Ok.Latency.Percent50, Is.LessThanOrEqualTo(thresholds.MaxLatencyP50Ms),
             $"P50 latency ({scenarioStats.Ok.Latency.Percent50}ms) exceeded threshold ({thresholds.MaxLatencyP50Ms}ms)");
 
-        Assert.LessOrEqual(scenarioStats.Ok.Latency.Percent75, thresholds.MaxLatencyP75Ms,
+        Assert.That(scenarioStats.Ok.Latency.Percent75, Is.LessThanOrEqualTo(thresholds.MaxLatencyP75Ms),
             $"P75 latency ({scenarioStats.Ok.Latency.Percent75}ms) exceeded threshold ({thresholds.MaxLatencyP75Ms}ms)");
 
-        Assert.LessOrEqual(scenarioStats.Ok.Latency.Percent95, thresholds.MaxLatencyP95Ms,
+        Assert.That(scenarioStats.Ok.Latency.Percent95, Is.LessThanOrEqualTo(thresholds.MaxLatencyP95Ms),
             $"P95 latency ({scenarioStats.Ok.Latency.Percent95}ms) exceeded threshold ({thresholds.MaxLatencyP95Ms}ms)");
 
-        Assert.LessOrEqual(scenarioStats.Ok.Latency.Percent99, thresholds.MaxLatencyP99Ms,
+        Assert.That(scenarioStats.Ok.Latency.Percent99, Is.LessThanOrEqualTo(thresholds.MaxLatencyP99Ms),
             $"P99 latency ({scenarioStats.Ok.Latency.Percent99}ms) exceeded threshold ({thresholds.MaxLatencyP99Ms}ms)");
 
         // Assert on failure rate
-        Assert.LessOrEqual(failureRate, thresholds.MaxFailureRatePercent,
+        Assert.That(failureRate, Is.LessThanOrEqualTo(thresholds.MaxFailureRatePercent),
             $"Failure rate ({failureRate:F2}%) exceeded threshold ({thresholds.MaxFailureRatePercent}%)");
 
         // Assert on minimum RPS
-        Assert.GreaterOrEqual(scenarioStats.Ok.Request.RPS, thresholds.MinRequestsPerSecond,
+        Assert.That(scenarioStats.Ok.Request.RPS, Is.GreaterThanOrEqualTo(thresholds.MinRequestsPerSecond),
             $"RPS ({scenarioStats.Ok.Request.RPS}) is below minimum threshold ({thresholds.MinRequestsPerSecond})");
 
         Console.WriteLine($"✓ All performance thresholds passed for scenario '{scenarioName}'");

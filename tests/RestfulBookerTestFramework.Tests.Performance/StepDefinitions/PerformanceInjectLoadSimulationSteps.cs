@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using NBomber.Contracts;
 using NBomber.CSharp;
 using NBomber.Http.CSharp;
 using Reqnroll;
