@@ -1,0 +1,167 @@
+name: CI - Build and Integration Tests
+
+on:
+  push:
+    branches: [ main, master, develop, 'claude/**' ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  SOLUTION_FILE: 'RestfulBookerTestFramework.sln'
+
+jobs:
+  build:
+    name: Build Solution
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SOLUTION_FILE }}
+
+    - name: Build solution
+      run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      with:
+        name: build-artifacts
+        path: |
+          tests/**/bin/Release/**
+          !tests/**/bin/Release/**/ref/**
+        retention-days: 1
+
+  integration-tests:
+    name: API Integration Tests
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SOLUTION_FILE }}
+
+    - name: Build solution
+      run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
+
+    - name: Run API Integration Tests
+      run: |
+        dotnet test tests/RestfulBookerTestFramework.Tests.Api/RestfulBookerTestFramework.Tests.Api.csproj \
+          --configuration Release \
+          --no-build \
+          --logger "trx;LogFileName=api-integration-test-results.trx" \
+          --logger "console;verbosity=detailed" \
+          --results-directory ./TestResults/Integration
+      continue-on-error: false
+
+    - name: Upload Integration Test Results
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      with:
+        name: integration-test-results
+        path: TestResults/Integration/**/*.trx
+        retention-days: 7
+
+    - name: Publish Integration Test Results
+      if: always()
+      uses: EnricoMi/publish-unit-test-result-action@34d7c956a59aed1bfebf31df77b8de55db9bbaaf # v2.21.0
+      with:
+        files: TestResults/Integration/**/*.trx
+        check_name: API Integration Test Results
+        comment_mode: off
+
+  contract-tests:
+    name: Contract Tests (Schema Validation)
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SOLUTION_FILE }}
+
+    - name: Build solution
+      run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
+
+    - name: Run Contract/Schema Validation Tests
+      run: |
+        dotnet test tests/RestfulBookerTestFramework.Tests.Contracts/RestfulBookerTestFramework.Tests.Contracts.csproj \
+          --configuration Release \
+          --no-build \
+          --logger "trx;LogFileName=contract-test-results.trx" \
+          --logger "console;verbosity=detailed" \
+          --results-directory ./TestResults/Contracts
+      continue-on-error: false
+
+    - name: Upload Contract Test Results
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      with:
+        name: contract-test-results
+        path: TestResults/Contracts/**/*.trx
+        retention-days: 7
+
+    - name: Publish Contract Test Results
+      if: always()
+      uses: EnricoMi/publish-unit-test-result-action@34d7c956a59aed1bfebf31df77b8de55db9bbaaf # v2.21.0
+      with:
+        files: TestResults/Contracts/**/*.trx
+        check_name: Contract Test Results
+        comment_mode: off
+
+  test-summary:
+    name: Test Summary
+    needs: [integration-tests, contract-tests]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+    - name: Download all test results
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+      with:
+        pattern: '*-test-results'
+        merge-multiple: true
+        path: ./all-test-results
+
+    - name: Display test summary
+      run: |
+        echo "## Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Build completed successfully" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Integration tests executed" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Contract tests executed" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Test results are available in the artifacts." >> $GITHUB_STEP_SUMMARY
+
+    - name: Check test results
+      run: |
+        if [ "${{ needs.integration-tests.result }}" == "success" ] && [ "${{ needs.contract-tests.result }}" == "success" ]; then
+          echo "All tests passed! ✅"
+          exit 0
+        else
+          echo "Some tests failed! ❌"
+          exit 1
+        fi
