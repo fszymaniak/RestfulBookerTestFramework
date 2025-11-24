@@ -27,6 +27,7 @@ public static class SetupTestDependencies
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile(FileNames.AppSettingsJson, optional: true, reloadOnChange: true)
             .AddUserSecrets<TestBaseSetup>()
+            .AddEnvironmentVariables()
             .Build();
 
         var appSettingsConfig = config.GetSection(nameof(AppSettings)).Get<AppSettings>();
