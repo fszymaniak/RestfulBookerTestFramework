@@ -11,7 +11,10 @@
         <PackageReference Include="Autofac" />
         <PackageReference Include="Autofac.Extensions.DependencyInjection" />
         <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="NBomber" />
         <PackageReference Include="NBomber.Contracts" />

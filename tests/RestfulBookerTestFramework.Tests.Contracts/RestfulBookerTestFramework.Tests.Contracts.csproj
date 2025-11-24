@@ -13,6 +13,7 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="Newtonsoft.Json.Schema" />
         <PackageReference Include="Reqnroll.Autofac" />
