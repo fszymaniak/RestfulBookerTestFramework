@@ -61,6 +61,9 @@ jobs:
       run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
 
     - name: Run API Integration Tests
+      env:
+        AppSettings__Credentials__UserName: ${{ secrets.RESTFUL_BOOKER_USERNAME }}
+        AppSettings__Credentials__Password: ${{ secrets.RESTFUL_BOOKER_PASSWORD }}
       run: |
         dotnet test tests/RestfulBookerTestFramework.Tests.Api/RestfulBookerTestFramework.Tests.Api.csproj \
           --configuration Release \
@@ -107,6 +110,9 @@ jobs:
       run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
 
     - name: Run Contract/Schema Validation Tests
+      env:
+        AppSettings__Credentials__UserName: ${{ secrets.RESTFUL_BOOKER_USERNAME }}
+        AppSettings__Credentials__Password: ${{ secrets.RESTFUL_BOOKER_PASSWORD }}
       run: |
         dotnet test tests/RestfulBookerTestFramework.Tests.Contracts/RestfulBookerTestFramework.Tests.Contracts.csproj \
           --configuration Release \
