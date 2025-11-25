@@ -5,6 +5,7 @@
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
         <UserSecretsId>94171d59-b230-4880-aae9-6fd68e29f44f</UserSecretsId>
         <OutputType>Library</OutputType>
+        <IsTestProject>true</IsTestProject>
     </PropertyGroup>
 
     <ItemGroup>
