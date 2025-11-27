@@ -7,6 +7,11 @@ on:
     branches: [ main, master, develop ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
 env:
   DOTNET_VERSION: '8.0.x'
   SOLUTION_FILE: 'RestfulBookerTestFramework.sln'
@@ -82,7 +87,7 @@ jobs:
         retention-days: 7
 
     - name: Publish Integration Test Results
-      if: always()
+      if: always() && github.event_name == 'pull_request'
       uses: EnricoMi/publish-unit-test-result-action@34d7c956a59aed1bfebf31df77b8de55db9bbaaf # v2.21.0
       with:
         files: TestResults/Integration/**/*.trx
@@ -131,7 +136,7 @@ jobs:
         retention-days: 7
 
     - name: Publish Contract Test Results
-      if: always()
+      if: always() && github.event_name == 'pull_request'
       uses: EnricoMi/publish-unit-test-result-action@34d7c956a59aed1bfebf31df77b8de55db9bbaaf # v2.21.0
       with:
         files: TestResults/Contracts/**/*.trx
